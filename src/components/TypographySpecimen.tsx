@@ -44,7 +44,7 @@ const TypographySpecimen = () => {
               <div className="text-6xl font-bold text-neutral-100 leading-none mb-2">
                 Aa
               </div>
-              <div className="technical-detail">
+              <div className="technical-detail text-neutral-400">
                 STRUCTURAL / MONTSERRAT
               </div>
             </div>
@@ -52,7 +52,7 @@ const TypographySpecimen = () => {
               <div className="text-6xl font-light text-neutral-200 leading-none mb-2 font-content">
                 Aa
               </div>
-              <div className="technical-detail">
+              <div className="technical-detail text-neutral-400">
                 CONTENT / HIND MADURAI
               </div>
             </div>
@@ -67,7 +67,7 @@ const TypographySpecimen = () => {
           {fontFamilies.map((font) => (
             <div key={font.name}>
               <p className="text-xl font-bold text-neutral-100">{font.name}</p>
-              <p className="text-sm text-neutral-400">{font.family}</p>
+              <p className="text-sm text-neutral-300">{font.family}</p>
               <p className={`text-5xl mt-4 leading-none ${font.class} text-neutral-100`}>Aa</p>
               <div className={`mt-4 space-y-1 text-sm tracking-wider break-all ${font.class} text-neutral-300`}>
                 <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
@@ -84,27 +84,27 @@ const TypographySpecimen = () => {
         <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-600 pb-2 mb-6 text-neutral-100">Type Scale</h2>
         <div className="space-y-10 mt-6 flow-root">
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail">h1</span>
+            <span className="technical-detail text-neutral-400">h1</span>
             <h1 className="text-5xl font-extrabold tracking-tighter text-neutral-100">The quick brown fox</h1>
           </div>
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail">h2</span>
+            <span className="technical-detail text-neutral-400">h2</span>
             <h2 className="text-4xl font-bold tracking-tight text-neutral-100">The quick brown fox</h2>
           </div>
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail">h3</span>
+            <span className="technical-detail text-neutral-400">h3</span>
             <h3 className="text-3xl font-semibold text-neutral-100">The quick brown fox</h3>
           </div>
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail">h4</span>
+            <span className="technical-detail text-neutral-400">h4</span>
             <h4 className="text-2xl font-semibold text-neutral-100">The quick brown fox</h4>
           </div>
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail">h5</span>
+            <span className="technical-detail text-neutral-400">h5</span>
             <h5 className="text-xl font-medium text-neutral-100">The quick brown fox</h5>
           </div>
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail">h6</span>
+            <span className="technical-detail text-neutral-400">h6</span>
             <h6 className="text-lg font-medium text-neutral-100">The quick brown fox</h6>
           </div>
         </div>
@@ -112,13 +112,13 @@ const TypographySpecimen = () => {
 
       {/* Composition Examples */}
       <section>
-        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6">Composition</h2>
+        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6 text-neutral-100">Composition</h2>
         <div className="grid md:grid-cols-2 gap-8 mt-6">
           <div className="bg-card p-8 rounded-lg border relative overflow-hidden">
             <p className="font-mono text-9xl font-bold text-card-foreground/5 absolute -right-5 -top-5 select-none">01/</p>
             <div className="relative">
-              <h3 className="text-3xl font-semibold font-subheader">Article Heading</h3>
-              <p className="text-lg mt-2 font-structural font-bold">A Stunning Subtitle Follows</p>
+              <h3 className="text-3xl font-semibold font-subheader text-neutral-100">Article Heading</h3>
+              <p className="text-lg mt-2 font-structural font-bold text-neutral-200">A Stunning Subtitle Follows</p>
               <p className="mt-4 text-muted-foreground font-content">
                 This composition demonstrates how different type styles can work together. We combine headings, subheadings, and body text to create a clear and pleasing visual hierarchy.
               </p>
@@ -127,11 +127,11 @@ const TypographySpecimen = () => {
           <div className="bg-card p-8 rounded-lg border relative overflow-hidden">
             <p className="font-mono text-9xl font-bold text-card-foreground/5 absolute -right-5 -bottom-9 select-none">U09/</p>
             <div className="relative">
-              <p className="technical-detail">Unit Portables AB / Item 734</p>
-              <h3 className="font-structural text-4xl font-bold tracking-tight my-3">Shoulder Bag</h3>
+              <p className="technical-detail text-neutral-400">Unit Portables AB / Item 734</p>
+              <h3 className="font-structural text-4xl font-bold tracking-tight my-3 text-neutral-100">Shoulder Bag</h3>
               <div className="flex justify-between items-baseline border-t border-muted pt-3">
-                <p className="font-content">Polyester/580x360mm</p>
-                <p className="font-structural text-3xl font-bold">15"</p>
+                <p className="font-content text-neutral-200">Polyester/580x360mm</p>
+                <p className="font-structural text-3xl font-bold text-neutral-100">15"</p>
               </div>
             </div>
           </div>
@@ -158,3 +158,4 @@ const TypographySpecimen = () => {
 };
 
 export default TypographySpecimen;
+
