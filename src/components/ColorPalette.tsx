@@ -1,5 +1,6 @@
 import React from 'react';
 import ColorSwatch from './ColorSwatch';
+import GradientContainer from './GradientContainer';
 
 interface ColorSwatchData {
   name: string;
@@ -99,7 +100,7 @@ const ColorPalette = () => {
 
       {/* Color Categories */}
       {colorCategories.map((category) => (
-        <section key={category.name} className="ds-card p-8">
+        <GradientContainer key={category.name} className="p-8">
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-neutral-900 mb-2">{category.name}</h2>
             <p className="text-neutral-600">{category.description}</p>
@@ -122,11 +123,11 @@ const ColorPalette = () => {
               );
             })}
           </div>
-        </section>
+        </GradientContainer>
       ))}
 
       {/* Usage Examples */}
-      <section className="ds-card p-8">
+      <GradientContainer className="p-8">
         <h2 className="text-2xl font-bold text-neutral-900 mb-6">Usage Examples</h2>
         
         <div className="grid lg:grid-cols-2 gap-8">
@@ -170,7 +171,7 @@ const ColorPalette = () => {
             </div>
           </div>
         </div>
-      </section>
+      </GradientContainer>
     </div>
   );
 };

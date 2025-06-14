@@ -1,4 +1,5 @@
 import React from 'react';
+import GradientContainer from './GradientContainer';
 
 const TypographySpecimen = () => {
   const fontWeights = [
@@ -13,7 +14,7 @@ const TypographySpecimen = () => {
   return (
     <div className="space-y-16 text-left">
       {/* Hero Typography Display */}
-      <section className="ds-card p-12 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
+      <GradientContainer className="p-12">
         <div className="space-y-8">
           <div className="space-y-4">
             <h1 className="text-display-2xl font-bold text-neutral-900 leading-none">
@@ -44,11 +45,11 @@ const TypographySpecimen = () => {
             </div>
           </div>
         </div>
-      </section>
+      </GradientContainer>
 
       {/* Font Weight Specimens */}
       <section className="grid md:grid-cols-2 gap-8">
-        <div className="ds-card p-8 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
+        <GradientContainer className="p-8">
           <h2 className="text-xl font-semibold text-neutral-900 mb-8">Structural Font Weights</h2>
           <div className="space-y-6">
             {fontWeights.map((weight) => (
@@ -67,9 +68,9 @@ const TypographySpecimen = () => {
               </div>
             ))}
           </div>
-        </div>
+        </GradientContainer>
 
-        <div className="ds-card p-8 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
+        <GradientContainer className="p-8">
           <h2 className="text-xl font-semibold text-neutral-900 mb-8">Content Font Weights</h2>
           <div className="space-y-6">
             {fontWeights.slice(0, 4).map((weight) => (
@@ -88,11 +89,11 @@ const TypographySpecimen = () => {
               </div>
             ))}
           </div>
-        </div>
+        </GradientContainer>
       </section>
 
       {/* Display Scale */}
-      <section className="ds-card p-8 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
+      <GradientContainer className="p-8">
         <h2 className="text-xl font-semibold text-neutral-900 mb-8">Display Scale</h2>
         <div className="space-y-8">
           <div className="py-8 border-2 border-dashed border-neutral-300 rounded-lg px-6">
@@ -123,11 +124,11 @@ const TypographySpecimen = () => {
             <div className="technical-detail">36px / 2.25rem</div>
           </div>
         </div>
-      </section>
+      </GradientContainer>
 
       {/* Reading Specimens */}
       <section className="grid md:grid-cols-2 gap-8">
-        <div className="ds-card p-8 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
+        <GradientContainer className="p-8">
           <h2 className="text-xl font-semibold text-neutral-900 mb-6">Heading Hierarchy</h2>
           <div className="space-y-6">
             <div>
@@ -155,9 +156,9 @@ const TypographySpecimen = () => {
               <span className="technical-detail">text-xl / font-semibold</span>
             </div>
           </div>
-        </div>
+        </GradientContainer>
 
-        <div className="ds-card p-8 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
+        <GradientContainer className="p-8">
           <h2 className="text-xl font-semibold text-neutral-900 mb-6">Body Text</h2>
           <div className="space-y-6">
             <div>
@@ -179,7 +180,7 @@ const TypographySpecimen = () => {
               <span className="technical-detail">text-sm / font-content</span>
             </div>
           </div>
-        </div>
+        </GradientContainer>
       </section>
 
       {/* Typography Showcase */}
