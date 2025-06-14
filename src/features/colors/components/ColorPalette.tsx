@@ -1,11 +1,12 @@
 
 import React from 'react';
+import { RefreshCcw } from 'lucide-react';
 import ColorSwatch from './ColorSwatch';
 import GradientContainer from '../../shared/components/GradientContainer';
 import { useColorPalette } from '../hooks/useColorPalette';
 
 const ColorPalette = () => {
-  const { categories, copiedColor, copyToClipboard } = useColorPalette();
+  const { categories, copiedColor, copyToClipboard, generateNewPalette } = useColorPalette();
 
   // Get all colors from all categories
   const allColors = categories.flatMap(category => category.colors);
@@ -26,8 +27,15 @@ const ColorPalette = () => {
 
       {/* Single Color Card with Three Rows */}
       <GradientContainer className="p-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-card-foreground mb-2">Colors</h2>
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-card-foreground">Colors</h2>
+          <button
+            onClick={generateNewPalette}
+            className="flex items-center justify-center w-10 h-10 rounded-lg bg-card-foreground/10 hover:bg-card-foreground/20 transition-colors"
+            title="Generate new color palette"
+          >
+            <RefreshCcw className="w-5 h-5 text-card-foreground" />
+          </button>
         </div>
 
         <div className="space-y-6">

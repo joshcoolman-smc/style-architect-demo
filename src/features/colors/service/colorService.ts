@@ -1,11 +1,13 @@
 
 import { ColorRepository, IColorRepository } from '../repository/colorRepository';
 import { ColorCategory, ColorPaletteData } from '../types/color.types';
+import { generateAlgorithmicPalette } from '../utils/paletteGenerator';
 
 export interface IColorService {
   getColorCategories(): ColorCategory[];
   copyColorToClipboard(value: string): Promise<void>;
   updateColorPalette(palette: ColorPaletteData): void;
+  generateNewPalette(): ColorPaletteData;
 }
 
 export class ColorService implements IColorService {
@@ -21,6 +23,10 @@ export class ColorService implements IColorService {
 
   updateColorPalette(palette: ColorPaletteData): void {
     this.repository.updateColorPalette(palette);
+  }
+
+  generateNewPalette(): ColorPaletteData {
+    return generateAlgorithmicPalette();
   }
 
   async copyColorToClipboard(value: string): Promise<void> {

@@ -34,10 +34,16 @@ export const useColorPalette = () => {
     setState(prev => ({ ...prev, categories }));
   };
 
+  const generateNewPalette = () => {
+    const newPalette = colorService.generateNewPalette();
+    updateColorPalette(newPalette);
+  };
+
   return {
     categories: state.categories,
     copiedColor: state.copiedColor,
     copyToClipboard,
     updateColorPalette,
+    generateNewPalette,
   };
 };
