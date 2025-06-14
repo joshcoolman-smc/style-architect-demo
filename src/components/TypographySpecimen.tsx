@@ -1,3 +1,4 @@
+
 import React from 'react';
 import GradientContainer from './GradientContainer';
 
@@ -9,6 +10,27 @@ const TypographySpecimen = () => {
     { weight: '600', name: 'Semibold', class: 'font-semibold' },
     { weight: '700', name: 'Bold', class: 'font-bold' },
     { weight: '800', name: 'Extrabold', class: 'font-extrabold' },
+  ];
+
+  const fontFamilies = [
+    {
+      name: 'Heading',
+      family: 'Montserrat',
+      class: 'font-structural',
+      description: 'STRUCTURAL / MONTSERRAT'
+    },
+    {
+      name: 'Subheading',
+      family: 'Lora',
+      class: 'font-subheader',
+      description: 'SUBHEADER / LORA'
+    },
+    {
+      name: 'Body',
+      family: 'Hind Madurai',
+      class: 'font-content',
+      description: 'CONTENT / HIND MADURAI'
+    }
   ];
 
   return (
@@ -44,6 +66,43 @@ const TypographySpecimen = () => {
               </div>
             </div>
           </div>
+        </div>
+      </GradientContainer>
+
+      {/* Font Families Section */}
+      <GradientContainer className="p-12">
+        <h2 className="text-xl font-semibold text-neutral-900 mb-12">Font Families</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {fontFamilies.map((font) => (
+            <div key={font.name} className="space-y-6">
+              <div>
+                <h3 className="text-lg font-semibold text-neutral-900 mb-1">{font.name}</h3>
+                <p className="technical-detail">{font.family}</p>
+              </div>
+              
+              <div className="space-y-4">
+                <div className={`text-8xl ${font.class} text-neutral-900 leading-none`}>
+                  Aa
+                </div>
+                
+                <div className={`${font.class} text-neutral-700 space-y-1`}>
+                  <div className="text-sm font-bold tracking-wider">
+                    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                  </div>
+                  <div className="text-sm tracking-wide">
+                    abcdefghijklmnopqrstuvwxyz
+                  </div>
+                  <div className="text-sm tracking-wide">
+                    0123456789
+                  </div>
+                </div>
+              </div>
+              
+              <div className="technical-detail pt-4 border-t border-neutral-200">
+                {font.description}
+              </div>
+            </div>
+          ))}
         </div>
       </GradientContainer>
 

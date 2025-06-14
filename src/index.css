@@ -71,7 +71,8 @@
   
   /* Technical details styling - updated to use extra light */
   .technical-detail {
-    @apply font-technical text-xs text-muted-foreground uppercase tracking-wide font-extralight;
+    @apply font-technical text-xs text-muted-foreground uppercase tracking-wide;
+    font-weight: 200; /* Extra light weight for IBM Plex Mono */
   }
   
   /* Mathematical spacing utilities */
