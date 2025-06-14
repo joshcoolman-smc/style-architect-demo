@@ -1,29 +1,27 @@
 
 import React from 'react';
 import { ColorService } from '../service/colorService';
-import { ColorPaletteState, ColorPaletteData } from '../types/color.types';
+import { ColorPaletteData } from '../types/color.types';
+import { useColorStore } from '../../../stores/colorStore';
 
 export const useColorPalette = () => {
-  const [state, setState] = React.useState<ColorPaletteState>({
-    categories: [],
-    copiedColor: null,
-  });
-
+  const { categories, updateCategories, updatePalette } = useColorStore();
+  const [copiedColor, setCopiedColor] = React.useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = React.useState(false);
 
   const colorService = React.useMemo(() => new ColorService(), []);
 
   React.useEffect(() => {
     const categories = colorService.getColorCategories();
-    setState(prev => ({ ...prev, categories }));
-  }, [colorService]);
+    updateCategories(categories);
+  }, [colorService, updateCategories]);
 
   const copyToClipboard = async (value: string) => {
     try {
       await colorService.copyColorToClipboard(value);
-      setState(prev => ({ ...prev, copiedColor: value }));
+      setCopiedColor(value);
       setTimeout(() => {
-        setState(prev => ({ ...prev, copiedColor: null }));
+        setCopiedColor(null);
       }, 2000);
     } catch (err) {
       console.error('Failed to copy color:', err);
@@ -32,8 +30,9 @@ export const useColorPalette = () => {
 
   const updateColorPalette = (palette: ColorPaletteData) => {
     colorService.updateColorPalette(palette);
+    updatePalette(palette);
     const categories = colorService.getColorCategories();
-    setState(prev => ({ ...prev, categories }));
+    updateCategories(categories);
   };
 
   const generateNewPalette = () => {
@@ -55,8 +54,8 @@ export const useColorPalette = () => {
   };
 
   return {
-    categories: state.categories,
-    copiedColor: state.copiedColor,
+    categories,
+    copiedColor,
     isAnalyzing,
     copyToClipboard,
     updateColorPalette,

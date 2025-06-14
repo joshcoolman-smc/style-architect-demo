@@ -1,5 +1,5 @@
-
 import { ColorCategory, ColorPaletteData } from '../types/color.types';
+import { useColorStore } from '../../../stores/colorStore';
 
 export interface IColorRepository {
   getColorCategories(): ColorCategory[];
@@ -7,45 +7,35 @@ export interface IColorRepository {
 }
 
 export class ColorRepository implements IColorRepository {
-  private colorPalette: ColorPaletteData = {
-    "light-1": "#9DACA7",
-    "light-2": "#BABAAC", 
-    "light-3": "#E0C9A0",
-    "mid-1": "#3F8DA4",
-    "mid-2": "#6D7673",
-    "mid-3": "#BDA06E",
-    "dark-1": "#005A78",
-    "dark-2": "#335763",
-    "dark-3": "#233E49"
-  };
-
   getColorCategories(): ColorCategory[] {
+    const { palette } = useColorStore.getState();
+    
     return [
       {
         name: 'Light Tones',
         description: 'Soft, light colors for backgrounds and subtle accents.',
         colors: [
-          { name: 'Light 1', value: this.colorPalette["light-1"], description: 'Soft sage green for subtle backgrounds' },
-          { name: 'Light 2', value: this.colorPalette["light-2"], description: 'Warm neutral for card backgrounds' },
-          { name: 'Light 3', value: this.colorPalette["light-3"], description: 'Warm cream for highlight areas' },
+          { name: 'Light 1', value: palette["light-1"], description: 'Soft sage green for subtle backgrounds' },
+          { name: 'Light 2', value: palette["light-2"], description: 'Warm neutral for card backgrounds' },
+          { name: 'Light 3', value: palette["light-3"], description: 'Warm cream for highlight areas' },
         ],
       },
       {
         name: 'Mid Tones',
         description: 'Balanced colors for primary interface elements and interactions.',
         colors: [
-          { name: 'Mid 1', value: this.colorPalette["mid-1"], description: 'Ocean blue for primary actions' },
-          { name: 'Mid 2', value: this.colorPalette["mid-2"], description: 'Neutral gray for secondary elements' },
-          { name: 'Mid 3', value: this.colorPalette["mid-3"], description: 'Warm gold for accent elements' },
+          { name: 'Mid 1', value: palette["mid-1"], description: 'Ocean blue for primary actions' },
+          { name: 'Mid 2', value: palette["mid-2"], description: 'Neutral gray for secondary elements' },
+          { name: 'Mid 3', value: palette["mid-3"], description: 'Warm gold for accent elements' },
         ],
       },
       {
         name: 'Dark Tones',
         description: 'Deep, rich colors for text, borders, and contrast elements.',
         colors: [
-          { name: 'Dark 1', value: this.colorPalette["dark-1"], description: 'Deep teal for primary text and emphasis' },
-          { name: 'Dark 2', value: this.colorPalette["dark-2"], description: 'Slate blue for secondary text' },
-          { name: 'Dark 3', value: this.colorPalette["dark-3"], description: 'Navy for high contrast elements' },
+          { name: 'Dark 1', value: palette["dark-1"], description: 'Deep teal for primary text and emphasis' },
+          { name: 'Dark 2', value: palette["dark-2"], description: 'Slate blue for secondary text' },
+          { name: 'Dark 3', value: palette["dark-3"], description: 'Navy for high contrast elements' },
         ],
       },
       {
@@ -78,6 +68,6 @@ export class ColorRepository implements IColorRepository {
   }
 
   updateColorPalette(palette: ColorPaletteData): void {
-    this.colorPalette = { ...palette };
+    useColorStore.getState().updatePalette(palette);
   }
 }
