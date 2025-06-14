@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const TypographySpecimen = () => {
@@ -14,7 +13,7 @@ const TypographySpecimen = () => {
   return (
     <div className="space-y-16 text-left">
       {/* Hero Typography Display */}
-      <section className="ds-card p-12">
+      <section className="ds-card p-12 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
         <div className="space-y-8">
           <div className="space-y-4">
             <h1 className="text-display-2xl font-bold text-neutral-900 leading-none">
@@ -49,7 +48,7 @@ const TypographySpecimen = () => {
 
       {/* Font Weight Specimens */}
       <section className="grid md:grid-cols-2 gap-8">
-        <div className="ds-card p-8">
+        <div className="ds-card p-8 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
           <h2 className="text-xl font-semibold text-neutral-900 mb-8">Structural Font Weights</h2>
           <div className="space-y-6">
             {fontWeights.map((weight) => (
@@ -70,7 +69,7 @@ const TypographySpecimen = () => {
           </div>
         </div>
 
-        <div className="ds-card p-8">
+        <div className="ds-card p-8 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
           <h2 className="text-xl font-semibold text-neutral-900 mb-8">Content Font Weights</h2>
           <div className="space-y-6">
             {fontWeights.slice(0, 4).map((weight) => (
@@ -93,7 +92,7 @@ const TypographySpecimen = () => {
       </section>
 
       {/* Display Scale */}
-      <section className="ds-card p-8">
+      <section className="ds-card p-8 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
         <h2 className="text-xl font-semibold text-neutral-900 mb-8">Display Scale</h2>
         <div className="space-y-8">
           <div className="py-8 border-2 border-dashed border-neutral-300 rounded-lg px-6">
@@ -128,7 +127,7 @@ const TypographySpecimen = () => {
 
       {/* Reading Specimens */}
       <section className="grid md:grid-cols-2 gap-8">
-        <div className="ds-card p-8">
+        <div className="ds-card p-8 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
           <h2 className="text-xl font-semibold text-neutral-900 mb-6">Heading Hierarchy</h2>
           <div className="space-y-6">
             <div>
@@ -158,7 +157,7 @@ const TypographySpecimen = () => {
           </div>
         </div>
 
-        <div className="ds-card p-8">
+        <div className="ds-card p-8 bg-gradient-to-br from-zinc-900/90 to-zinc-800/90">
           <h2 className="text-xl font-semibold text-neutral-900 mb-6">Body Text</h2>
           <div className="space-y-6">
             <div>
