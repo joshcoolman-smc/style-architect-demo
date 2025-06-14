@@ -134,7 +134,7 @@ const ColorPalette = () => {
               return (
                 <div
                   key={color.name}
-                  className="ds-card-interactive group cursor-pointer overflow-hidden"
+                  className="ds-card-nested-interactive group cursor-pointer overflow-hidden"
                   onClick={() => copyToClipboard(color.value)}
                 >
                   <div
@@ -180,7 +180,7 @@ const ColorPalette = () => {
         </section>
       ))}
 
-      {/* Color Usage Examples */}
+      {/* Usage Examples */}
       <section className="ds-card p-8">
         <h2 className="text-2xl font-bold text-neutral-900 mb-6">Usage Examples</h2>
         
