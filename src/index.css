@@ -115,11 +115,28 @@
   }
   
   .ds-text-technical-light {
-    @apply ds-text-technical ;
+    @apply ds-text-technical;
   }
   
   .ds-text-technical-muted {
     @apply ds-text-technical text-muted-foreground;
+  }
+  
+  /* Font utility classes */
+  .font-technical {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  
+  .font-structural {
+    font-family: var(--font-structural), ui-sans-serif, system-ui;
+  }
+  
+  .font-content {
+    font-family: var(--font-content), ui-sans-serif, system-ui;
+  }
+  
+  .font-subheader {
+    font-family: var(--font-subheader), ui-serif, serif;
   }
   
   .ds-section-spacing {
@@ -133,5 +150,9 @@
   .ds-content-spacing {
     @apply space-y-3unit;
   }
+  
+  /* Technical detail helper class */
+  .technical-detail {
+    @apply ds-text-technical-light;
+  }
 }
-
