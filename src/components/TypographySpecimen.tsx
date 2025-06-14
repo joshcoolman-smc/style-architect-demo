@@ -30,10 +30,10 @@ const TypographySpecimen = () => {
       <GradientContainer className="p-12">
         <div className="space-y-8">
           <div className="space-y-4">
-            <h1 className="text-display-2xl font-bold text-neutral-900 leading-none">
+            <h1 className="text-display-2xl font-bold text-neutral-100 leading-none">
               Typography
             </h1>
-            <p className="text-2xl text-neutral-600 font-light max-w-2xl">
+            <p className="text-2xl text-neutral-300 font-light max-w-2xl">
               A carefully crafted type system built on modern web fonts for optimal readability and visual hierarchy.
             </p>
           </div>
@@ -41,7 +41,7 @@ const TypographySpecimen = () => {
           {/* Large specimen display */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
             <div>
-              <div className="text-6xl font-bold text-neutral-900 leading-none mb-2">
+              <div className="text-6xl font-bold text-neutral-100 leading-none mb-2">
                 Aa
               </div>
               <div className="technical-detail">
@@ -49,7 +49,7 @@ const TypographySpecimen = () => {
               </div>
             </div>
             <div>
-              <div className="text-6xl font-light text-neutral-700 leading-none mb-2 font-content">
+              <div className="text-6xl font-light text-neutral-200 leading-none mb-2 font-content">
                 Aa
               </div>
               <div className="technical-detail">
