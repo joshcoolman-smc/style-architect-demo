@@ -26,40 +26,7 @@ const TypographySpecimen = () => {
 
   return (
     <div className="space-y-16 text-left">
-      {/* Hero Typography Display */}
-      <GradientContainer className="p-12 text-white">
-        <div className="space-y-8">
-          <div className="space-y-4">
-            <h1 className="text-display-2xl font-bold  leading-none">
-              Typography
-            </h1>
-            <p className="text-2xl  font-light max-w-2xl">
-              A carefully crafted type system built on modern web fonts for optimal readability and visual hierarchy.
-            </p>
-          </div>
-          
-          {/* Large specimen display */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            <div>
-              <div className="text-6xl font-bold  leading-none mb-2">
-                Aa
-              </div>
-              <div className="ds-text-technical-light">
-                STRUCTURAL / MONTSERRAT
-              </div>
-            </div>
-            <div>
-              <div className="text-6xl font-light  leading-none mb-2 font-content">
-                Aa
-              </div>
-              <div className="ds-text-technical-light">
-                CONTENT / HIND MADURAI
-              </div>
-            </div>
-          </div>
-        </div>
-      </GradientContainer>
-
+      
       {/* Font Families Section */}
       <GradientContainer className="p-12">
         <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Font Families</h2>
