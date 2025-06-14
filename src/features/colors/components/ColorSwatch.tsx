@@ -37,7 +37,7 @@ const ColorSwatch = ({ name, value, description, onCopy, isCopied, isSemanticCol
         <div className="space-y-2">
           <h3 className="font-semibold text-card-foreground">{name}</h3>
           
-          {/* Subtle horizontal rule */}
+          {/* Horizontal rule under the color name */}
           <Separator className="my-2" />
           
           {/* Technical Details with IBM Plex Mono */}
