@@ -3,15 +3,6 @@ import React from 'react';
 import GradientContainer from './GradientContainer';
 
 const TypographySpecimen = () => {
-  const fontWeights = [
-    { weight: '300', name: 'Light', class: 'font-light' },
-    { weight: '400', name: 'Regular', class: 'font-normal' },
-    { weight: '500', name: 'Medium', class: 'font-medium' },
-    { weight: '600', name: 'Semibold', class: 'font-semibold' },
-    { weight: '700', name: 'Bold', class: 'font-bold' },
-    { weight: '800', name: 'Extrabold', class: 'font-extrabold' },
-  ];
-
   const fontFamilies = [
     {
       name: 'Heading',
@@ -70,41 +61,23 @@ const TypographySpecimen = () => {
       </GradientContainer>
 
       {/* Font Families Section */}
-      <GradientContainer className="p-12">
-        <h2 className="text-xl font-semibold text-neutral-900 mb-12">Font Families</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <section>
+        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6">Font Families</h2>
+        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
           {fontFamilies.map((font) => (
-            <div key={font.name} className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold text-neutral-900 mb-1">{font.name}</h3>
-                <p className="technical-detail">{font.family}</p>
-              </div>
-              
-              <div className="space-y-4">
-                <div className={`text-8xl ${font.class} text-neutral-900 leading-none`}>
-                  Aa
-                </div>
-                
-                <div className={`${font.class} text-neutral-700 space-y-1`}>
-                  <div className="text-sm font-bold tracking-wider">
-                    ABCDEFGHIJKLMNOPQRSTUVWXYZ
-                  </div>
-                  <div className="text-sm tracking-wide">
-                    abcdefghijklmnopqrstuvwxyz
-                  </div>
-                  <div className="text-sm tracking-wide">
-                    0123456789
-                  </div>
-                </div>
-              </div>
-              
-              <div className="technical-detail pt-4 border-t border-neutral-200">
-                {font.description}
+            <div key={font.name}>
+              <p className="text-xl font-bold">{font.name}</p>
+              <p className="text-sm text-muted-foreground">{font.family}</p>
+              <p className={`text-5xl mt-4 leading-none ${font.class}`}>Aa</p>
+              <div className={`mt-4 space-y-1 text-sm tracking-wider break-all ${font.class}`}>
+                <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+                <p>abcdefghijklmnopqrstuvwxyz</p>
+                <p>0123456789</p>
               </div>
             </div>
           ))}
         </div>
-      </GradientContainer>
+      </section>
 
       {/* Type Scale */}
       <section>
@@ -133,39 +106,6 @@ const TypographySpecimen = () => {
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
             <span className="technical-detail">h6</span>
             <h6 className="text-lg font-medium">The quick brown fox</h6>
-          </div>
-        </div>
-      </section>
-
-      {/* Font Weights */}
-      <section>
-        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6">Font Weights</h2>
-        <div className="grid md:grid-cols-2 gap-8 mt-6">
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Structural Weights</h3>
-            <div className="space-y-6">
-              {fontWeights.map((weight) => (
-                <div key={weight.weight} className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-                  <span className="technical-detail">{weight.name} {weight.weight}</span>
-                  <div className={`text-3xl ${weight.class} text-neutral-900 leading-tight`}>
-                    The quick brown fox
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Content Weights</h3>
-            <div className="space-y-6">
-              {fontWeights.slice(0, 4).map((weight) => (
-                <div key={`content-${weight.weight}`} className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-                  <span className="technical-detail">{weight.name} {weight.weight}</span>
-                  <div className={`text-3xl font-content ${weight.class} text-neutral-900 leading-tight`}>
-                    The quick brown fox
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
