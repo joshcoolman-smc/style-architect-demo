@@ -1,11 +1,51 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
-
+/* Design System CSS Variables */
 @layer base {
   :root {
+    /* Design System Colors */
+    --ds-brand-50: 240 249 255;
+    --ds-brand-500: 14 165 233;
+    --ds-brand-600: 2 132 199;
+    --ds-brand-700: 3 105 161;
+    
+    --ds-accent-500: 20 184 166;
+    --ds-accent-600: 13 148 136;
+    
+    --ds-neutral-50: 250 250 250;
+    --ds-neutral-100: 245 245 245;
+    --ds-neutral-200: 229 229 229;
+    --ds-neutral-300: 212 212 212;
+    --ds-neutral-400: 163 163 163;
+    --ds-neutral-500: 115 115 115;
+    --ds-neutral-600: 82 82 82;
+    --ds-neutral-700: 64 64 64;
+    --ds-neutral-800: 38 38 38;
+    --ds-neutral-900: 23 23 23;
+    
+    /* Design System Spacing */
+    --ds-space-unit: 0.25rem;
+    --ds-space-xs: calc(var(--ds-space-unit) * 2);
+    --ds-space-sm: calc(var(--ds-space-unit) * 3);
+    --ds-space-md: calc(var(--ds-space-unit) * 4);
+    --ds-space-lg: calc(var(--ds-space-unit) * 6);
+    --ds-space-xl: calc(var(--ds-space-unit) * 8);
+    --ds-space-2xl: calc(var(--ds-space-unit) * 12);
+    
+    /* Design System Typography */
+    --ds-font-size-xs: 0.75rem;
+    --ds-font-size-sm: 0.875rem;
+    --ds-font-size-base: 1rem;
+    --ds-font-size-lg: 1.125rem;
+    --ds-font-size-xl: 1.25rem;
+    --ds-font-size-2xl: 1.5rem;
+    --ds-font-size-3xl: 1.875rem;
+    --ds-font-size-4xl: 2.25rem;
+    
+    /* Existing shadcn variables */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -35,22 +75,6 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -81,14 +105,6 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -98,6 +114,45 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+  
+  /* Typography Utilities */
+  .ds-text-display-2xl {
+    font-size: var(--ds-font-size-4xl);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+  }
+  
+  .ds-text-display-xl {
+    font-size: var(--ds-font-size-3xl);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  
+  .ds-code-block {
+    @apply bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm;
+    tab-size: 2;
+  }
+}
+
+@layer components {
+  /* Component Base Styles */
+  .ds-card {
+    @apply bg-white border border-neutral-200 rounded-xl shadow-sm;
+  }
+  
+  .ds-card-interactive {
+    @apply ds-card transition-all duration-200 hover:shadow-md hover:border-neutral-300;
+  }
+  
+  .ds-button-primary {
+    @apply bg-brand-600 text-white px-4 py-2 rounded-lg font-medium transition-colors hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
+  }
+  
+  .ds-button-secondary {
+    @apply bg-neutral-100 text-neutral-900 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
   }
 }
