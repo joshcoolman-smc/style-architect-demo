@@ -7,6 +7,14 @@ import { useColorPalette } from '../hooks/useColorPalette';
 const ColorPalette = () => {
   const { categories, copiedColor, copyToClipboard } = useColorPalette();
 
+  // Get all colors from all categories
+  const allColors = categories.flatMap(category => category.colors);
+  
+  // Group colors by tone (light, mid, dark)
+  const lightColors = allColors.filter(color => color.name.startsWith('light-'));
+  const midColors = allColors.filter(color => color.name.startsWith('mid-'));
+  const darkColors = allColors.filter(color => color.name.startsWith('dark-'));
+
   return (
     <div className="space-y-12">
       <div>
@@ -16,33 +24,56 @@ const ColorPalette = () => {
         </p>
       </div>
 
-      {/* Color Categories */}
-      {categories.map((category) => (
-        <GradientContainer key={category.name} className="p-8">
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-card-foreground mb-2">{category.name}</h2>
-            <p className="text-muted-foreground">{category.description}</p>
+      {/* Single Color Card with Three Rows */}
+      <GradientContainer className="p-8">
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-card-foreground mb-2">Colors</h2>
+        </div>
+
+        <div className="space-y-6">
+          {/* Light Colors Row */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {lightColors.map((color) => (
+              <ColorSwatch
+                key={color.name}
+                name={color.name}
+                value={color.value}
+                description={color.description}
+                onCopy={copyToClipboard}
+                isCopied={copiedColor === color.value}
+              />
+            ))}
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {category.colors.map((color) => {
-              const isSemanticColor = category.name === 'Semantic Colors';
-              
-              return (
-                <ColorSwatch
-                  key={color.name}
-                  name={color.name}
-                  value={color.value}
-                  description={color.description}
-                  onCopy={copyToClipboard}
-                  isCopied={copiedColor === color.value}
-                  isSemanticColor={isSemanticColor}
-                />
-              );
-            })}
+          {/* Mid Colors Row */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {midColors.map((color) => (
+              <ColorSwatch
+                key={color.name}
+                name={color.name}
+                value={color.value}
+                description={color.description}
+                onCopy={copyToClipboard}
+                isCopied={copiedColor === color.value}
+              />
+            ))}
           </div>
-        </GradientContainer>
-      ))}
+
+          {/* Dark Colors Row */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {darkColors.map((color) => (
+              <ColorSwatch
+                key={color.name}
+                name={color.name}
+                value={color.value}
+                description={color.description}
+                onCopy={copyToClipboard}
+                isCopied={copiedColor === color.value}
+              />
+            ))}
+          </div>
+        </div>
+      </GradientContainer>
 
       {/* Usage Examples */}
       <GradientContainer className="p-8">
