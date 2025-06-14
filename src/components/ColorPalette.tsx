@@ -1,8 +1,7 @@
-
 import React from 'react';
-import { Copy, Check } from 'lucide-react';
+import ColorSwatch from './ColorSwatch';
 
-interface ColorSwatch {
+interface ColorSwatchData {
   name: string;
   value: string;
   description: string;
@@ -12,7 +11,7 @@ interface ColorSwatch {
 interface ColorCategory {
   name: string;
   description: string;
-  colors: ColorSwatch[];
+  colors: ColorSwatchData[];
 }
 
 const ColorPalette = () => {
@@ -26,26 +25,6 @@ const ColorPalette = () => {
     } catch (err) {
       console.error('Failed to copy color:', err);
     }
-  };
-
-  const getContrastColor = (hexColor: string): 'white' | 'black' => {
-    const hex = hexColor.replace('#', '');
-    const r = parseInt(hex.substr(0, 2), 16);
-    const g = parseInt(hex.substr(2, 2), 16);
-    const b = parseInt(hex.substr(4, 2), 16);
-    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-    return brightness > 128 ? 'black' : 'white';
-  };
-
-  const hexToRgb = (hex: string) => {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result
-      ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-        }
-      : null;
   };
 
   const colorCategories: ColorCategory[] = [
@@ -128,52 +107,18 @@ const ColorPalette = () => {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {category.colors.map((color) => {
-              const rgb = hexToRgb(color.value);
               const isSemanticColor = category.name === 'Semantic Colors';
               
               return (
-                <div
+                <ColorSwatch
                   key={color.name}
-                  className="ds-card-nested-interactive group cursor-pointer overflow-hidden"
-                  onClick={() => copyToClipboard(color.value)}
-                >
-                  <div
-                    className={`h-24 ${isSemanticColor ? 'h-20' : ''} relative flex items-center justify-center`}
-                    style={{ backgroundColor: color.value }}
-                  >
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-10 flex items-center justify-center">
-                      {copiedColor === color.value ? (
-                        <Check size={20} className={`${color.textColor === 'white' ? 'text-white' : 'text-black'}`} />
-                      ) : (
-                        <Copy size={20} className={`${color.textColor === 'white' ? 'text-white' : 'text-black'}`} />
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-semibold text-neutral-900">{color.name}</h3>
-                      <span className="text-xs font-mono text-neutral-500 bg-neutral-100 px-2 py-1 rounded">
-                        {color.value.toUpperCase()}
-                      </span>
-                    </div>
-                    
-                    <p className="text-sm text-neutral-600 mb-3">{color.description}</p>
-                    
-                    {rgb && (
-                      <div className="text-xs text-neutral-500 space-y-1">
-                        <div className="flex justify-between">
-                          <span>RGB</span>
-                          <span className="font-mono">{rgb.r}, {rgb.g}, {rgb.b}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Contrast</span>
-                          <span className="font-mono">{getContrastColor(color.value)} text</span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                  name={color.name}
+                  value={color.value}
+                  description={color.description}
+                  onCopy={copyToClipboard}
+                  isCopied={copiedColor === color.value}
+                  isSemanticColor={isSemanticColor}
+                />
               );
             })}
           </div>
