@@ -86,13 +86,13 @@ const TypographySpecimen = () => {
                 </div>
                 
                 <div className={`${font.class} text-neutral-700 space-y-1`}>
-                  <div className="text-sm font-bold tracking-wider">
+                  <div className="technical-detail">
                     ABCDEFGHIJKLMNOPQRSTUVWXYZ
                   </div>
-                  <div className="text-sm tracking-wide">
+                  <div className="technical-detail">
                     abcdefghijklmnopqrstuvwxyz
                   </div>
-                  <div className="text-sm tracking-wide">
+                  <div className="technical-detail">
                     0123456789
                   </div>
                 </div>
