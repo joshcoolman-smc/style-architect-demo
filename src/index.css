@@ -51,10 +51,6 @@
     @apply border-border;
   }
 
-  html {
-    @apply dark;
-  }
-
   body {
     @apply bg-background text-foreground font-content;
     font-family: var(--font-content), ui-sans-serif, system-ui;
