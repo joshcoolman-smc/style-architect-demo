@@ -9,6 +9,8 @@ export const useColorPalette = () => {
     copiedColor: null,
   });
 
+  const [isAnalyzing, setIsAnalyzing] = React.useState(false);
+
   const colorService = React.useMemo(() => new ColorService(), []);
 
   React.useEffect(() => {
@@ -39,11 +41,26 @@ export const useColorPalette = () => {
     updateColorPalette(newPalette);
   };
 
+  const generatePaletteFromImage = async (imageFile: File) => {
+    setIsAnalyzing(true);
+    try {
+      const newPalette = await colorService.generatePaletteFromImage(imageFile);
+      updateColorPalette(newPalette);
+    } catch (error) {
+      console.error('Failed to generate palette from image:', error);
+      throw error;
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   return {
     categories: state.categories,
     copiedColor: state.copiedColor,
+    isAnalyzing,
     copyToClipboard,
     updateColorPalette,
     generateNewPalette,
+    generatePaletteFromImage,
   };
 };

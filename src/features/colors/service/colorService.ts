@@ -2,12 +2,14 @@
 import { ColorRepository, IColorRepository } from '../repository/colorRepository';
 import { ColorCategory, ColorPaletteData } from '../types/color.types';
 import { generateAlgorithmicPalette } from '../utils/paletteGenerator';
+import { extractPaletteFromImage } from '../utils/imageAnalysis';
 
 export interface IColorService {
   getColorCategories(): ColorCategory[];
   copyColorToClipboard(value: string): Promise<void>;
   updateColorPalette(palette: ColorPaletteData): void;
   generateNewPalette(): ColorPaletteData;
+  generatePaletteFromImage(imageFile: File): Promise<ColorPaletteData>;
 }
 
 export class ColorService implements IColorService {
@@ -27,6 +29,23 @@ export class ColorService implements IColorService {
 
   generateNewPalette(): ColorPaletteData {
     return generateAlgorithmicPalette();
+  }
+
+  async generatePaletteFromImage(imageFile: File): Promise<ColorPaletteData> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const imageSrc = e.target?.result as string;
+          const palette = await extractPaletteFromImage(imageSrc);
+          resolve(palette);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.readAsDataURL(imageFile);
+    });
   }
 
   async copyColorToClipboard(value: string): Promise<void> {
