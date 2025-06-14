@@ -10,10 +10,10 @@ const ColorPalette = () => {
   // Get all colors from all categories
   const allColors = categories.flatMap(category => category.colors);
   
-  // Group colors by tone (light, mid, dark)
-  const lightColors = allColors.filter(color => color.name.startsWith('light-'));
-  const midColors = allColors.filter(color => color.name.startsWith('mid-'));
-  const darkColors = allColors.filter(color => color.name.startsWith('dark-'));
+  // Group colors by tone (using the actual category names)
+  const lightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
+  const midColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
+  const darkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
 
   return (
     <div className="space-y-12">
