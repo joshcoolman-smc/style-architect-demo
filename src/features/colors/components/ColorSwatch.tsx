@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { getReadableTextColor, hexToRgb } from '../utils/colorUtils';
+import { Separator } from '@/components/ui/separator';
 
 interface ColorSwatchProps {
   name: string;
@@ -35,7 +36,9 @@ const ColorSwatch = ({ name, value, description, onCopy, isCopied, isSemanticCol
       <div className="p-6 space-y-4">
         <div className="space-y-2">
           <h3 className="font-semibold text-card-foreground">{name}</h3>
-          <p className="text-sm text-muted-foreground">{description}</p>
+          
+          {/* Subtle horizontal rule */}
+          <Separator className="my-2" />
           
           {/* Technical Details with IBM Plex Mono */}
           <div className="space-y-1">
