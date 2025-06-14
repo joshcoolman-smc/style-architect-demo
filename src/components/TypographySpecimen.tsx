@@ -44,7 +44,7 @@ const TypographySpecimen = () => {
               <div className="text-6xl font-bold text-neutral-100 leading-none mb-2">
                 Aa
               </div>
-              <div className="technical-detail text-neutral-400">
+              <div className="ds-text-technical-light">
                 STRUCTURAL / MONTSERRAT
               </div>
             </div>
@@ -52,7 +52,7 @@ const TypographySpecimen = () => {
               <div className="text-6xl font-light text-neutral-200 leading-none mb-2 font-content">
                 Aa
               </div>
-              <div className="technical-detail text-neutral-400">
+              <div className="ds-text-technical-light">
                 CONTENT / HIND MADURAI
               </div>
             </div>
@@ -84,27 +84,27 @@ const TypographySpecimen = () => {
         <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Type Scale</h2>
         <div className="space-y-10 mt-6 flow-root">
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail text-neutral-300">h1</span>
+            <span className="ds-text-technical-light">h1</span>
             <h1 className="text-5xl font-extrabold tracking-tighter text-white">The quick brown fox</h1>
           </div>
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail text-neutral-300">h2</span>
+            <span className="ds-text-technical-light">h2</span>
             <h2 className="text-4xl font-bold tracking-tight text-white">The quick brown fox</h2>
           </div>
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail text-neutral-300">h3</span>
+            <span className="ds-text-technical-light">h3</span>
             <h3 className="text-3xl font-semibold text-white">The quick brown fox</h3>
           </div>
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail text-neutral-300">h4</span>
+            <span className="ds-text-technical-light">h4</span>
             <h4 className="text-2xl font-semibold text-white">The quick brown fox</h4>
           </div>
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail text-neutral-300">h5</span>
+            <span className="ds-text-technical-light">h5</span>
             <h5 className="text-xl font-medium text-white">The quick brown fox</h5>
           </div>
           <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="technical-detail text-neutral-300">h6</span>
+            <span className="ds-text-technical-light">h6</span>
             <h6 className="text-lg font-medium text-white">The quick brown fox</h6>
           </div>
         </div>
@@ -127,7 +127,7 @@ const TypographySpecimen = () => {
           <div className="bg-card p-8 rounded-lg border relative overflow-hidden">
             <p className="font-mono text-9xl font-bold text-card-foreground/5 absolute -right-5 -bottom-9 select-none">U09/</p>
             <div className="relative">
-              <p className="technical-detail text-neutral-400">Unit Portables AB / Item 734</p>
+              <p className="ds-text-technical-muted">Unit Portables AB / Item 734</p>
               <h3 className="font-structural text-4xl font-bold tracking-tight my-3 text-neutral-100">Shoulder Bag</h3>
               <div className="flex justify-between items-baseline border-t border-muted pt-3">
                 <p className="font-content text-neutral-200">Polyester/580x360mm</p>

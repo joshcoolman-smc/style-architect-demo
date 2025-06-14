@@ -1,4 +1,5 @@
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -70,11 +71,6 @@
     font-family: var(--font-subheader), ui-serif, serif;
   }
   
-  /* Technical details styling - removed text-muted-foreground to prevent conflicts */
-  .technical-detail {
-    @apply font-technical text-xs uppercase tracking-wide font-extralight;
-  }
-  
   /* Mathematical spacing utilities */
   .space-unit { @apply space-y-unit; }
   .space-3unit { @apply space-y-3unit; }
@@ -113,6 +109,19 @@
     @apply bg-secondary text-secondary-foreground px-6unit py-3unit rounded-lg font-medium font-structural transition-colors hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-background;
   }
   
+  /* Typography Design System Classes */
+  .ds-text-technical {
+    @apply font-technical text-xs uppercase tracking-wide font-extralight;
+  }
+  
+  .ds-text-technical-light {
+    @apply ds-text-technical text-neutral-300;
+  }
+  
+  .ds-text-technical-muted {
+    @apply ds-text-technical text-muted-foreground;
+  }
+  
   .ds-section-spacing {
     @apply space-y-8unit;
   }
@@ -125,3 +134,4 @@
     @apply space-y-3unit;
   }
 }
+
