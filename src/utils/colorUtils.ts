@@ -36,33 +36,13 @@ export const hexToRgb = (hex: string) => {
 };
 
 /**
- * Lighten or darken a hex color by a percentage
- */
-export const adjustColorLightness = (hex: string, percent: number): string => {
-  const rgb = hexToRgb(hex);
-  if (!rgb) return hex;
-  
-  const { r, g, b } = rgb;
-  
-  const adjustedR = Math.max(0, Math.min(255, r + (255 - r) * percent));
-  const adjustedG = Math.max(0, Math.min(255, g + (255 - g) * percent));
-  const adjustedB = Math.max(0, Math.min(255, b + (255 - b) * percent));
-  
-  return `#${Math.round(adjustedR).toString(16).padStart(2, '0')}${Math.round(adjustedG).toString(16).padStart(2, '0')}${Math.round(adjustedB).toString(16).padStart(2, '0')}`;
-};
-
-/**
  * Get the appropriate text color for a given background color
- * Returns a tinted version of the background color for better readability
+ * Returns white or black based on contrast ratio
  */
 export const getReadableTextColor = (backgroundColor: string): string => {
   const luminance = calculateLuminance(backgroundColor);
   
-  // If the background is dark, return a much lighter version
-  if (luminance < 0.5) {
-    return adjustColorLightness(backgroundColor, 0.7);
-  }
-  
-  // If the background is light, return a much darker version
-  return adjustColorLightness(backgroundColor, -0.7);
+  // Use WCAG contrast ratio threshold
+  // If luminance is greater than 0.179, use black text, otherwise white
+  return luminance > 0.179 ? '#000000' : '#ffffff';
 };
