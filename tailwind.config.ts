@@ -25,6 +25,8 @@ export default {
 				'content': ['var(--font-content)', 'ui-sans-serif', 'system-ui'],
 				// Sub-headers
 				'subheader': ['var(--font-subheader)', 'ui-serif', 'serif'],
+				// Technical monospace
+				'technical': ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular'],
 				// Monospace
 				'mono': ['Fira Code', 'ui-monospace', 'SFMono-Regular'],
 				

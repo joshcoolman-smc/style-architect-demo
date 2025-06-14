@@ -12,34 +12,34 @@ const TypographySpecimen = () => {
   ];
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-16 text-left">
       {/* Hero Typography Display */}
-      <section className="ds-card p-12 text-center">
+      <section className="ds-card p-12">
         <div className="space-y-8">
           <div className="space-y-4">
             <h1 className="text-display-2xl font-bold text-neutral-900 leading-none">
               Typography
             </h1>
-            <p className="text-2xl text-neutral-600 font-light max-w-2xl mx-auto">
+            <p className="text-2xl text-neutral-600 font-light max-w-2xl">
               A carefully crafted type system built on modern web fonts for optimal readability and visual hierarchy.
             </p>
           </div>
           
           {/* Large specimen display */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            <div className="text-left">
+            <div>
               <div className="text-6xl font-bold text-neutral-900 leading-none mb-2">
                 Aa
               </div>
-              <div className="text-sm text-neutral-500 font-mono">
+              <div className="technical-detail">
                 STRUCTURAL / MONTSERRAT
               </div>
             </div>
-            <div className="text-left">
+            <div>
               <div className="text-6xl font-light text-neutral-700 leading-none mb-2 font-content">
                 Aa
               </div>
-              <div className="text-sm text-neutral-500 font-mono">
+              <div className="technical-detail">
                 CONTENT / HIND MADURAI
               </div>
             </div>
@@ -55,10 +55,10 @@ const TypographySpecimen = () => {
             {fontWeights.map((weight) => (
               <div key={weight.weight} className="group">
                 <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-xs text-neutral-500 font-mono uppercase tracking-wide">
+                  <span className="technical-detail">
                     {weight.name}
                   </span>
-                  <span className="text-xs text-neutral-400 font-mono">
+                  <span className="technical-detail">
                     {weight.weight}
                   </span>
                 </div>
@@ -76,10 +76,10 @@ const TypographySpecimen = () => {
             {fontWeights.slice(0, 4).map((weight) => (
               <div key={`content-${weight.weight}`} className="group">
                 <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-xs text-neutral-500 font-mono uppercase tracking-wide">
+                  <span className="technical-detail">
                     {weight.name}
                   </span>
-                  <span className="text-xs text-neutral-400 font-mono">
+                  <span className="technical-detail">
                     {weight.weight}
                   </span>
                 </div>
@@ -96,32 +96,32 @@ const TypographySpecimen = () => {
       <section className="ds-card p-8">
         <h2 className="text-xl font-semibold text-neutral-900 mb-8">Display Scale</h2>
         <div className="space-y-8">
-          <div className="text-center py-8 border-2 border-dashed border-neutral-300 rounded-lg">
+          <div className="py-8 border-2 border-dashed border-neutral-300 rounded-lg px-6">
             <div className="text-display-2xl font-bold text-neutral-900 leading-none mb-2">
               Display 2XL
             </div>
-            <div className="text-sm text-neutral-500 font-mono">72px / 4.5rem</div>
+            <div className="technical-detail">72px / 4.5rem</div>
           </div>
           
-          <div className="text-center py-6 border-2 border-dashed border-neutral-300 rounded-lg">
+          <div className="py-6 border-2 border-dashed border-neutral-300 rounded-lg px-6">
             <div className="text-display-xl font-bold text-neutral-900 leading-none mb-2">
               Display XL
             </div>
-            <div className="text-sm text-neutral-500 font-mono">60px / 3.75rem</div>
+            <div className="technical-detail">60px / 3.75rem</div>
           </div>
           
-          <div className="text-center py-4 border-2 border-dashed border-neutral-300 rounded-lg">
+          <div className="py-4 border-2 border-dashed border-neutral-300 rounded-lg px-6">
             <div className="text-display-lg font-bold text-neutral-900 leading-none mb-2">
               Display Large
             </div>
-            <div className="text-sm text-neutral-500 font-mono">48px / 3rem</div>
+            <div className="technical-detail">48px / 3rem</div>
           </div>
           
-          <div className="text-center py-3 border-2 border-dashed border-neutral-300 rounded-lg">
+          <div className="py-3 border-2 border-dashed border-neutral-300 rounded-lg px-6">
             <div className="text-display-md font-semibold text-neutral-900 leading-none mb-2">
               Display Medium
             </div>
-            <div className="text-sm text-neutral-500 font-mono">36px / 2.25rem</div>
+            <div className="technical-detail">36px / 2.25rem</div>
           </div>
         </div>
       </section>
@@ -135,25 +135,25 @@ const TypographySpecimen = () => {
               <h1 className="text-4xl font-bold text-neutral-900 leading-tight mb-1">
                 Heading 1
               </h1>
-              <span className="text-xs text-neutral-500 font-mono">text-4xl / font-bold</span>
+              <span className="technical-detail">text-4xl / font-bold</span>
             </div>
             <div>
               <h2 className="text-3xl font-bold text-neutral-900 leading-tight mb-1">
                 Heading 2
               </h2>
-              <span className="text-xs text-neutral-500 font-mono">text-3xl / font-bold</span>
+              <span className="technical-detail">text-3xl / font-bold</span>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-neutral-900 leading-tight mb-1">
                 Heading 3
               </h3>
-              <span className="text-xs text-neutral-500 font-mono">text-2xl / font-semibold</span>
+              <span className="technical-detail">text-2xl / font-semibold</span>
             </div>
             <div>
               <h4 className="text-xl font-semibold text-neutral-900 leading-tight mb-1">
                 Heading 4
               </h4>
-              <span className="text-xs text-neutral-500 font-mono">text-xl / font-semibold</span>
+              <span className="technical-detail">text-xl / font-semibold</span>
             </div>
           </div>
         </div>
@@ -165,19 +165,19 @@ const TypographySpecimen = () => {
               <p className="text-lg text-neutral-700 leading-relaxed mb-2 font-content">
                 Large body text provides excellent readability for important content sections and introductory paragraphs.
               </p>
-              <span className="text-xs text-neutral-500 font-mono">text-lg / font-content</span>
+              <span className="technical-detail">text-lg / font-content</span>
             </div>
             <div>
               <p className="text-base text-neutral-700 leading-relaxed mb-2 font-content">
                 Regular body text serves as the foundation of most content on the web, providing comfortable reading at standard sizes.
               </p>
-              <span className="text-xs text-neutral-500 font-mono">text-base / font-content</span>
+              <span className="technical-detail">text-base / font-content</span>
             </div>
             <div>
               <p className="text-sm text-neutral-600 leading-relaxed mb-2 font-content">
                 Small body text is often used for captions, labels, and secondary information that supports the main content.
               </p>
-              <span className="text-xs text-neutral-500 font-mono">text-sm / font-content</span>
+              <span className="technical-detail">text-sm / font-content</span>
             </div>
           </div>
         </div>
@@ -185,14 +185,14 @@ const TypographySpecimen = () => {
 
       {/* Typography Showcase */}
       <section className="ds-card p-12 bg-gradient-to-br from-zinc-900 to-zinc-800">
-        <div className="text-center space-y-6">
+        <div className="space-y-6">
           <div className="text-6xl font-bold text-white leading-none">
             Design
           </div>
           <div className="text-4xl font-light text-zinc-300 leading-none font-content">
             Typography
           </div>
-          <div className="text-lg text-zinc-400 max-w-md mx-auto font-content">
+          <div className="text-lg text-zinc-400 max-w-md font-content">
             Crafted for clarity, designed for impact, built for the modern web.
           </div>
         </div>

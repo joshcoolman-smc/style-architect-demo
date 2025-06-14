@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Palette, Type, Layout, Home } from 'lucide-react';
+import { Palette, Type, Layout } from 'lucide-react';
 import FontSelector from './FontSelector';
 
 const Navigation = () => {
@@ -9,7 +9,6 @@ const Navigation = () => {
   const [showFontSelector, setShowFontSelector] = useState(false);
 
   const navItems = [
-    { path: '/', label: 'Overview', icon: Home },
     { path: '/typography', label: 'Typography', icon: Type },
     { path: '/colors', label: 'Colors', icon: Palette },
     { path: '/components', label: 'Components', icon: Layout },
