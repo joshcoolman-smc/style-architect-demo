@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -69,9 +70,9 @@
     font-family: var(--font-subheader), ui-serif, serif;
   }
   
-  /* Technical details styling - simplified to use only Tailwind */
+  /* Technical details styling - removed text-muted-foreground to prevent conflicts */
   .technical-detail {
-    @apply font-technical text-xs text-muted-foreground uppercase tracking-wide font-extralight;
+    @apply font-technical text-xs uppercase tracking-wide font-extralight;
   }
   
   /* Mathematical spacing utilities */
