@@ -11,203 +11,189 @@ const TypographySpecimen = () => {
     { weight: '800', name: 'Extrabold', class: 'font-extrabold' },
   ];
 
-  const headings = [
-    { tag: 'H1', class: 'text-4xl font-bold', sample: 'The quick brown fox jumps over the lazy dog' },
-    { tag: 'H2', class: 'text-3xl font-bold', sample: 'The quick brown fox jumps over the lazy dog' },
-    { tag: 'H3', class: 'text-2xl font-semibold', sample: 'The quick brown fox jumps over the lazy dog' },
-    { tag: 'H4', class: 'text-xl font-semibold', sample: 'The quick brown fox jumps over the lazy dog' },
-    { tag: 'H5', class: 'text-lg font-medium', sample: 'The quick brown fox jumps over the lazy dog' },
-    { tag: 'H6', class: 'text-base font-medium', sample: 'The quick brown fox jumps over the lazy dog' },
-  ];
-
-  const bodyText = [
-    { name: 'Large', class: 'text-lg', sample: 'This is large body text that provides excellent readability for important content sections.' },
-    { name: 'Regular', class: 'text-base', sample: 'This is regular body text that serves as the foundation of most content on the web.' },
-    { name: 'Small', class: 'text-sm', sample: 'This is small body text often used for captions, labels, and secondary information.' },
-    { name: 'Extra Small', class: 'text-xs', sample: 'This is extra small text typically used for fine print and metadata.' },
-  ];
-
-  const codeExample = `// TypeScript interface example
-interface DesignSystemProps {
-  theme: 'light' | 'dark';
-  spacing: number;
-  colors: {
-    primary: string;
-    secondary: string;
-  };
-}
-
-const myComponent: React.FC<DesignSystemProps> = ({ theme, spacing, colors }) => {
   return (
-    <div className={theme === 'dark' ? 'bg-neutral-900' : 'bg-white'}>
-      <h1 style={{ color: colors.primary }}>Hello Design System</h1>
-    </div>
-  );
-};`;
+    <div className="space-y-16">
+      {/* Hero Typography Display */}
+      <section className="ds-card p-12 text-center">
+        <div className="space-y-8">
+          <div className="space-y-4">
+            <h1 className="text-display-2xl font-bold text-neutral-900 leading-none">
+              Typography
+            </h1>
+            <p className="text-2xl text-neutral-600 font-light max-w-2xl mx-auto">
+              A carefully crafted type system built on modern web fonts for optimal readability and visual hierarchy.
+            </p>
+          </div>
+          
+          {/* Large specimen display */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            <div className="text-left">
+              <div className="text-6xl font-bold text-neutral-900 leading-none mb-2">
+                Aa
+              </div>
+              <div className="text-sm text-neutral-500 font-mono">
+                STRUCTURAL / MONTSERRAT
+              </div>
+            </div>
+            <div className="text-left">
+              <div className="text-6xl font-light text-neutral-700 leading-none mb-2 font-content">
+                Aa
+              </div>
+              <div className="text-sm text-neutral-500 font-mono">
+                CONTENT / HIND MADURAI
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  return (
-    <div className="space-y-12">
-      <div>
-        <h1 className="text-display-xl font-bold text-neutral-900 mb-2">Typography</h1>
-        <p className="text-lg text-neutral-600">
-          A comprehensive type system built on Inter for UI text and Fira Code for code examples.
-        </p>
-      </div>
-
-      {/* Font Families */}
-      <section className="ds-card p-8">
-        <h2 className="text-2xl font-bold text-neutral-900 mb-6">Font Families</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-lg font-semibold text-neutral-900 mb-4">Inter (UI Font)</h3>
-            <div className="space-y-3">
-              {fontWeights.map((weight) => (
-                <div key={weight.weight} className="flex items-center justify-between">
-                  <span className={`text-2xl ${weight.class}`}>
-                    The quick brown fox
+      {/* Font Weight Specimens */}
+      <section className="grid md:grid-cols-2 gap-8">
+        <div className="ds-card p-8">
+          <h2 className="text-xl font-semibold text-neutral-900 mb-8">Structural Font Weights</h2>
+          <div className="space-y-6">
+            {fontWeights.map((weight) => (
+              <div key={weight.weight} className="group">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="text-xs text-neutral-500 font-mono uppercase tracking-wide">
+                    {weight.name}
                   </span>
-                  <span className="text-sm text-neutral-500 font-mono">
-                    {weight.name} {weight.weight}
+                  <span className="text-xs text-neutral-400 font-mono">
+                    {weight.weight}
                   </span>
                 </div>
-              ))}
-            </div>
+                <div className={`text-3xl ${weight.class} text-neutral-900 leading-tight`}>
+                  The quick brown fox
+                </div>
+              </div>
+            ))}
           </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold text-neutral-900 mb-4">Fira Code (Monospace)</h3>
-            <div className="space-y-3">
-              {fontWeights.slice(0, 4).map((weight) => (
-                <div key={`mono-${weight.weight}`} className="flex items-center justify-between">
-                  <span className={`text-2xl font-mono ${weight.class}`}>
-                    const hello = "world";
+        </div>
+
+        <div className="ds-card p-8">
+          <h2 className="text-xl font-semibold text-neutral-900 mb-8">Content Font Weights</h2>
+          <div className="space-y-6">
+            {fontWeights.slice(0, 4).map((weight) => (
+              <div key={`content-${weight.weight}`} className="group">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="text-xs text-neutral-500 font-mono uppercase tracking-wide">
+                    {weight.name}
                   </span>
-                  <span className="text-sm text-neutral-500 font-mono">
-                    {weight.name} {weight.weight}
+                  <span className="text-xs text-neutral-400 font-mono">
+                    {weight.weight}
                   </span>
                 </div>
-              ))}
-            </div>
+                <div className={`text-3xl font-content ${weight.class} text-neutral-900 leading-tight`}>
+                  The quick brown fox
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Heading Hierarchy */}
+      {/* Display Scale */}
       <section className="ds-card p-8">
-        <h2 className="text-2xl font-bold text-neutral-900 mb-6">Heading Hierarchy</h2>
-        <div className="space-y-6">
-          {headings.map((heading) => (
-            <div key={heading.tag} className="border-l-4 border-brand-500 pl-4">
-              <div className="flex items-baseline justify-between mb-2">
-                <span className="text-sm font-mono text-neutral-500 bg-neutral-100 px-2 py-1 rounded">
-                  {heading.tag}
-                </span>
-                <span className="text-xs text-neutral-400 font-mono">
-                  {heading.class}
-                </span>
-              </div>
-              <div className={heading.class + ' text-neutral-900'}>
-                {heading.sample}
-              </div>
+        <h2 className="text-xl font-semibold text-neutral-900 mb-8">Display Scale</h2>
+        <div className="space-y-8">
+          <div className="text-center py-8 border-2 border-dashed border-neutral-300 rounded-lg">
+            <div className="text-display-2xl font-bold text-neutral-900 leading-none mb-2">
+              Display 2XL
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Body Text */}
-      <section className="ds-card p-8">
-        <h2 className="text-2xl font-bold text-neutral-900 mb-6">Body Text</h2>
-        <div className="space-y-6">
-          {bodyText.map((text) => (
-            <div key={text.name} className="border-l-4 border-accent-500 pl-4">
-              <div className="flex items-baseline justify-between mb-2">
-                <span className="text-sm font-mono text-neutral-500 bg-neutral-100 px-2 py-1 rounded">
-                  {text.name}
-                </span>
-                <span className="text-xs text-neutral-400 font-mono">
-                  {text.class}
-                </span>
-              </div>
-              <div className={text.class + ' text-neutral-700'}>
-                {text.sample}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Text Variations */}
-      <section className="ds-card p-8">
-        <h2 className="text-2xl font-bold text-neutral-900 mb-6">Text Variations</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-neutral-900">Styling</h3>
-            <div className="space-y-3">
-              <p className="text-base text-neutral-700">
-                This is <strong className="font-semibold">bold text</strong> for emphasis.
-              </p>
-              <p className="text-base text-neutral-700">
-                This is <em className="italic">italic text</em> for emphasis.
-              </p>
-              <p className="text-base text-neutral-700">
-                This is <a href="#" className="text-brand-600 hover:text-brand-700 underline">a link</a> with hover states.
-              </p>
-              <p className="text-base text-neutral-500">
-                This is muted text for secondary information.
-              </p>
-            </div>
+            <div className="text-sm text-neutral-500 font-mono">72px / 4.5rem</div>
           </div>
           
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-neutral-900">Lists</h3>
-            <ul className="space-y-2 text-neutral-700">
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                Clean, readable typography
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                Consistent spacing and hierarchy
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-brand-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                Accessible color contrast
-              </li>
-            </ul>
+          <div className="text-center py-6 border-2 border-dashed border-neutral-300 rounded-lg">
+            <div className="text-display-xl font-bold text-neutral-900 leading-none mb-2">
+              Display XL
+            </div>
+            <div className="text-sm text-neutral-500 font-mono">60px / 3.75rem</div>
+          </div>
+          
+          <div className="text-center py-4 border-2 border-dashed border-neutral-300 rounded-lg">
+            <div className="text-display-lg font-bold text-neutral-900 leading-none mb-2">
+              Display Large
+            </div>
+            <div className="text-sm text-neutral-500 font-mono">48px / 3rem</div>
+          </div>
+          
+          <div className="text-center py-3 border-2 border-dashed border-neutral-300 rounded-lg">
+            <div className="text-display-md font-semibold text-neutral-900 leading-none mb-2">
+              Display Medium
+            </div>
+            <div className="text-sm text-neutral-500 font-mono">36px / 2.25rem</div>
           </div>
         </div>
       </section>
 
-      {/* Code Examples */}
-      <section className="ds-card p-8">
-        <h2 className="text-2xl font-bold text-neutral-900 mb-6">Code Examples</h2>
-        <div className="space-y-4">
-          <div>
-            <h3 className="text-lg font-semibold text-neutral-900 mb-3">TypeScript Example</h3>
-            <pre className="ds-code-block overflow-x-auto">
-              <code>{codeExample}</code>
-            </pre>
+      {/* Reading Specimens */}
+      <section className="grid md:grid-cols-2 gap-8">
+        <div className="ds-card p-8">
+          <h2 className="text-xl font-semibold text-neutral-900 mb-6">Heading Hierarchy</h2>
+          <div className="space-y-6">
+            <div>
+              <h1 className="text-4xl font-bold text-neutral-900 leading-tight mb-1">
+                Heading 1
+              </h1>
+              <span className="text-xs text-neutral-500 font-mono">text-4xl / font-bold</span>
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold text-neutral-900 leading-tight mb-1">
+                Heading 2
+              </h2>
+              <span className="text-xs text-neutral-500 font-mono">text-3xl / font-bold</span>
+            </div>
+            <div>
+              <h3 className="text-2xl font-semibold text-neutral-900 leading-tight mb-1">
+                Heading 3
+              </h3>
+              <span className="text-xs text-neutral-500 font-mono">text-2xl / font-semibold</span>
+            </div>
+            <div>
+              <h4 className="text-xl font-semibold text-neutral-900 leading-tight mb-1">
+                Heading 4
+              </h4>
+              <span className="text-xs text-neutral-500 font-mono">text-xl / font-semibold</span>
+            </div>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-4 mt-6">
+        </div>
+
+        <div className="ds-card p-8">
+          <h2 className="text-xl font-semibold text-neutral-900 mb-6">Body Text</h2>
+          <div className="space-y-6">
             <div>
-              <h4 className="text-sm font-semibold text-neutral-900 mb-2">Inline Code</h4>
-              <p className="text-sm text-neutral-700">
-                Use <code className="bg-neutral-100 text-neutral-800 px-1 py-0.5 rounded text-xs font-mono">className</code> for styling.
+              <p className="text-lg text-neutral-700 leading-relaxed mb-2 font-content">
+                Large body text provides excellent readability for important content sections and introductory paragraphs.
               </p>
+              <span className="text-xs text-neutral-500 font-mono">text-lg / font-content</span>
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-neutral-900 mb-2">Keyboard</h4>
-              <p className="text-sm text-neutral-700">
-                Press <kbd className="bg-neutral-200 border border-neutral-300 rounded px-1.5 py-0.5 text-xs font-mono">Cmd + K</kbd> to search.
+              <p className="text-base text-neutral-700 leading-relaxed mb-2 font-content">
+                Regular body text serves as the foundation of most content on the web, providing comfortable reading at standard sizes.
               </p>
+              <span className="text-xs text-neutral-500 font-mono">text-base / font-content</span>
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-neutral-900 mb-2">Variable</h4>
-              <p className="text-sm text-neutral-700">
-                The <var className="italic text-brand-600 font-mono">primaryColor</var> variable is required.
+              <p className="text-sm text-neutral-600 leading-relaxed mb-2 font-content">
+                Small body text is often used for captions, labels, and secondary information that supports the main content.
               </p>
+              <span className="text-xs text-neutral-500 font-mono">text-sm / font-content</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Typography Showcase */}
+      <section className="ds-card p-12 bg-gradient-to-br from-zinc-900 to-zinc-800">
+        <div className="text-center space-y-6">
+          <div className="text-6xl font-bold text-white leading-none">
+            Design
+          </div>
+          <div className="text-4xl font-light text-zinc-300 leading-none font-content">
+            Typography
+          </div>
+          <div className="text-lg text-zinc-400 max-w-md mx-auto font-content">
+            Crafted for clarity, designed for impact, built for the modern web.
           </div>
         </div>
       </section>
