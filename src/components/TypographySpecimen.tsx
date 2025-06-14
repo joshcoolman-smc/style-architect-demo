@@ -106,154 +106,111 @@ const TypographySpecimen = () => {
         </div>
       </GradientContainer>
 
-      {/* Font Weight Specimens */}
-      <section className="grid md:grid-cols-2 gap-8">
-        <GradientContainer className="p-8">
-          <h2 className="text-xl font-semibold text-neutral-900 mb-8">Structural Font Weights</h2>
-          <div className="space-y-6">
-            {fontWeights.map((weight) => (
-              <div key={weight.weight} className="group">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="technical-detail">
-                    {weight.name}
-                  </span>
-                  <span className="technical-detail">
-                    {weight.weight}
-                  </span>
-                </div>
-                <div className={`text-3xl ${weight.class} text-neutral-900 leading-tight`}>
-                  The quick brown fox
-                </div>
-              </div>
-            ))}
+      {/* Type Scale */}
+      <section>
+        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6">Type Scale</h2>
+        <div className="space-y-10 mt-6 flow-root">
+          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+            <span className="technical-detail">h1</span>
+            <h1 className="text-5xl font-extrabold tracking-tighter">The quick brown fox</h1>
           </div>
-        </GradientContainer>
-
-        <GradientContainer className="p-8">
-          <h2 className="text-xl font-semibold text-neutral-900 mb-8">Content Font Weights</h2>
-          <div className="space-y-6">
-            {fontWeights.slice(0, 4).map((weight) => (
-              <div key={`content-${weight.weight}`} className="group">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="technical-detail">
-                    {weight.name}
-                  </span>
-                  <span className="technical-detail">
-                    {weight.weight}
-                  </span>
-                </div>
-                <div className={`text-3xl font-content ${weight.class} text-neutral-900 leading-tight`}>
-                  The quick brown fox
-                </div>
-              </div>
-            ))}
+          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+            <span className="technical-detail">h2</span>
+            <h2 className="text-4xl font-bold tracking-tight">The quick brown fox</h2>
           </div>
-        </GradientContainer>
-      </section>
-
-      {/* Display Scale */}
-      <GradientContainer className="p-8">
-        <h2 className="text-xl font-semibold text-neutral-900 mb-8">Display Scale</h2>
-        <div className="space-y-8">
-          <div className="py-8 border-2 border-dashed border-neutral-300 rounded-lg px-6">
-            <div className="text-display-2xl font-bold text-neutral-900 leading-none mb-2">
-              Display 2XL
-            </div>
-            <div className="technical-detail">72px / 4.5rem</div>
+          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+            <span className="technical-detail">h3</span>
+            <h3 className="text-3xl font-semibold">The quick brown fox</h3>
           </div>
-          
-          <div className="py-6 border-2 border-dashed border-neutral-300 rounded-lg px-6">
-            <div className="text-display-xl font-bold text-neutral-900 leading-none mb-2">
-              Display XL
-            </div>
-            <div className="technical-detail">60px / 3.75rem</div>
+          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+            <span className="technical-detail">h4</span>
+            <h4 className="text-2xl font-semibold">The quick brown fox</h4>
           </div>
-          
-          <div className="py-4 border-2 border-dashed border-neutral-300 rounded-lg px-6">
-            <div className="text-display-lg font-bold text-neutral-900 leading-none mb-2">
-              Display Large
-            </div>
-            <div className="technical-detail">48px / 3rem</div>
+          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+            <span className="technical-detail">h5</span>
+            <h5 className="text-xl font-medium">The quick brown fox</h5>
           </div>
-          
-          <div className="py-3 border-2 border-dashed border-neutral-300 rounded-lg px-6">
-            <div className="text-display-md font-semibold text-neutral-900 leading-none mb-2">
-              Display Medium
-            </div>
-            <div className="technical-detail">36px / 2.25rem</div>
+          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+            <span className="technical-detail">h6</span>
+            <h6 className="text-lg font-medium">The quick brown fox</h6>
           </div>
         </div>
-      </GradientContainer>
-
-      {/* Reading Specimens */}
-      <section className="grid md:grid-cols-2 gap-8">
-        <GradientContainer className="p-8">
-          <h2 className="text-xl font-semibold text-neutral-900 mb-6">Heading Hierarchy</h2>
-          <div className="space-y-6">
-            <div>
-              <h1 className="text-4xl font-bold text-neutral-900 leading-tight mb-1">
-                Heading 1
-              </h1>
-              <span className="technical-detail">text-4xl / font-bold</span>
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-neutral-900 leading-tight mb-1">
-                Heading 2
-              </h2>
-              <span className="technical-detail">text-3xl / font-bold</span>
-            </div>
-            <div>
-              <h3 className="text-2xl font-semibold text-neutral-900 leading-tight mb-1">
-                Heading 3
-              </h3>
-              <span className="technical-detail">text-2xl / font-semibold</span>
-            </div>
-            <div>
-              <h4 className="text-xl font-semibold text-neutral-900 leading-tight mb-1">
-                Heading 4
-              </h4>
-              <span className="technical-detail">text-xl / font-semibold</span>
-            </div>
-          </div>
-        </GradientContainer>
-
-        <GradientContainer className="p-8">
-          <h2 className="text-xl font-semibold text-neutral-900 mb-6">Body Text</h2>
-          <div className="space-y-6">
-            <div>
-              <p className="text-lg text-neutral-700 leading-relaxed mb-2 font-content">
-                Large body text provides excellent readability for important content sections and introductory paragraphs.
-              </p>
-              <span className="technical-detail">text-lg / font-content</span>
-            </div>
-            <div>
-              <p className="text-base text-neutral-700 leading-relaxed mb-2 font-content">
-                Regular body text serves as the foundation of most content on the web, providing comfortable reading at standard sizes.
-              </p>
-              <span className="technical-detail">text-base / font-content</span>
-            </div>
-            <div>
-              <p className="text-sm text-neutral-600 leading-relaxed mb-2 font-content">
-                Small body text is often used for captions, labels, and secondary information that supports the main content.
-              </p>
-              <span className="technical-detail">text-sm / font-content</span>
-            </div>
-          </div>
-        </GradientContainer>
       </section>
 
-      {/* Typography Showcase */}
-      <section className="ds-card p-12 bg-gradient-to-br from-zinc-900 to-zinc-800">
-        <div className="space-y-6">
-          <div className="text-6xl font-bold text-white leading-none">
-            Design
+      {/* Font Weights */}
+      <section>
+        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6">Font Weights</h2>
+        <div className="grid md:grid-cols-2 gap-8 mt-6">
+          <div>
+            <h3 className="text-lg font-semibold mb-6">Structural Weights</h3>
+            <div className="space-y-6">
+              {fontWeights.map((weight) => (
+                <div key={weight.weight} className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+                  <span className="technical-detail">{weight.name} {weight.weight}</span>
+                  <div className={`text-3xl ${weight.class} text-neutral-900 leading-tight`}>
+                    The quick brown fox
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="text-4xl font-light text-zinc-300 leading-none font-content">
-            Typography
+          <div>
+            <h3 className="text-lg font-semibold mb-6">Content Weights</h3>
+            <div className="space-y-6">
+              {fontWeights.slice(0, 4).map((weight) => (
+                <div key={`content-${weight.weight}`} className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+                  <span className="technical-detail">{weight.name} {weight.weight}</span>
+                  <div className={`text-3xl font-content ${weight.class} text-neutral-900 leading-tight`}>
+                    The quick brown fox
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="text-lg text-zinc-400 max-w-md font-content">
-            Crafted for clarity, designed for impact, built for the modern web.
+        </div>
+      </section>
+
+      {/* Composition Examples */}
+      <section>
+        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6">Composition</h2>
+        <div className="grid md:grid-cols-2 gap-8 mt-6">
+          <div className="bg-card p-8 rounded-lg border relative overflow-hidden">
+            <p className="font-mono text-9xl font-bold text-card-foreground/5 absolute -right-5 -top-5 select-none">01/</p>
+            <div className="relative">
+              <h3 className="text-3xl font-semibold font-subheader">Article Heading</h3>
+              <p className="text-lg mt-2 font-structural font-bold">A Stunning Subtitle Follows</p>
+              <p className="mt-4 text-muted-foreground font-content">
+                This composition demonstrates how different type styles can work together. We combine headings, subheadings, and body text to create a clear and pleasing visual hierarchy.
+              </p>
+            </div>
           </div>
+          <div className="bg-card p-8 rounded-lg border relative overflow-hidden">
+            <p className="font-mono text-9xl font-bold text-card-foreground/5 absolute -right-5 -bottom-9 select-none">U09/</p>
+            <div className="relative">
+              <p className="technical-detail">Unit Portables AB / Item 734</p>
+              <h3 className="font-structural text-4xl font-bold tracking-tight my-3">Shoulder Bag</h3>
+              <div className="flex justify-between items-baseline border-t border-muted pt-3">
+                <p className="font-content">Polyester/580x360mm</p>
+                <p className="font-structural text-3xl font-bold">15"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Paragraph Styles */}
+      <section>
+        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6">Paragraph Styles</h2>
+        <div className="space-y-4 max-w-prose mt-6">
+          <p className="text-lg font-content">
+            This is large body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It's perfect for introductions and lead paragraphs.
+          </p>
+          <p className="font-content">
+            This is standard body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It is the workhorse of our design system, used for most long-form content.
+          </p>
+          <p className="text-sm text-muted-foreground font-content">
+            This is small, muted body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. Ideal for captions, footnotes, and other supplementary information.
+          </p>
         </div>
       </section>
     </div>
