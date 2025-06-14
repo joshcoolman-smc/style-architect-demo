@@ -36,39 +36,50 @@ export function generateAlgorithmicPalette(): ColorPaletteData {
     };
   }
 
-  // Generate harmonious base hues using color theory
+  // Generate sophisticated base hues - prefer earth tones and muted colors
   function generateBaseHues() {
-    const baseHue = Math.random() * 360;
+    // Choose from sophisticated color ranges that work well together
+    const sophisticatedRanges = [
+      { min: 15, max: 45 },   // Warm browns/oranges
+      { min: 180, max: 220 }, // Cool blues/teals
+      { min: 75, max: 110 },  // Muted greens
+      { min: 240, max: 280 }, // Purples/violets
+      { min: 300, max: 340 }, // Magentas/roses
+    ];
     
-    // Create a triadic color scheme (120° apart) for maximum harmony
+    // Pick a random sophisticated range
+    const range = sophisticatedRanges[Math.floor(Math.random() * sophisticatedRanges.length)];
+    const baseHue = range.min + Math.random() * (range.max - range.min);
+    
+    // Create analogous colors (closer together, more harmonious)
     return [
       baseHue,
-      (baseHue + 120) % 360,
-      (baseHue + 240) % 360
+      (baseHue + 25 + Math.random() * 15) % 360, // 25-40° apart
+      (baseHue + 50 + Math.random() * 15) % 360  // 50-65° apart
     ];
   }
 
-  // Create light, mid, and dark variations of a hue
+  // Create sophisticated color variations with lower saturation
   function createColorVariations(hue: number) {
-    // Vary saturation slightly for each hue to add interest
-    const baseSaturation = 0.65 + (Math.random() - 0.5) * 0.2; // 55-75% saturation
+    // Much lower saturation for sophisticated look
+    const baseSaturation = 0.25 + Math.random() * 0.15; // 25-40% saturation (was 55-75%)
     
     const light = hslToRgb(
-      hue + (Math.random() - 0.5) * 15, // Slight hue variation
-      baseSaturation * 0.5, // Lower saturation for light colors
-      0.80 + Math.random() * 0.15 // 80-95% lightness
+      hue + (Math.random() - 0.5) * 8, // Less hue variation for subtlety
+      baseSaturation * 0.6, // Even lower saturation for light colors
+      0.75 + Math.random() * 0.1 // 75-85% lightness (less variation)
     );
     
     const mid = hslToRgb(
-      hue + (Math.random() - 0.5) * 10, // Slight hue variation
-      baseSaturation, // Full saturation for mid tones
-      0.50 + Math.random() * 0.15 // 50-65% lightness
+      hue + (Math.random() - 0.5) * 6, // Minimal hue variation
+      baseSaturation * 0.9, // Slightly reduced saturation
+      0.45 + Math.random() * 0.1 // 45-55% lightness (tighter range)
     );
     
     const dark = hslToRgb(
-      hue + (Math.random() - 0.5) * 10, // Slight hue variation
-      baseSaturation * 0.8, // Slightly reduced saturation for dark colors
-      0.20 + Math.random() * 0.15 // 20-35% lightness
+      hue + (Math.random() - 0.5) * 6, // Minimal hue variation
+      baseSaturation * 0.7, // Lower saturation for dark colors
+      0.25 + Math.random() * 0.1 // 25-35% lightness (tighter range)
     );
     
     return { light, mid, dark };
