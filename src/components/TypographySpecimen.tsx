@@ -27,7 +27,7 @@ const TypographySpecimen = () => {
   return (
     <div className="space-y-16 text-left">
       {/* Hero Typography Display */}
-      <GradientContainer className="p-12">
+      <GradientContainer className="p-12 text-white">
         <div className="space-y-8">
           <div className="space-y-4">
             <h1 className="text-display-2xl font-bold  leading-none">
