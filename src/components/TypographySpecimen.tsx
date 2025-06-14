@@ -49,7 +49,7 @@ const TypographySpecimen = () => {
               </div>
             </div>
             <div>
-              <div className="text-6xl font-light text-neutral-200 leading-none mb-2 font-content">
+              <div className="text-6xl font-light  leading-none mb-2 font-content">
                 Aa
               </div>
               <div className="ds-text-technical-light">
@@ -67,9 +67,9 @@ const TypographySpecimen = () => {
           {fontFamilies.map((font) => (
             <div key={font.name}>
               <p className="text-xl font-bold text-white">{font.name}</p>
-              <p className="text-sm text-neutral-200">{font.family}</p>
+              <p className="text-sm ">{font.family}</p>
               <p className={`text-5xl mt-4 leading-none ${font.class} text-white`}>Aa</p>
-              <div className={`mt-4 space-y-1 text-sm tracking-wider break-all ${font.class} text-neutral-200`}>
+              <div className={`mt-4 space-y-1 text-sm tracking-wider break-all ${font.class} `}>
                 <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
                 <p>abcdefghijklmnopqrstuvwxyz</p>
                 <p>0123456789</p>
@@ -118,7 +118,7 @@ const TypographySpecimen = () => {
             <p className="font-mono text-9xl font-bold text-card-foreground/5 absolute -right-5 -top-5 select-none">01/</p>
             <div className="relative">
               <h3 className="text-3xl font-semibold font-subheader ">Article Heading</h3>
-              <p className="text-lg mt-2 font-structural font-bold text-neutral-200">A Stunning Subtitle Follows</p>
+              <p className="text-lg mt-2 font-structural font-bold ">A Stunning Subtitle Follows</p>
               <p className="mt-4 text-muted-foreground font-content">
                 This composition demonstrates how different type styles can work together. We combine headings, subheadings, and body text to create a clear and pleasing visual hierarchy.
               </p>
@@ -130,7 +130,7 @@ const TypographySpecimen = () => {
               <p className="ds-text-technical-muted">Unit Portables AB / Item 734</p>
               <h3 className="font-structural text-4xl font-bold tracking-tight my-3 ">Shoulder Bag</h3>
               <div className="flex justify-between items-baseline border-t border-muted pt-3">
-                <p className="font-content text-neutral-200">Polyester/580x360mm</p>
+                <p className="font-content ">Polyester/580x360mm</p>
                 <p className="font-structural text-3xl font-bold ">15"</p>
               </div>
             </div>
@@ -145,7 +145,7 @@ const TypographySpecimen = () => {
           <p className="text-lg font-content ">
             This is large body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It's perfect for introductions and lead paragraphs.
           </p>
-          <p className="font-content text-neutral-200">
+          <p className="font-content ">
             This is standard body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It is the workhorse of our design system, used for most long-form content.
           </p>
           <p className="text-sm text-neutral-300 font-content">
