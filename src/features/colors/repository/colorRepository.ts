@@ -1,44 +1,51 @@
 
-import { ColorCategory } from '../types/color.types';
+import { ColorCategory, ColorPaletteData } from '../types/color.types';
 
 export interface IColorRepository {
   getColorCategories(): ColorCategory[];
+  updateColorPalette(palette: ColorPaletteData): void;
 }
 
 export class ColorRepository implements IColorRepository {
+  private colorPalette: ColorPaletteData = {
+    "light-1": "#9DACA7",
+    "light-2": "#BABAAC", 
+    "light-3": "#E0C9A0",
+    "mid-1": "#3F8DA4",
+    "mid-2": "#6D7673",
+    "mid-3": "#BDA06E",
+    "dark-1": "#005A78",
+    "dark-2": "#335763",
+    "dark-3": "#233E49"
+  };
+
   getColorCategories(): ColorCategory[] {
     return [
       {
-        name: 'Brand Colors',
-        description: 'Primary brand colors for sophisticated, modern interfaces.',
+        name: 'Light Tones',
+        description: 'Soft, light colors for backgrounds and subtle accents.',
         colors: [
-          { name: 'Brand 300', value: '#8b7355', description: 'Light brand accent' },
-          { name: 'Brand 600', value: '#5d4e37', description: 'Primary interactive elements' },
-          { name: 'Brand 900', value: '#2d251c', description: 'Darkest brand shade' },
+          { name: 'Light 1', value: this.colorPalette["light-1"], description: 'Soft sage green for subtle backgrounds' },
+          { name: 'Light 2', value: this.colorPalette["light-2"], description: 'Warm neutral for card backgrounds' },
+          { name: 'Light 3', value: this.colorPalette["light-3"], description: 'Warm cream for highlight areas' },
         ],
       },
       {
-        name: 'Accent Colors',
-        description: 'Sophisticated accent colors inspired by luxury automotive design.',
+        name: 'Mid Tones',
+        description: 'Balanced colors for primary interface elements and interactions.',
         colors: [
-          { name: 'Accent 300', value: '#d4af37', description: 'Light accent' },
-          { name: 'Accent 600', value: '#b8860b', description: 'Success states' },
-          { name: 'Accent 900', value: '#6b5b0f', description: 'Darkest accent' },
+          { name: 'Mid 1', value: this.colorPalette["mid-1"], description: 'Ocean blue for primary actions' },
+          { name: 'Mid 2', value: this.colorPalette["mid-2"], description: 'Neutral gray for secondary elements' },
+          { name: 'Mid 3', value: this.colorPalette["mid-3"], description: 'Warm gold for accent elements' },
         ],
       },
       {
-        name: 'Metallic Accents',
-        description: 'Metallic tones for premium design elements and highlights.',
+        name: 'Dark Tones',
+        description: 'Deep, rich colors for text, borders, and contrast elements.',
         colors: [
-          { name: 'Gold Light', value: '#fbbf24', description: 'Light gold for highlights' },
-          { name: 'Gold', value: '#f59e0b', description: 'Primary gold accent' },
-          { name: 'Gold Dark', value: '#d97706', description: 'Dark gold for depth' },
-          { name: 'Bronze Light', value: '#dc2626', description: 'Light bronze accent' },
-          { name: 'Bronze', value: '#b91c1c', description: 'Primary bronze tone' },
-          { name: 'Bronze Dark', value: '#991b1b', description: 'Dark bronze for contrast' },
-          { name: 'Steel Light', value: '#6b7280', description: 'Light steel gray' },
-          { name: 'Steel', value: '#4b5563', description: 'Primary steel tone' },
-          { name: 'Steel Dark', value: '#374151', description: 'Dark steel for depth' },
+          { name: 'Dark 1', value: this.colorPalette["dark-1"], description: 'Deep teal for primary text and emphasis' },
+          { name: 'Dark 2', value: this.colorPalette["dark-2"], description: 'Slate blue for secondary text' },
+          { name: 'Dark 3', value: this.colorPalette["dark-3"], description: 'Navy for high contrast elements' },
         ],
       },
       {
@@ -68,5 +75,9 @@ export class ColorRepository implements IColorRepository {
         ],
       },
     ];
+  }
+
+  updateColorPalette(palette: ColorPaletteData): void {
+    this.colorPalette = { ...palette };
   }
 }

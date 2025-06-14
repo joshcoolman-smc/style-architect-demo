@@ -20,3 +20,16 @@ export interface ColorPaletteState {
   categories: ColorCategory[];
   copiedColor: string | null;
 }
+
+// New color palette structure
+export interface ColorPaletteData {
+  "light-1": string;
+  "light-2": string;
+  "light-3": string;
+  "mid-1": string;
+  "mid-2": string;
+  "mid-3": string;
+  "dark-1": string;
+  "dark-2": string;
+  "dark-3": string;
+}

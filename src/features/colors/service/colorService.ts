@@ -1,10 +1,11 @@
 
 import { ColorRepository, IColorRepository } from '../repository/colorRepository';
-import { ColorCategory } from '../types/color.types';
+import { ColorCategory, ColorPaletteData } from '../types/color.types';
 
 export interface IColorService {
   getColorCategories(): ColorCategory[];
   copyColorToClipboard(value: string): Promise<void>;
+  updateColorPalette(palette: ColorPaletteData): void;
 }
 
 export class ColorService implements IColorService {
@@ -16,6 +17,10 @@ export class ColorService implements IColorService {
 
   getColorCategories(): ColorCategory[] {
     return this.repository.getColorCategories();
+  }
+
+  updateColorPalette(palette: ColorPaletteData): void {
+    this.repository.updateColorPalette(palette);
   }
 
   async copyColorToClipboard(value: string): Promise<void> {

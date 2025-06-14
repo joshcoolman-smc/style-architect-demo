@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { ColorService } from '../service/colorService';
-import { ColorPaletteState } from '../types/color.types';
+import { ColorPaletteState, ColorPaletteData } from '../types/color.types';
 
 export const useColorPalette = () => {
   const [state, setState] = React.useState<ColorPaletteState>({
@@ -28,9 +28,16 @@ export const useColorPalette = () => {
     }
   };
 
+  const updateColorPalette = (palette: ColorPaletteData) => {
+    colorService.updateColorPalette(palette);
+    const categories = colorService.getColorCategories();
+    setState(prev => ({ ...prev, categories }));
+  };
+
   return {
     categories: state.categories,
     copiedColor: state.copiedColor,
     copyToClipboard,
+    updateColorPalette,
   };
 };
