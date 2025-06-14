@@ -115,7 +115,7 @@
   }
   
   .ds-text-technical-light {
-    @apply ds-text-technical text-neutral-300;
+    @apply ds-text-technical ;
   }
   
   .ds-text-technical-muted {
