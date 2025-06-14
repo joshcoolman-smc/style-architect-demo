@@ -33,7 +33,7 @@ const TypographySpecimen = () => {
             <h1 className="text-display-2xl font-bold  leading-none">
               Typography
             </h1>
-            <p className="text-2xl text-neutral-300 font-light max-w-2xl">
+            <p className="text-2xl  font-light max-w-2xl">
               A carefully crafted type system built on modern web fonts for optimal readability and visual hierarchy.
             </p>
           </div>
@@ -148,7 +148,7 @@ const TypographySpecimen = () => {
           <p className="font-content ">
             This is standard body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It is the workhorse of our design system, used for most long-form content.
           </p>
-          <p className="text-sm text-neutral-300 font-content">
+          <p className="text-sm  font-content">
             This is small, muted body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. Ideal for captions, footnotes, and other supplementary information.
           </p>
         </div>
