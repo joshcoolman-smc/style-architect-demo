@@ -30,7 +30,7 @@ const TypographySpecimen = () => {
       <GradientContainer className="p-12">
         <div className="space-y-8">
           <div className="space-y-4">
-            <h1 className="text-display-2xl font-bold text-neutral-100 leading-none">
+            <h1 className="text-display-2xl font-bold  leading-none">
               Typography
             </h1>
             <p className="text-2xl text-neutral-300 font-light max-w-2xl">
@@ -41,7 +41,7 @@ const TypographySpecimen = () => {
           {/* Large specimen display */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
             <div>
-              <div className="text-6xl font-bold text-neutral-100 leading-none mb-2">
+              <div className="text-6xl font-bold  leading-none mb-2">
                 Aa
               </div>
               <div className="ds-text-technical-light">
@@ -112,12 +112,12 @@ const TypographySpecimen = () => {
 
       {/* Composition Examples */}
       <section>
-        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6 text-neutral-100">Composition</h2>
+        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6 ">Composition</h2>
         <div className="grid md:grid-cols-2 gap-8 mt-6">
           <div className="bg-card p-8 rounded-lg border relative overflow-hidden">
             <p className="font-mono text-9xl font-bold text-card-foreground/5 absolute -right-5 -top-5 select-none">01/</p>
             <div className="relative">
-              <h3 className="text-3xl font-semibold font-subheader text-neutral-100">Article Heading</h3>
+              <h3 className="text-3xl font-semibold font-subheader ">Article Heading</h3>
               <p className="text-lg mt-2 font-structural font-bold text-neutral-200">A Stunning Subtitle Follows</p>
               <p className="mt-4 text-muted-foreground font-content">
                 This composition demonstrates how different type styles can work together. We combine headings, subheadings, and body text to create a clear and pleasing visual hierarchy.
@@ -128,10 +128,10 @@ const TypographySpecimen = () => {
             <p className="font-mono text-9xl font-bold text-card-foreground/5 absolute -right-5 -bottom-9 select-none">U09/</p>
             <div className="relative">
               <p className="ds-text-technical-muted">Unit Portables AB / Item 734</p>
-              <h3 className="font-structural text-4xl font-bold tracking-tight my-3 text-neutral-100">Shoulder Bag</h3>
+              <h3 className="font-structural text-4xl font-bold tracking-tight my-3 ">Shoulder Bag</h3>
               <div className="flex justify-between items-baseline border-t border-muted pt-3">
                 <p className="font-content text-neutral-200">Polyester/580x360mm</p>
-                <p className="font-structural text-3xl font-bold text-neutral-100">15"</p>
+                <p className="font-structural text-3xl font-bold ">15"</p>
               </div>
             </div>
           </div>
@@ -142,7 +142,7 @@ const TypographySpecimen = () => {
       <GradientContainer className="p-12">
         <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Paragraph Styles</h2>
         <div className="space-y-4 max-w-prose mt-6">
-          <p className="text-lg font-content text-neutral-100">
+          <p className="text-lg font-content ">
             This is large body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It's perfect for introductions and lead paragraphs.
           </p>
           <p className="font-content text-neutral-200">
