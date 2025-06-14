@@ -77,34 +77,6 @@ const TypographySpecimen = () => {
         </div>
       </GradientContainer>
 
-      {/* Composition Examples */}
-      <section>
-        <h2 className="text-2xl md:text-3xl font-bold border-b pb-2 mb-6 ">Composition</h2>
-        <div className="grid md:grid-cols-2 gap-8 mt-6">
-          <div className="bg-card p-8 rounded-lg border relative overflow-hidden">
-            <p className="font-mono text-9xl font-bold text-card-foreground/5 absolute -right-5 -top-5 select-none">01/</p>
-            <div className="relative">
-              <h3 className="text-3xl font-semibold font-subheader ">Article Heading</h3>
-              <p className="text-lg mt-2 font-structural font-bold ">A Stunning Subtitle Follows</p>
-              <p className="mt-4 text-muted-foreground font-content">
-                This composition demonstrates how different type styles can work together. We combine headings, subheadings, and body text to create a clear and pleasing visual hierarchy.
-              </p>
-            </div>
-          </div>
-          <div className="bg-card p-8 rounded-lg border relative overflow-hidden">
-            <p className="font-mono text-9xl font-bold text-card-foreground/5 absolute -right-5 -bottom-9 select-none">U09/</p>
-            <div className="relative">
-              <p className="ds-text-technical-muted">Unit Portables AB / Item 734</p>
-              <h3 className="font-structural text-4xl font-bold tracking-tight my-3 ">Shoulder Bag</h3>
-              <div className="flex justify-between items-baseline border-t border-muted pt-3">
-                <p className="font-content ">Polyester/580x360mm</p>
-                <p className="font-structural text-3xl font-bold ">15"</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Paragraph Styles */}
       <GradientContainer className="p-12">
         <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Paragraph Styles</h2>
