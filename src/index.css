@@ -69,10 +69,9 @@
     font-family: var(--font-subheader), ui-serif, serif;
   }
   
-  /* Technical details styling - updated to use extra light */
+  /* Technical details styling - simplified to use only Tailwind */
   .technical-detail {
-    @apply font-technical text-xs text-muted-foreground uppercase tracking-wide;
-    font-weight: 200; /* Extra light weight for IBM Plex Mono */
+    @apply font-technical text-xs text-muted-foreground uppercase tracking-wide font-extralight;
   }
   
   /* Mathematical spacing utilities */
