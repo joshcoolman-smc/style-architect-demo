@@ -19,49 +19,65 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+				// Structural fonts (Navigation, headings, UI controls)
+				'structural': ['var(--font-structural)', 'ui-sans-serif', 'system-ui'],
+				// Content fonts (Body copy, descriptions, articles) 
+				'content': ['var(--font-content)', 'ui-sans-serif', 'system-ui'],
+				// Sub-headers
+				'subheader': ['var(--font-subheader)', 'ui-serif', 'serif'],
+				// Monospace
 				'mono': ['Fira Code', 'ui-monospace', 'SFMono-Regular'],
+				
+				// Available font options
+				'montserrat': ['Montserrat', 'ui-sans-serif', 'system-ui'],
+				'lora': ['Lora', 'ui-serif', 'serif'],
+				'hind': ['Hind Madurai', 'ui-sans-serif', 'system-ui'],
+				'inter': ['Inter', 'ui-sans-serif', 'system-ui'],
+				'poppins': ['Poppins', 'ui-sans-serif', 'system-ui'],
+				'roboto': ['Roboto', 'ui-sans-serif', 'system-ui'],
+				'open-sans': ['Open Sans', 'ui-sans-serif', 'system-ui'],
+				'playfair': ['Playfair Display', 'ui-serif', 'serif'],
 			},
 			colors: {
-				// Design System Colors
+				// Dark mode color palette
 				brand: {
-					50: '#f0f9ff',
-					100: '#e0f2fe',
-					200: '#bae6fd',
-					300: '#7dd3fc',
-					400: '#38bdf8',
-					500: '#0ea5e9',
-					600: '#0284c7',
-					700: '#0369a1',
-					800: '#075985',
-					900: '#0c4a6e',
-					950: '#082f49',
+					50: '#0f1419',
+					100: '#1a202c',
+					200: '#2d3748',
+					300: '#4a5568',
+					400: '#718096',
+					500: '#a0aec0',
+					600: '#cbd5e0',
+					700: '#e2e8f0',
+					800: '#edf2f7',
+					900: '#f7fafc',
+					950: '#ffffff',
 				},
 				accent: {
-					50: '#f0fdfa',
-					100: '#ccfbf1',
-					200: '#99f6e4',
-					300: '#5eead4',
-					400: '#2dd4bf',
-					500: '#14b8a6',
-					600: '#0d9488',
-					700: '#0f766e',
-					800: '#115e59',
-					900: '#134e4a',
-					950: '#042f2e',
+					50: '#0d1117',
+					100: '#161b22',
+					200: '#21262d',
+					300: '#30363d',
+					400: '#484f58',
+					500: '#6e7681',
+					600: '#8b949e',
+					700: '#b1bac4',
+					800: '#c9d1d9',
+					900: '#e6edf3',
+					950: '#f0f6fc',
 				},
 				neutral: {
-					50: '#fafafa',
-					100: '#f5f5f5',
-					200: '#e5e5e5',
-					300: '#d4d4d4',
-					400: '#a3a3a3',
+					50: '#0a0a0a',
+					100: '#171717',
+					200: '#262626',
+					300: '#404040',
+					400: '#525252',
 					500: '#737373',
-					600: '#525252',
-					700: '#404040',
-					800: '#262626',
-					900: '#171717',
-					950: '#0a0a0a',
+					600: '#a3a3a3',
+					700: '#d4d4d4',
+					800: '#e5e5e5',
+					900: '#f5f5f5',
+					950: '#fafafa',
 				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -95,29 +111,29 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
-				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
 			fontSize: {
 				'display-2xl': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
 				'display-xl': ['3.75rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
 				'display-lg': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
-				'display-md': ['2.25rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
+				'display-md': ['2.25rem', { lineHeight: '1.3', letterSpacing: '-0.02em' }],
 				'display-sm': ['1.875rem', { lineHeight: '1.3', letterSpacing: '-0.02em' }],
 				'display-xs': ['1.5rem', { lineHeight: '1.3' }],
 			},
 			spacing: {
 				'18': '4.5rem',
 				'88': '22rem',
+				// Mathematical spacing system (8px base)
+				'unit': '0.5rem', // 8px base unit
+				'3unit': '1.5rem', // 24px
+				'4unit': '2rem', // 32px
+				'6unit': '3rem', // 48px
+				'8unit': '4rem', // 64px
+				'10unit': '5rem', // 80px
+				'12unit': '6rem', // 96px
+				'16unit': '8rem', // 128px
+				'20unit': '10rem', // 160px
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

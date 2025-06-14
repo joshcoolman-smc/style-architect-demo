@@ -3,108 +3,46 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design System CSS Variables */
+/* Font Variables */
+:root {
+  --font-structural: 'Montserrat';
+  --font-content: 'Hind Madurai';
+  --font-subheader: 'Lora';
+}
+
+/* Dark Mode CSS Variables */
 @layer base {
   :root {
-    /* Design System Colors */
-    --ds-brand-50: 240 249 255;
-    --ds-brand-500: 14 165 233;
-    --ds-brand-600: 2 132 199;
-    --ds-brand-700: 3 105 161;
-    
-    --ds-accent-500: 20 184 166;
-    --ds-accent-600: 13 148 136;
-    
-    --ds-neutral-50: 250 250 250;
-    --ds-neutral-100: 245 245 245;
-    --ds-neutral-200: 229 229 229;
-    --ds-neutral-300: 212 212 212;
-    --ds-neutral-400: 163 163 163;
-    --ds-neutral-500: 115 115 115;
-    --ds-neutral-600: 82 82 82;
-    --ds-neutral-700: 64 64 64;
-    --ds-neutral-800: 38 38 38;
-    --ds-neutral-900: 23 23 23;
-    
-    /* Design System Spacing */
-    --ds-space-unit: 0.25rem;
-    --ds-space-xs: calc(var(--ds-space-unit) * 2);
-    --ds-space-sm: calc(var(--ds-space-unit) * 3);
-    --ds-space-md: calc(var(--ds-space-unit) * 4);
-    --ds-space-lg: calc(var(--ds-space-unit) * 6);
-    --ds-space-xl: calc(var(--ds-space-unit) * 8);
-    --ds-space-2xl: calc(var(--ds-space-unit) * 12);
-    
-    /* Design System Typography */
-    --ds-font-size-xs: 0.75rem;
-    --ds-font-size-sm: 0.875rem;
-    --ds-font-size-base: 1rem;
-    --ds-font-size-lg: 1.125rem;
-    --ds-font-size-xl: 1.25rem;
-    --ds-font-size-2xl: 1.5rem;
-    --ds-font-size-3xl: 1.875rem;
-    --ds-font-size-4xl: 2.25rem;
-    
-    /* Existing shadcn variables */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark theme colors */
+    --background: 218 11% 8%;
+    --foreground: 220 9% 89%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 13% 9%;
+    --card-foreground: 220 9% 89%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 13% 9%;
+    --popover-foreground: 220 9% 89%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 220 14% 11%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 215 25% 27%;
+    --secondary-foreground: 220 9% 89%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 25% 14%;
+    --muted-foreground: 217 10% 64%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 215 25% 14%;
+    --accent-foreground: 220 9% 89%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 220 9% 89%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --radius: 0.75rem;
   }
 }
 
@@ -113,46 +51,64 @@
     @apply border-border;
   }
 
+  html {
+    @apply dark;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-content;
+    font-family: var(--font-content), ui-sans-serif, system-ui;
   }
   
-  /* Typography Utilities */
-  .ds-text-display-2xl {
-    font-size: var(--ds-font-size-4xl);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    font-weight: 800;
-  }
-  
-  .ds-text-display-xl {
-    font-size: var(--ds-font-size-3xl);
+  /* Typography System */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-structural), ui-sans-serif, system-ui;
     line-height: 1.2;
     letter-spacing: -0.02em;
-    font-weight: 700;
   }
   
-  .ds-code-block {
-    @apply bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm;
-    tab-size: 2;
+  .subheader {
+    font-family: var(--font-subheader), ui-serif, serif;
   }
+  
+  /* Mathematical spacing utilities */
+  .space-unit { @apply space-y-unit; }
+  .space-3unit { @apply space-y-3unit; }
+  .space-4unit { @apply space-y-4unit; }
+  .space-6unit { @apply space-y-6unit; }
+  .space-8unit { @apply space-y-8unit; }
+  .space-12unit { @apply space-y-12unit; }
+  .space-16unit { @apply space-y-16unit; }
+  .space-20unit { @apply space-y-20unit; }
 }
 
 @layer components {
   /* Component Base Styles */
   .ds-card {
-    @apply bg-white border border-neutral-200 rounded-xl shadow-sm;
+    @apply bg-card border border-border rounded-xl shadow-sm;
   }
   
   .ds-card-interactive {
-    @apply ds-card transition-all duration-200 hover:shadow-md hover:border-neutral-300;
+    @apply ds-card transition-all duration-200 hover:shadow-md hover:border-accent-600;
   }
   
   .ds-button-primary {
-    @apply bg-brand-600 text-white px-4 py-2 rounded-lg font-medium transition-colors hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
+    @apply bg-primary text-primary-foreground px-6unit py-3unit rounded-lg font-medium font-structural transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
   }
   
   .ds-button-secondary {
-    @apply bg-neutral-100 text-neutral-900 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
+    @apply bg-secondary text-secondary-foreground px-6unit py-3unit rounded-lg font-medium font-structural transition-colors hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-background;
+  }
+  
+  .ds-section-spacing {
+    @apply space-y-8unit;
+  }
+  
+  .ds-component-spacing {
+    @apply space-y-6unit;
+  }
+  
+  .ds-content-spacing {
+    @apply space-y-3unit;
   }
 }
