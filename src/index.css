@@ -85,7 +85,7 @@
   }
   
   .ds-card-interactive {
-    @apply ds-card transition-all duration-200 hover:shadow-md hover:border-accent-600;
+    @apply ds-card transition-all duration-200 hover:shadow-md hover:border-primary/30;
   }
   
   .ds-button-primary {
