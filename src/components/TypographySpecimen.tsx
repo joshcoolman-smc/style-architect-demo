@@ -34,7 +34,7 @@ const TypographySpecimen = () => {
           {fontFamilies.map((font) => (
             <div key={font.name}>
               <p className="text-xl font-bold text-white">{font.name}</p>
-              <p className="text-sm ">{font.family}</p>
+              <p className="ds-text-technical-muted">{font.family}</p>
               <p className={`text-5xl mt-4 leading-none ${font.class} text-white`}>Aa</p>
               <div className={`mt-4 space-y-1 text-sm tracking-wider break-all text-muted-foreground ${font.class} `}>
                 <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
