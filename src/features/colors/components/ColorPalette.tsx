@@ -46,17 +46,15 @@ const ColorPalette = () => {
 
   return (
     <div className="space-y-12">
-      <div>
-        <h1 className="text-display-xl font-bold text-card-foreground mb-2">Color Palette</h1>
-        <p className="text-lg text-muted-foreground">
-          A sophisticated three-tier color system with light, mid, and dark tones for comprehensive design flexibility.
-        </p>
-      </div>
-
       {/* Single Color Card with Three Rows */}
       <GradientContainer className="p-8">
         <div className="mb-8 flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-card-foreground">Colors</h2>
+          <div>
+            <h2 className="text-2xl font-bold text-card-foreground">Colors</h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Upload an image to generate a palette or click refresh to generate a random palette
+            </p>
+          </div>
           <div className="flex items-center gap-2">
             <input
               ref={fileInputRef}
