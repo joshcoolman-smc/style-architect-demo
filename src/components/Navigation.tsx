@@ -22,8 +22,8 @@ const Navigation = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-8unit">
               <Link to="/" className="flex items-center space-x-3unit">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent-600 rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm font-structural">DS</span>
+                <div className="w-8 h-8 bg-zinc-200 rounded-lg flex items-center justify-center">
+                  <span className="text-zinc-900 font-bold text-sm font-structural">DS</span>
                 </div>
                 <span className="font-structural font-semibold text-lg text-foreground">
                   Design System
@@ -41,8 +41,8 @@ const Navigation = () => {
                       to={item.path}
                       className={`flex items-center space-x-2 px-3unit py-2 rounded-lg text-sm font-medium font-structural transition-colors ${
                         isActive
-                          ? 'bg-primary/10 text-primary border border-primary/20'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                          ? 'bg-zinc-800 text-zinc-100'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-zinc-800/50'
                       }`}
                     >
                       <IconComponent size={16} />
@@ -56,7 +56,7 @@ const Navigation = () => {
             <div className="flex items-center space-x-4unit">
               <button
                 onClick={() => setShowFontSelector(true)}
-                className="flex items-center space-x-2 px-3unit py-2 rounded-lg text-sm font-medium font-structural text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                className="flex items-center space-x-2 px-3unit py-2 rounded-lg text-sm font-medium font-structural text-muted-foreground hover:text-foreground hover:bg-zinc-800/50 transition-colors"
               >
                 <Type size={16} />
                 <span className="hidden sm:block">Fonts</span>
