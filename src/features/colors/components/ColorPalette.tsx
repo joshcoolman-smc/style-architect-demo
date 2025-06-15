@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { RefreshCcw, Upload, X } from 'lucide-react';
 import ColorSwatch from './ColorSwatch';
@@ -119,7 +118,6 @@ const ColorPalette = () => {
         {uploadedImage ? (
           <ImagePaletteComparison
             imageUrl={uploadedImage}
-            categories={categories}
             onCopyColor={copyToClipboard}
             copiedColor={copiedColor}
           />
