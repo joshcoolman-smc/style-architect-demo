@@ -12,9 +12,9 @@ export const fontCombinations: FontOption[] = [
   {
     name: 'Corporate Clean',
     structural: 'Inter',
-    subheader: 'Inter',
-    content: 'Inter',
-    description: 'Consistent and professional throughout'
+    subheader: 'Roboto Slab',
+    content: 'Source Sans Pro',
+    description: 'Professional with subtle serif contrast'
   },
   {
     name: 'Friendly Modern',
