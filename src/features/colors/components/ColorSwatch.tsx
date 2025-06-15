@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { getReadableTextColor, hexToRgb } from '../utils/colorUtils';
 import { Separator } from '@/components/ui/separator';
 
@@ -18,19 +19,33 @@ const ColorSwatch = ({ name, value, description, onCopy, isCopied, isSemanticCol
   const rgbString = rgb ? `${rgb.r}, ${rgb.g}, ${rgb.b}` : '';
 
   return (
-    <div className="ds-card-nested-interactive overflow-hidden">
+    <motion.div 
+      className="ds-card-nested-interactive overflow-hidden"
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
       {/* Color Preview - Full width at top */}
-      <div 
-        className="w-full h-24 cursor-pointer transition-transform hover:scale-105 flex items-center justify-center"
+      <motion.div 
+        className="w-full h-24 cursor-pointer flex items-center justify-center"
         style={{ backgroundColor: value }}
         onClick={() => onCopy(value)}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 400, damping: 25 }}
       >
         {isCopied && (
-          <span className="text-sm font-medium animate-fade-in" style={{ color: textColor }}>
+          <motion.span 
+            className="text-sm font-medium"
+            style={{ color: textColor }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ type: "spring", stiffness: 500, damping: 25 }}
+          >
             Copied!
-          </span>
+          </motion.span>
         )}
-      </div>
+      </motion.div>
       
       {/* Color Information - Below the color, with padding */}
       <div className="p-6 space-y-4">
@@ -59,7 +74,7 @@ const ColorSwatch = ({ name, value, description, onCopy, isCopied, isSemanticCol
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { AnimatePresence } from 'framer-motion';
 import Navigation from './Navigation';
 
 interface LayoutProps {
@@ -12,7 +13,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Navigation />
       <main className="max-w-7xl mx-auto px-6unit sm:px-8unit lg:px-10unit py-8unit">
         <div className="mx-auto max-w-7xl">
-          {children}
+          <AnimatePresence mode="wait">
+            {children}
+          </AnimatePresence>
         </div>
       </main>
     </div>
