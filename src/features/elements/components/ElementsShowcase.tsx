@@ -4,6 +4,7 @@ import { motion, Variants } from 'framer-motion';
 import { useColorStore } from '../../../stores/colorStore';
 import { useColorStrategy } from '../hooks/useColorStrategy';
 import SectionHeader from './SectionHeader';
+import DesignSpecification from './DesignSpecification';
 import TestimonialCard from './cards/TestimonialCard';
 import TeamMemberCard from './cards/TeamMemberCard';
 import ProjectShowcaseCard from './cards/ProjectShowcaseCard';
@@ -50,6 +51,9 @@ const ElementsShowcase = () => {
 
   return (
     <div className="space-y-12">
+      {/* AI-Ready Design Specification */}
+      <DesignSpecification />
+
       {/* Cards Section - Moved to top */}
       <div className="ds-card p-8">
         <div className="space-y-8">
