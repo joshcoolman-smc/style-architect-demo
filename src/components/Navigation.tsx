@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import FontButton from '../features/fonts/components/FontButton';
 
 const Navigation = () => {
@@ -32,13 +33,27 @@ const Navigation = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`px-3unit py-2 text-sm font-medium font-inter transition-colors border-b-2 flex items-center gap-1.5 ${
+                    className={`px-3unit py-2 text-sm font-medium font-inter transition-colors flex items-center gap-1.5 relative ${
                       isActive
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
+                        ? 'text-foreground'
+                        : 'text-muted-foreground hover:text-foreground'
                     }`}
                   >
                     {item.label}
+                    {isActive && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground"
+                        layoutId="activeTab"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 30,
+                          mass: 0.8
+                        }}
+                      />
+                    )}
                   </Link>
                 );
               })}
