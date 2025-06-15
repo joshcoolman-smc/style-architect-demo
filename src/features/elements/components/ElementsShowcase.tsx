@@ -60,7 +60,6 @@ const ElementsShowcase = () => {
             isLocked={strategyState.testimonials.isLocked}
             onRefresh={() => refreshStrategy('testimonials', 4)}
             onToggleLock={() => toggleLock('testimonials')}
-            strategyInfo={`Strategy ${strategyState.testimonials.currentStrategy + 1}/4`}
           />
           <motion.div 
             className="grid gap-6 lg:grid-cols-3"
@@ -90,7 +89,6 @@ const ElementsShowcase = () => {
             isLocked={strategyState.dataVisualization.isLocked}
             onRefresh={() => refreshStrategy('dataVisualization', 4)}
             onToggleLock={() => toggleLock('dataVisualization')}
-            strategyInfo={`Strategy ${strategyState.dataVisualization.currentStrategy + 1}/4`}
           />
           <DataVisualization colorStrategy={strategyState.dataVisualization.currentStrategy} />
         </div>
@@ -105,7 +103,6 @@ const ElementsShowcase = () => {
             isLocked={strategyState.forms.isLocked}
             onRefresh={() => refreshStrategy('forms', 3)}
             onToggleLock={() => toggleLock('forms')}
-            strategyInfo={`Strategy ${strategyState.forms.currentStrategy + 1}/3`}
           />
           <InteractiveForms colorStrategy={strategyState.forms.currentStrategy} />
         </div>
@@ -120,7 +117,6 @@ const ElementsShowcase = () => {
             isLocked={strategyState.alerts.isLocked}
             onRefresh={() => refreshStrategy('alerts', 3)}
             onToggleLock={() => toggleLock('alerts')}
-            strategyInfo={`Strategy ${strategyState.alerts.currentStrategy + 1}/3`}
           />
           <AlertNotifications colorStrategy={strategyState.alerts.currentStrategy} />
         </div>
@@ -135,7 +131,6 @@ const ElementsShowcase = () => {
             isLocked={strategyState.cards.isLocked}
             onRefresh={() => refreshStrategy('cards', 3)}
             onToggleLock={() => toggleLock('cards')}
-            strategyInfo={`Strategy ${strategyState.cards.currentStrategy + 1}/3`}
           />
           <motion.div 
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"

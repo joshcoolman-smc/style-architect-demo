@@ -155,13 +155,13 @@ const TestimonialCard = ({ testimonial, colorStrategy = 0, cardIndex }: Testimon
 
   return (
     <motion.div 
-      className="h-80 p-8 rounded-lg shadow-lg transition-colors duration-300 relative overflow-hidden flex flex-col"
+      className="p-8 rounded-lg shadow-lg transition-colors duration-300 relative overflow-hidden"
       style={{ backgroundColor: colors.backgroundColor }}
       whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
     >
       {/* Quote Icon */}
-      <div className="mb-6 flex-shrink-0">
+      <div className="mb-6">
         <Quote 
           className="w-8 h-8 opacity-60" 
           style={{ color: colors.iconColor }}
@@ -170,17 +170,14 @@ const TestimonialCard = ({ testimonial, colorStrategy = 0, cardIndex }: Testimon
 
       {/* Quote Text - showcases typography */}
       <blockquote 
-        className="text-heading-2 font-content leading-relaxed flex-1 transition-colors duration-300"
+        className="text-heading-2 font-content leading-relaxed mb-6 transition-colors duration-300"
         style={{ color: colors.quoteColor }}
       >
         "{testimonial.quote}"
       </blockquote>
 
-      {/* Fixed spacing before attribution */}
-      <div className="h-6 flex-shrink-0"></div>
-
       {/* Attribution */}
-      <div className="space-y-1 flex-shrink-0">
+      <div className="space-y-1">
         <div 
           className="text-body-bold font-structural transition-colors duration-300"
           style={{ color: colors.authorColor }}

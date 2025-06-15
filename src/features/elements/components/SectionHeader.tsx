@@ -8,7 +8,6 @@ interface SectionHeaderProps {
   isLocked: boolean;
   onRefresh: () => void;
   onToggleLock: () => void;
-  strategyInfo?: string;
 }
 
 const SectionHeader = ({ 
@@ -16,22 +15,14 @@ const SectionHeader = ({
   description, 
   isLocked, 
   onRefresh, 
-  onToggleLock,
-  strategyInfo 
+  onToggleLock
 }: SectionHeaderProps) => {
   return (
     <div className="flex items-start justify-between mb-6">
       <div className="flex-1">
-        <div className="flex items-center gap-3 mb-2">
-          <h3 className="text-heading-3 font-structural text-foreground">
-            {title}
-          </h3>
-          {strategyInfo && (
-            <span className="text-caption font-technical text-muted-foreground bg-muted px-2 py-1 rounded">
-              {strategyInfo}
-            </span>
-          )}
-        </div>
+        <h3 className="text-heading-3 font-structural text-foreground mb-2">
+          {title}
+        </h3>
         <p className="text-body font-content text-muted-foreground">
           {description}
         </p>
