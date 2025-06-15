@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { FontOption } from '../types/font.types';
 import { fontCombinations } from '../data/fontCombinations';
@@ -33,10 +34,10 @@ const FontSidebar: React.FC<FontSidebarProps> = ({ isOpen, onClose }) => {
         onInteractOutside={onClose}
       >
         <SheetHeader>
-          <SheetTitle className="text-zinc-100" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <SheetTitle className="text-zinc-100" style={{ fontFamily: 'Inter, sans-serif' }}>
             Font Selector
           </SheetTitle>
-          <SheetDescription className="text-zinc-400" style={{ fontFamily: 'Hind Madurai, sans-serif' }}>
+          <SheetDescription className="text-zinc-400" style={{ fontFamily: 'Inter, sans-serif' }}>
             Choose a font combination that fits your design
           </SheetDescription>
         </SheetHeader>
@@ -57,7 +58,7 @@ const FontSidebar: React.FC<FontSidebarProps> = ({ isOpen, onClose }) => {
                   <h3 className="font-medium text-zinc-100 mb-2" style={{ fontFamily: font.structural + ', sans-serif' }}>
                     {font.name}
                   </h3>
-                  <div className="text-sm text-zinc-400 space-y-1" style={{ fontFamily: 'Hind Madurai, sans-serif' }}>
+                  <div className="text-sm text-zinc-400 space-y-1" style={{ fontFamily: 'Inter, sans-serif' }}>
                     <div>{font.structural}, {font.subheader}, {font.content}</div>
                   </div>
                 </div>
@@ -67,12 +68,6 @@ const FontSidebar: React.FC<FontSidebarProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-8unit pt-6unit border-t border-zinc-700">
-          <p className="text-sm text-zinc-400 text-center" style={{ fontFamily: 'Hind Madurai, sans-serif' }}>
-            Font changes apply instantly and persist across the application
-          </p>
         </div>
       </SheetContent>
     </Sheet>

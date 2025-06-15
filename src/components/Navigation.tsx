@@ -17,7 +17,7 @@ const Navigation = () => {
       <div className="w-full px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
-            <span className="font-structural font-semibold text-lg text-foreground">
+            <span className="font-inter font-semibold text-lg text-foreground">
               Style Guide
             </span>
           </Link>
@@ -31,7 +31,7 @@ const Navigation = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`px-3unit py-2 text-sm font-medium font-structural transition-colors border-b-2 ${
+                    className={`px-3unit py-2 text-sm font-medium font-inter transition-colors border-b-2 ${
                       isActive
                         ? 'text-foreground border-foreground'
                         : 'text-muted-foreground border-transparent hover:text-foreground'
