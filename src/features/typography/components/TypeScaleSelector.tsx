@@ -10,17 +10,13 @@ import {
 } from '../../../components/ui/select';
 
 const TypeScaleSelector = () => {
-  const [selectedScale, setSelectedScale] = useState('major-third');
+  const [selectedScale, setSelectedScale] = useState('minor-third');
 
   const typeScales = [
-    { value: 'minor-second', label: 'Minor Second (1.067)' },
-    { value: 'major-second', label: 'Major Second (1.125)' },
     { value: 'minor-third', label: 'Minor Third (1.2)' },
     { value: 'major-third', label: 'Major Third (1.25)' },
     { value: 'perfect-fourth', label: 'Perfect Fourth (1.333)' },
     { value: 'augmented-fourth', label: 'Augmented Fourth (1.414)' },
-    { value: 'perfect-fifth', label: 'Perfect Fifth (1.5)' },
-    { value: 'golden-ratio', label: 'Golden Ratio (1.618)' },
   ];
 
   const handleScaleChange = (value: string) => {
