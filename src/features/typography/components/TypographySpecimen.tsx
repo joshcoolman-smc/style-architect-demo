@@ -68,10 +68,10 @@ const TypographySpecimen = () => {
               Visual contrast guides the reader's eye
             </h2>
             <p className="text-body text-white font-content">
-              Effective typography establishes clear information hierarchy through strategic use of size, weight, and spacing.
+              Effective typography establishes clear information hierarchy through strategic use of size, weight, and spacing. This larger paragraph demonstrates how body text appears at the standard reading size.
             </p>
             <p className="text-caption text-white/90 font-content">
-              The largest text draws initial attention, medium weights provide context and categorization, while body text delivers detailed information.
+              The smallest text provides additional context and details. Caption text is perfect for metadata, annotations, and supplementary information that supports the main content without competing for attention.
             </p>
           </div>
         </GradientContainer>
