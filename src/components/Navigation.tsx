@@ -25,7 +25,7 @@ const Navigation = () => {
           </Link>
           
           <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center space-x-1 relative">
+            <div className="hidden md:flex items-center space-x-1">
               {navItems.map((item) => {
                 const isActive = location.pathname === item.path;
                 
@@ -33,37 +33,27 @@ const Navigation = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`px-3unit py-2 text-sm font-medium font-inter transition-colors flex items-center gap-1.5 relative ${
+                    className={`px-3 py-2 text-sm font-medium font-inter transition-colors flex items-center gap-1.5 relative ${
                       isActive
                         ? 'text-foreground'
                         : 'text-muted-foreground hover:text-foreground'
                     }`}
                   >
                     {item.label}
+                    {isActive && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground"
+                        layoutId="activeNavIndicator"
+                        transition={{
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 30,
+                          mass: 0.8
+                        }}
+                      />
+                    )}
                   </Link>
                 );
-              })}
-              
-              {/* Active indicator that slides between nav items */}
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                return isActive ? (
-                  <motion.div
-                    key="activeIndicator"
-                    className="absolute bottom-0 h-0.5 bg-foreground"
-                    layoutId="activeNavIndicator"
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 30,
-                      mass: 0.8
-                    }}
-                    style={{
-                      left: `${navItems.findIndex(navItem => navItem.path === item.path) * 25}%`,
-                      width: `${100 / navItems.length}%`
-                    }}
-                  />
-                ) : null;
               })}
             </div>
             
