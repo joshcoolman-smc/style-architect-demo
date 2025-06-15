@@ -1,6 +1,7 @@
 
 import React from 'react';
 import FontFamiliesComponent from './FontFamiliesComponent';
+import TypeScaleSelector from './TypeScaleSelector';
 import TypeScaleComponent from './TypeScaleComponent';
 import SampleTextComponent from './SampleTextComponent';
 
@@ -9,6 +10,9 @@ const TypographySpecimen = () => {
     <div className="space-y-16 text-left">
       {/* Font Families Section */}
       <FontFamiliesComponent />
+
+      {/* Type Scale Selector */}
+      <TypeScaleSelector />
 
       {/* Type Scale and Editorial Example Side by Side */}
       <div className="grid md:grid-cols-2 gap-8">
