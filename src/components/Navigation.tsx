@@ -22,7 +22,7 @@ const Navigation = () => {
             </span>
           </Link>
           
-          <div className="flex items-center space-x-6unit">
+          <div className="flex items-center space-x-4">
             <div className="hidden md:flex items-center space-x-1">
               {navItems.map((item) => {
                 const isActive = location.pathname === item.path;
