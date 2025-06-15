@@ -79,9 +79,16 @@ export async function extractPaletteFromImage(imageSrc: string, numColorsToExtra
       for (let i = 0; i < k - numUnique; i++) {
         centroidsToReturn.push(uniquePoints[i % numUnique]);
       }
-      centroidsToReturn.sort(() => 0.5 - Math.random());
+      // Add randomness by shuffling multiple times
+      for (let i = 0; i < 3; i++) {
+        centroidsToReturn.sort(() => 0.5 - Math.random());
+      }
     } else {
-      centroidsToReturn = uniquePoints.sort(() => 0.5 - Math.random()).slice(0, k);
+      // Add randomness by shuffling and taking different slices
+      for (let i = 0; i < 5; i++) {
+        uniquePoints.sort(() => 0.5 - Math.random());
+      }
+      centroidsToReturn = uniquePoints.slice(0, k);
     }
     return centroidsToReturn;
   }
@@ -175,7 +182,10 @@ export async function extractPaletteFromImage(imageSrc: string, numColorsToExtra
 
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
       const pixels = [];
-      for (let i = 0; i < imageData.length; i += 4) {
+      
+      // Add randomness to pixel sampling
+      const skipFactor = Math.floor(Math.random() * 3) + 1; // Skip 1-3 pixels randomly
+      for (let i = 0; i < imageData.length; i += 4 * skipFactor) {
         if (imageData[i + 3] > 0) {
           pixels.push({ r: imageData[i], g: imageData[i + 1], b: imageData[i + 2] });
         }
@@ -199,7 +209,10 @@ export async function extractPaletteFromImage(imageSrc: string, numColorsToExtra
       }
 
       const labPixels = pixels.map(rgbToLab);
-      const centroids = kMeans(labPixels, numColorsToExtract);
+      
+      // Add randomness to k-means by varying max iterations
+      const randomMaxIterations = Math.floor(Math.random() * 5) + 8; // 8-12 iterations
+      const centroids = kMeans(labPixels, numColorsToExtract, randomMaxIterations);
 
       const initialPalette = centroids.map((lab) => {
         const rgb = labToRgb(lab);
@@ -207,7 +220,14 @@ export async function extractPaletteFromImage(imageSrc: string, numColorsToExtra
       });
 
       const refined = refinePalette(initialPalette);
-      refined.sort((a, b) => b.lab.l - a.lab.l);
+      
+      // Add randomness to sorting
+      const shouldRandomizeSort = Math.random() > 0.5;
+      if (shouldRandomizeSort) {
+        refined.sort((a, b) => a.lab.l - b.lab.l); // Light to dark
+      } else {
+        refined.sort((a, b) => b.lab.l - a.lab.l); // Dark to light
+      }
 
       const numPerCategory = Math.max(1, Math.floor(numColorsToExtract / 3));
 
@@ -225,7 +245,8 @@ export async function extractPaletteFromImage(imageSrc: string, numColorsToExtra
         dark = darkCandidates.sort((a, b) => a.lab.b - b.lab.b);
       }
       
-      const targetDarkness = 35;
+      // Add slight randomness to darkness adjustment
+      const targetDarkness = 35 + (Math.random() * 10 - 5); // 30-40 range
       dark = dark.map(color => {
         if (color.lab.l > targetDarkness) {
           const adjustedLab = { ...color.lab, l: targetDarkness };

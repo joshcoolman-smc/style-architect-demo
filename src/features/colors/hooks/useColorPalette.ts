@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ColorService } from '../service/colorService';
 import { ColorPaletteData } from '../types/color.types';
@@ -9,6 +8,7 @@ export const useColorPalette = () => {
   const [copiedColor, setCopiedColor] = React.useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = React.useState(false);
   const [uploadedImage, setUploadedImage] = React.useState<string | null>(null);
+  const [originalImageFile, setOriginalImageFile] = React.useState<File | null>(null);
 
   const colorService = React.useMemo(() => new ColorService(), []);
 
@@ -36,24 +36,39 @@ export const useColorPalette = () => {
     updateCategories(categories);
   };
 
-  const generateNewPalette = () => {
-    const newPalette = colorService.generateNewPalette();
-    updateColorPalette(newPalette);
-    clearUploadedImage();
+  const generateNewPalette = async () => {
+    // If we have an uploaded image, regenerate from that image
+    if (originalImageFile) {
+      setIsAnalyzing(true);
+      try {
+        const newPalette = await colorService.generatePaletteFromImage(originalImageFile);
+        updateColorPalette(newPalette);
+      } catch (error) {
+        console.error('Failed to regenerate palette from image:', error);
+      } finally {
+        setIsAnalyzing(false);
+      }
+    } else {
+      // Otherwise generate a random palette
+      const newPalette = colorService.generateNewPalette();
+      updateColorPalette(newPalette);
+    }
   };
 
   const generatePaletteFromImage = async (imageFile: File) => {
     setIsAnalyzing(true);
     try {
-      // Store the image data URL
+      // Store both the image data URL and the original file
       const imageDataUrl = URL.createObjectURL(imageFile);
       setUploadedImage(imageDataUrl);
+      setOriginalImageFile(imageFile);
       
       const newPalette = await colorService.generatePaletteFromImage(imageFile);
       updateColorPalette(newPalette);
     } catch (error) {
       console.error('Failed to generate palette from image:', error);
       setUploadedImage(null);
+      setOriginalImageFile(null);
       throw error;
     } finally {
       setIsAnalyzing(false);
@@ -65,6 +80,11 @@ export const useColorPalette = () => {
       URL.revokeObjectURL(uploadedImage);
     }
     setUploadedImage(null);
+    setOriginalImageFile(null);
+    
+    // Generate a new random palette when clearing the image
+    const newPalette = colorService.generateNewPalette();
+    updateColorPalette(newPalette);
   };
 
   return {
