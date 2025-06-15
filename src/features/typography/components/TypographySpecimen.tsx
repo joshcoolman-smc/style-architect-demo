@@ -7,7 +7,7 @@ const TypographySpecimen = () => {
   const { fontFamilies } = useTypography();
 
   return (
-    <div className="space-y-16 text-left">
+    <div className="space-y-8 text-left">
       
       {/* Font Families Section */}
       <GradientContainer className="p-12">
