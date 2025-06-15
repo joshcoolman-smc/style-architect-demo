@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useColorStore } from '../../../../stores/colorStore';
 import { Project } from '../../types/element.types';
 import { AspectRatio } from '../../../../components/ui/aspect-ratio';
@@ -10,6 +10,7 @@ interface ProjectShowcaseCardProps {
 
 const ProjectShowcaseCard = ({ project }: ProjectShowcaseCardProps) => {
   const { palette, categories } = useColorStore();
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Extract colors from categories
   const lightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
@@ -59,12 +60,20 @@ const ProjectShowcaseCard = ({ project }: ProjectShowcaseCardProps) => {
       }}
     >
       <div className="flex">
-        <div className="w-48 flex-shrink-0 bg-zinc-800">
+        <div className="w-48 flex-shrink-0 bg-zinc-800 overflow-hidden">
           <AspectRatio ratio={2/3}>
-            <img 
+            <motion.img 
               src={project.imageUrl} 
               alt={project.title}
               className="w-full h-full object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: imageLoaded ? 1 : 0 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ 
+                opacity: { duration: 0.3 },
+                scale: { duration: 0.3, ease: "easeOut" }
+              }}
+              onLoad={() => setImageLoaded(true)}
             />
           </AspectRatio>
         </div>

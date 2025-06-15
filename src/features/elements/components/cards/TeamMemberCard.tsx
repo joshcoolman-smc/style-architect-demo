@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useColorStore } from '../../../../stores/colorStore';
 import { TeamMember } from '../../types/element.types';
 
@@ -9,6 +9,7 @@ interface TeamMemberCardProps {
 
 const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
   const { palette, categories } = useColorStore();
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Extract colors from categories
   const lightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
@@ -64,11 +65,19 @@ const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
         border: `1px solid ${colors.backgroundColor}10`
       }}
     >
-      <div className="aspect-square w-full bg-zinc-800">
-        <img 
+      <div className="aspect-square w-full bg-zinc-800 overflow-hidden">
+        <motion.img 
           src={member.imageUrl} 
           alt={member.name}
           className="w-full h-full object-cover"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: imageLoaded ? 1 : 0 }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ 
+            opacity: { duration: 0.3 },
+            scale: { duration: 0.3, ease: "easeOut" }
+          }}
+          onLoad={() => setImageLoaded(true)}
         />
       </div>
       <div className="p-6 space-y-2">
