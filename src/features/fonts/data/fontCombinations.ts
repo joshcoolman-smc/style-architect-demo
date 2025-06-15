@@ -17,11 +17,11 @@ export const fontCombinations: FontOption[] = [
     description: 'Professional with subtle serif contrast'
   },
   {
-    name: 'Friendly Modern',
-    structural: 'Poppins',
-    subheader: 'Lora',
-    content: 'Open Sans',
-    description: 'Approachable and contemporary feel'
+    name: 'Kinda Bookish',
+    structural: 'Martel',
+    subheader: 'Cardo',
+    content: 'Muli',
+    description: 'Literary and scholarly aesthetic'
   },
   {
     name: 'Tech Minimal',
