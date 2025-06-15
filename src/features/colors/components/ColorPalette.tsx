@@ -48,13 +48,13 @@ const ColorPalette = () => {
   const midColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
   const darkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
 
-  // Animation variants for staggered entrance
+  // Animation variants for staggered entrance (similar to cards)
   const containerVariants: Variants = {
     hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05,
+        staggerChildren: 0.1,
         delayChildren: 0.1
       }
     }
@@ -79,8 +79,8 @@ const ColorPalette = () => {
     }
   };
 
-  // Sequential ripple effect variants for regeneration
-  const rippleVariants: Variants = {
+  // Row-based ripple effect variants for regeneration
+  const rowRippleVariants: Variants = {
     initial: { scale: 1 },
     ripple: { 
       scale: [1, 1.1, 1],
@@ -135,7 +135,7 @@ const ColorPalette = () => {
     setIsRegenerating(true);
     await generateNewPalette();
     // Keep regenerating state for animation duration
-    setTimeout(() => setIsRegenerating(false), 2000); // Extended to allow full stagger
+    setTimeout(() => setIsRegenerating(false), 1200); // Adjusted for row-based timing
   };
 
   return (
@@ -202,20 +202,18 @@ const ColorPalette = () => {
             {/* Light Colors Row */}
             <motion.div 
               className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
+              variants={isRegenerating ? rowRippleVariants : containerVariants}
+              initial={isRegenerating ? "initial" : "hidden"}
+              animate={isRegenerating ? "ripple" : "visible"}
+              transition={isRegenerating ? {
+                delay: 0 * 0.2, // First row
+                duration: 0.4
+              } : undefined}
             >
               {lightColors.map((color, index) => (
                 <motion.div 
                   key={color.name} 
-                  variants={isRegenerating ? rippleVariants : itemVariants}
-                  initial={isRegenerating ? "initial" : "hidden"}
-                  animate={isRegenerating ? "ripple" : "visible"}
-                  transition={isRegenerating ? {
-                    delay: index * 0.1, // Increased delay for clearer sequence
-                    duration: 0.4
-                  } : undefined}
+                  variants={itemVariants}
                 >
                   <ColorSwatch
                     name={color.name}
@@ -231,20 +229,18 @@ const ColorPalette = () => {
             {/* Mid Colors Row */}
             <motion.div 
               className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
+              variants={isRegenerating ? rowRippleVariants : containerVariants}
+              initial={isRegenerating ? "initial" : "hidden"}
+              animate={isRegenerating ? "ripple" : "visible"}
+              transition={isRegenerating ? {
+                delay: 1 * 0.2, // Second row
+                duration: 0.4
+              } : undefined}
             >
               {midColors.map((color, index) => (
                 <motion.div 
                   key={color.name} 
-                  variants={isRegenerating ? rippleVariants : itemVariants}
-                  initial={isRegenerating ? "initial" : "hidden"}
-                  animate={isRegenerating ? "ripple" : "visible"}
-                  transition={isRegenerating ? {
-                    delay: (lightColors.length + index) * 0.1, // Sequential after light colors
-                    duration: 0.4
-                  } : undefined}
+                  variants={itemVariants}
                 >
                   <ColorSwatch
                     name={color.name}
@@ -260,20 +256,18 @@ const ColorPalette = () => {
             {/* Dark Colors Row */}
             <motion.div 
               className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
+              variants={isRegenerating ? rowRippleVariants : containerVariants}
+              initial={isRegenerating ? "initial" : "hidden"}
+              animate={isRegenerating ? "ripple" : "visible"}
+              transition={isRegenerating ? {
+                delay: 2 * 0.2, // Third row
+                duration: 0.4
+              } : undefined}
             >
               {darkColors.map((color, index) => (
                 <motion.div 
                   key={color.name} 
-                  variants={isRegenerating ? rippleVariants : itemVariants}
-                  initial={isRegenerating ? "initial" : "hidden"}
-                  animate={isRegenerating ? "ripple" : "visible"}
-                  transition={isRegenerating ? {
-                    delay: (lightColors.length + midColors.length + index) * 0.1, // Sequential after mid colors
-                    duration: 0.4
-                  } : undefined}
+                  variants={itemVariants}
                 >
                   <ColorSwatch
                     name={color.name}
