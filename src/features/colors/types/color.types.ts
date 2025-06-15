@@ -22,6 +22,13 @@ export interface ColorPaletteState {
 }
 
 // New color palette structure
+// Category names enum for type safety
+export enum ColorCategoryName {
+  LIGHT_TONES = 'Light Tones',
+  MID_TONES = 'Mid Tones',
+  DARK_TONES = 'Dark Tones'
+}
+
 export interface ColorPaletteData {
   "light-1": string;
   "light-2": string;

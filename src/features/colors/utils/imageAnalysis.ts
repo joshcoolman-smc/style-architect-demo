@@ -147,7 +147,7 @@ export async function extractPaletteFromImage(imageSrc: string, numColorsToExtra
   }
 
   // --- Palette Refinement ---
-  function refinePalette(palette: any[]) {
+  function refinePalette(palette: Array<{ rgb: { r: number; g: number; b: number }; lab: { l: number; a: number; b: number } }>) {
     return palette.map((color) => {
       let { l, a, b } = color.lab;
       l = Math.max(10, Math.min(90, l));
@@ -231,8 +231,8 @@ export async function extractPaletteFromImage(imageSrc: string, numColorsToExtra
 
       const numPerCategory = Math.max(1, Math.floor(numColorsToExtract / 3));
 
-      let light = refined.slice(0, numPerCategory).sort((a, b) => a.lab.b - b.lab.b);
-      let mid = refined.slice(numPerCategory, numPerCategory * 2).sort((a, b) => a.lab.b - b.lab.b);
+      const light = refined.slice(0, numPerCategory).sort((a, b) => a.lab.b - b.lab.b);
+      const mid = refined.slice(numPerCategory, numPerCategory * 2).sort((a, b) => a.lab.b - b.lab.b);
       
       const darkCandidates = refined.slice(numPerCategory * 2);
       const minDarkness = 45;

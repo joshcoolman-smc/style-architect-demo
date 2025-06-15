@@ -4,6 +4,7 @@ import { RefreshCcw, ImagePlus, X } from 'lucide-react';
 import ColorSwatch from './ColorSwatch';
 import ImagePaletteComparison from './ImagePaletteComparison';
 import ImageUploadDialog from './ImageUploadDialog';
+import ImageProcessingErrorBoundary from './ImageProcessingErrorBoundary';
 import GradientContainer from '../../shared/components/GradientContainer';
 import { ColorApplicationShowcase } from './ColorApplicationShowcase';
 import { useColorPalette } from '../hooks/useColorPalette';
@@ -190,13 +191,15 @@ const ColorPalette = () => {
         </div>
 
         {uploadedImage ? (
-          <ImagePaletteComparison
-            imageUrl={uploadedImage}
-            onCopyColor={copyToClipboard}
-            copiedColor={copiedColor}
-            isSampleImage={isSampleImage}
-            onCycleImage={cycleToNextSampleImage}
-          />
+          <ImageProcessingErrorBoundary>
+            <ImagePaletteComparison
+              imageUrl={uploadedImage}
+              onCopyColor={copyToClipboard}
+              copiedColor={copiedColor}
+              isSampleImage={isSampleImage}
+              onCycleImage={cycleToNextSampleImage}
+            />
+          </ImageProcessingErrorBoundary>
         ) : (
           <div className="space-y-6">
             {/* Light Colors Row */}

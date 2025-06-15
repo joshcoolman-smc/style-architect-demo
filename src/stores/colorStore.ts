@@ -2,6 +2,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { ColorPaletteData, ColorCategory } from '../features/colors/types/color.types';
+import { fileToBase64 } from '../utils/fileUtils';
 
 interface ColorStore {
   palette: ColorPaletteData;
@@ -22,26 +23,6 @@ interface ColorStore {
   clearImageState: () => void;
 }
 
-// Helper function to convert File to base64
-const fileToBase64 = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = error => reject(error);
-  });
-};
-
-// Helper function to convert base64 to File
-const base64ToFile = (base64: string, fileName: string, fileType: string): File => {
-  const byteCharacters = atob(base64.split(',')[1]);
-  const byteNumbers = new Array(byteCharacters.length);
-  for (let i = 0; i < byteCharacters.length; i++) {
-    byteNumbers[i] = byteCharacters.charCodeAt(i);
-  }
-  const byteArray = new Uint8Array(byteNumbers);
-  return new File([byteArray], fileName, { type: fileType });
-};
 
 export const useColorStore = create<ColorStore>()(
   persist(
@@ -65,42 +46,7 @@ export const useColorStore = create<ColorStore>()(
       isSampleImage: false,
       currentSampleIndex: 0,
       isAnalyzing: false,
-      updatePalette: (newPalette) => set((state) => ({ 
-        palette: newPalette,
-        categories: state.categories.map(category => {
-          if (category.name === 'Light Tones') {
-            return {
-              ...category,
-              colors: [
-                { ...category.colors[0], value: newPalette["light-1"] },
-                { ...category.colors[1], value: newPalette["light-2"] },
-                { ...category.colors[2], value: newPalette["light-3"] }
-              ]
-            };
-          }
-          if (category.name === 'Mid Tones') {
-            return {
-              ...category,
-              colors: [
-                { ...category.colors[0], value: newPalette["mid-1"] },
-                { ...category.colors[1], value: newPalette["mid-2"] },
-                { ...category.colors[2], value: newPalette["mid-3"] }
-              ]
-            };
-          }
-          if (category.name === 'Dark Tones') {
-            return {
-              ...category,
-              colors: [
-                { ...category.colors[0], value: newPalette["dark-1"] },
-                { ...category.colors[1], value: newPalette["dark-2"] },
-                { ...category.colors[2], value: newPalette["dark-3"] }
-              ]
-            };
-          }
-          return category;
-        })
-      })),
+      updatePalette: (newPalette) => set({ palette: newPalette }),
       updateCategories: (newCategories) => set({ categories: newCategories }),
       setUploadedImage: (imageUrl) => set({ uploadedImage: imageUrl }),
       setOriginalImageFile: async (file) => {
@@ -152,5 +98,3 @@ export const useColorStore = create<ColorStore>()(
   )
 );
 
-// Export helper functions for use in hooks
-export { base64ToFile };

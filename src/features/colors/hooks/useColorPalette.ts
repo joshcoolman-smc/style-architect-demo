@@ -2,7 +2,8 @@
 import React from 'react';
 import { ColorService } from '../service/colorService';
 import { ColorPaletteData } from '../types/color.types';
-import { useColorStore, base64ToFile } from '../../../stores/colorStore';
+import { useColorStore } from '../../../stores/colorStore';
+import { base64ToFile } from '../../../utils/fileUtils';
 
 export const useColorPalette = () => {
   const { 
@@ -46,7 +47,7 @@ export const useColorPalette = () => {
     updateCategories(categories);
   }, [colorService, updateCategories]);
 
-  const copyToClipboard = async (value: string) => {
+  const copyToClipboard = React.useCallback(async (value: string) => {
     try {
       await colorService.copyColorToClipboard(value);
       setCopiedColor(value);
@@ -56,14 +57,15 @@ export const useColorPalette = () => {
     } catch (err) {
       console.error('Failed to copy color:', err);
     }
-  };
+  }, [colorService]);
 
-  const updateColorPalette = (palette: ColorPaletteData) => {
+  const updateColorPalette = React.useCallback((palette: ColorPaletteData) => {
     colorService.updateColorPalette(palette);
     updatePalette(palette);
-    const categories = colorService.getColorCategories();
-    updateCategories(categories);
-  };
+    // Update categories using the service method for proper mapping
+    const updatedCategories = colorService.updateCategoriesFromPalette(categories, palette);
+    updateCategories(updatedCategories);
+  }, [colorService, categories, updatePalette, updateCategories]);
 
   const generateNewPalette = async () => {
     // If we have an uploaded image, regenerate from that image

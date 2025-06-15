@@ -1,13 +1,15 @@
 
 import { ColorRepository, IColorRepository } from '../repository/colorRepository';
-import { ColorCategory, ColorPaletteData } from '../types/color.types';
+import { ColorCategory, ColorPaletteData, ColorCategoryName } from '../types/color.types';
 import { generateAlgorithmicPalette } from '../utils/paletteGenerator';
-import { extractPaletteFromImage } from '../utils/imageAnalysis';
+import { extractPaletteFromImageLazy } from '../utils/lazyImageAnalysis';
+import { fileToBase64 } from '../../../utils/fileUtils';
 
 export interface IColorService {
   getColorCategories(): ColorCategory[];
   copyColorToClipboard(value: string): Promise<void>;
   updateColorPalette(palette: ColorPaletteData): void;
+  updateCategoriesFromPalette(categories: ColorCategory[], palette: ColorPaletteData): ColorCategory[];
   generateNewPalette(): ColorPaletteData;
   generatePaletteFromImage(imageFile: File): Promise<ColorPaletteData>;
 }
@@ -27,25 +29,54 @@ export class ColorService implements IColorService {
     this.repository.updateColorPalette(palette);
   }
 
+  updateCategoriesFromPalette(categories: ColorCategory[], palette: ColorPaletteData): ColorCategory[] {
+    return categories.map(category => {
+      switch (category.name as ColorCategoryName) {
+        case ColorCategoryName.LIGHT_TONES:
+          return {
+            ...category,
+            colors: [
+              { ...category.colors[0], value: palette["light-1"] },
+              { ...category.colors[1], value: palette["light-2"] },
+              { ...category.colors[2], value: palette["light-3"] }
+            ]
+          };
+        case ColorCategoryName.MID_TONES:
+          return {
+            ...category,
+            colors: [
+              { ...category.colors[0], value: palette["mid-1"] },
+              { ...category.colors[1], value: palette["mid-2"] },
+              { ...category.colors[2], value: palette["mid-3"] }
+            ]
+          };
+        case ColorCategoryName.DARK_TONES:
+          return {
+            ...category,
+            colors: [
+              { ...category.colors[0], value: palette["dark-1"] },
+              { ...category.colors[1], value: palette["dark-2"] },
+              { ...category.colors[2], value: palette["dark-3"] }
+            ]
+          };
+        default:
+          return category;
+      }
+    });
+  }
+
   generateNewPalette(): ColorPaletteData {
     return generateAlgorithmicPalette();
   }
 
   async generatePaletteFromImage(imageFile: File): Promise<ColorPaletteData> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        try {
-          const imageSrc = e.target?.result as string;
-          const palette = await extractPaletteFromImage(imageSrc);
-          resolve(palette);
-        } catch (error) {
-          reject(error);
-        }
-      };
-      reader.onerror = () => reject(new Error('Failed to read file'));
-      reader.readAsDataURL(imageFile);
-    });
+    try {
+      const imageSrc = await fileToBase64(imageFile);
+      const palette = await extractPaletteFromImageLazy(imageSrc);
+      return palette;
+    } catch (error) {
+      throw new Error('Failed to generate palette from image');
+    }
   }
 
   async copyColorToClipboard(value: string): Promise<void> {

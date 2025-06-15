@@ -13,7 +13,7 @@ interface ColorSwatchProps {
   isSemanticColor?: boolean;
 }
 
-const ColorSwatch = ({ name, value, description, onCopy, isCopied, isSemanticColor }: ColorSwatchProps) => {
+const ColorSwatch = React.memo(({ name, value, description, onCopy, isCopied, isSemanticColor }: ColorSwatchProps) => {
   const textColor = getReadableTextColor(value);
   const rgb = hexToRgb(value);
   const rgbString = rgb ? `${rgb.r}, ${rgb.g}, ${rgb.b}` : '';
@@ -76,6 +76,6 @@ const ColorSwatch = ({ name, value, description, onCopy, isCopied, isSemanticCol
       </div>
     </motion.div>
   );
-};
+});
 
 export default ColorSwatch;
