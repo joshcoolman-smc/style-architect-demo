@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { RefreshCcw, ImagePlus, X } from 'lucide-react';
 import ColorSwatch from './ColorSwatch';
@@ -14,9 +13,12 @@ const ColorPalette = () => {
     copiedColor, 
     isAnalyzing, 
     uploadedImage,
+    isSampleImage,
     copyToClipboard, 
     generateNewPalette, 
     generatePaletteFromImage,
+    generatePaletteFromSampleImage,
+    cycleToNextSampleImage,
     clearUploadedImage
   } = useColorPalette();
   
@@ -69,16 +71,7 @@ const ColorPalette = () => {
 
   const handleSampleImageSelect = async () => {
     try {
-      // Pick a random sample image
-      const randomImage = sampleImages[Math.floor(Math.random() * sampleImages.length)];
-      
-      // Fetch the image and convert to File object
-      const response = await fetch(randomImage);
-      const blob = await response.blob();
-      const filename = randomImage.split('/').pop() || 'sample-image.png';
-      const file = new File([blob], filename, { type: blob.type });
-      
-      await generatePaletteFromImage(file);
+      await generatePaletteFromSampleImage();
     } catch (error) {
       console.error('Error loading sample image:', error);
       alert('Failed to load sample image. Please try another one.');
@@ -102,7 +95,9 @@ const ColorPalette = () => {
             <h2 className="text-2xl font-bold text-card-foreground">Colors</h2>
             <p className="text-sm text-muted-foreground mt-1">
               {uploadedImage 
-                ? "Image-based color palette comparison"
+                ? isSampleImage 
+                  ? "Click the image to cycle through samples and see different palettes"
+                  : "Image-based color palette comparison"
                 : "Upload an image to generate a palette or click refresh to generate a random palette"
               }
             </p>
@@ -147,6 +142,8 @@ const ColorPalette = () => {
             imageUrl={uploadedImage}
             onCopyColor={copyToClipboard}
             copiedColor={copiedColor}
+            isSampleImage={isSampleImage}
+            onCycleImage={cycleToNextSampleImage}
           />
         ) : (
           <div className="space-y-6">
