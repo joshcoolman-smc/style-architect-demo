@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Pencil } from 'lucide-react';
 import { Button } from './ui/button';
@@ -97,33 +96,28 @@ const TypographySpecimen = () => {
           <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Type Scale</h2>
           <div className="space-y-10 mt-6 flow-root">
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-              <span className="ds-text-technical-light">h1</span>
-              <h1 className="text-5xl font-extrabold tracking-tighter text-white">Quick brown fox</h1>
+              <span className="ds-text-technical-light">heading-1</span>
+              <h1 className="text-heading-1 text-white">Quick brown fox</h1>
             </div>
             <Separator className="bg-white/20" />
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-              <span className="ds-text-technical-light">h2</span>
-              <h2 className="text-4xl font-bold tracking-tight text-white">Quick brown fox</h2>
+              <span className="ds-text-technical-light">heading-2</span>
+              <h2 className="text-heading-2 text-white">Quick brown fox</h2>
             </div>
             <Separator className="bg-white/20" />
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-              <span className="ds-text-technical-light">h3</span>
-              <h3 className="text-3xl font-semibold text-white">Quick brown fox</h3>
+              <span className="ds-text-technical-light">heading-3</span>
+              <h3 className="text-heading-3 text-white">Quick brown fox</h3>
             </div>
             <Separator className="bg-white/20" />
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-              <span className="ds-text-technical-light">h4</span>
-              <h4 className="text-2xl font-semibold text-white">Quick brown fox</h4>
+              <span className="ds-text-technical-light">body</span>
+              <p className="text-body text-white">Quick brown fox jumps over the lazy dog</p>
             </div>
             <Separator className="bg-white/20" />
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-              <span className="ds-text-technical-light">h5</span>
-              <h5 className="text-xl font-medium text-white">Quick brown fox</h5>
-            </div>
-            <Separator className="bg-white/20" />
-            <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-              <span className="ds-text-technical-light">h6</span>
-              <h6 className="text-lg font-medium text-white">Quick brown fox</h6>
+              <span className="ds-text-technical-light">caption</span>
+              <p className="text-caption text-white">Quick brown fox jumps over the lazy dog</p>
             </div>
           </div>
         </GradientContainer>
@@ -131,17 +125,17 @@ const TypographySpecimen = () => {
         {/* Editorial Example */}
         <GradientContainer className="p-12">
           <div className="space-y-6 max-w-prose">
-            <h1 className="text-4xl font-bold tracking-tight text-white font-structural">
+            <h1 className="text-heading-1 text-white font-structural">
               Typography creates hierarchy
             </h1>
-            <h2 className="text-xl font-medium text-white/80 font-subheader">
+            <h2 className="text-heading-2 text-white/80 font-subheader">
               Visual contrast guides the reader's eye through information
             </h2>
-            <p className="text-lg leading-relaxed text-white font-content">
+            <p className="text-body text-white font-content">
               Effective typography establishes clear information hierarchy through strategic use of size, weight, and spacing. By varying these elements systematically, designers create a visual roadmap that leads readers through content naturally.
             </p>
-            <p className="text-base leading-relaxed text-white/90 font-content">
-              The largest text draws initial attention, medium weights provide context and categorization, while body text delivers detailed information. This purposeful contrast between type sizes and weights transforms dense information into scannable, digestible content that serves both aesthetic and functional purposes.
+            <p className="text-caption text-white/90 font-content">
+              The smallest text provides additional context and details. Caption text is perfect for metadata, annotations, and supplementary information that supports the main content without competing for attention.
             </p>
           </div>
         </GradientContainer>
