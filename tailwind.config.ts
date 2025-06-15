@@ -122,10 +122,10 @@ export default {
 				}
 			},
 			fontSize: {
-				// Semantic Type Scale System
+				// Dynamic type scale using CSS custom properties
 				// text-caption
 				caption: [
-					"12px",
+					"var(--font-size-caption, 12px)",
 					{
 						lineHeight: "16px",
 						fontWeight: "400",
@@ -134,7 +134,7 @@ export default {
 
 				// text-caption-bold
 				"caption-bold": [
-					"12px",
+					"var(--font-size-caption, 12px)",
 					{
 						lineHeight: "16px",
 						fontWeight: "500",
@@ -143,7 +143,7 @@ export default {
 
 				// text-body
 				body: [
-					"14px",
+					"var(--font-size-body, 14px)",
 					{
 						lineHeight: "20px",
 						fontWeight: "400",
@@ -152,7 +152,7 @@ export default {
 
 				// text-body-bold
 				"body-bold": [
-					"14px",
+					"var(--font-size-body, 14px)",
 					{
 						lineHeight: "20px",
 						fontWeight: "500",
@@ -161,7 +161,7 @@ export default {
 
 				// text-heading-3
 				"heading-3": [
-					"16px",
+					"var(--font-size-heading-3, 16px)",
 					{
 						lineHeight: "20px",
 						fontWeight: "600",
@@ -170,7 +170,7 @@ export default {
 
 				// text-heading-2
 				"heading-2": [
-					"20px",
+					"var(--font-size-heading-2, 20px)",
 					{
 						lineHeight: "24px",
 						fontWeight: "600",
@@ -179,7 +179,7 @@ export default {
 
 				// text-heading-1
 				"heading-1": [
-					"30px",
+					"var(--font-size-heading-1, 30px)",
 					{
 						lineHeight: "36px",
 						fontWeight: "500",
@@ -188,7 +188,7 @@ export default {
 
 				// text-monospace-body
 				"monospace-body": [
-					"14px",
+					"var(--font-size-body, 14px)",
 					{
 						lineHeight: "20px",
 						fontWeight: "400",

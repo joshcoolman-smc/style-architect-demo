@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GradientContainer from '../../../components/GradientContainer';
 import {
   Select,
@@ -13,22 +13,53 @@ const TypeScaleSelector = () => {
   const [selectedScale, setSelectedScale] = useState('minor-third');
 
   const typeScales = [
-    { value: 'minor-third', label: 'Minor Third', ratio: '1.2' },
-    { value: 'major-third', label: 'Major Third', ratio: '1.25' },
-    { value: 'perfect-fourth', label: 'Perfect Fourth', ratio: '1.333' },
-    { value: 'augmented-fourth', label: 'Augmented Fourth', ratio: '1.414' },
+    { value: 'minor-third', label: 'Minor Third', ratio: 1.2 },
+    { value: 'major-third', label: 'Major Third', ratio: 1.25 },
+    { value: 'perfect-fourth', label: 'Perfect Fourth', ratio: 1.333 },
+    { value: 'augmented-fourth', label: 'Augmented Fourth', ratio: 1.414 },
   ];
+
+  const applyTypeScale = (ratio: number) => {
+    const baseSize = 14; // base body text size in px
+    
+    // Calculate sizes using the ratio
+    const caption = baseSize * 0.857; // 12px
+    const body = baseSize; // 14px
+    const heading3 = baseSize * Math.pow(ratio, 0.143); // ~16px
+    const heading2 = baseSize * Math.pow(ratio, 0.429); // ~20px
+    const heading1 = baseSize * Math.pow(ratio, 1.143); // ~30px
+    
+    // Apply to CSS custom properties
+    document.documentElement.style.setProperty('--font-size-caption', `${caption}px`);
+    document.documentElement.style.setProperty('--font-size-body', `${body}px`);
+    document.documentElement.style.setProperty('--font-size-heading-3', `${heading3}px`);
+    document.documentElement.style.setProperty('--font-size-heading-2', `${heading2}px`);
+    document.documentElement.style.setProperty('--font-size-heading-1', `${heading1}px`);
+    
+    console.log('Applied type scale:', { ratio, caption, body, heading3, heading2, heading1 });
+  };
 
   const handleScaleChange = (value: string) => {
     setSelectedScale(value);
-    // No implementation yet - just visual for now
+    const selectedTypeScale = typeScales.find(scale => scale.value === value);
+    if (selectedTypeScale) {
+      applyTypeScale(selectedTypeScale.ratio);
+    }
     console.log('Selected scale:', value);
   };
 
   const getCurrentRatio = () => {
     const currentScale = typeScales.find(scale => scale.value === selectedScale);
-    return currentScale ? currentScale.ratio : '1.2';
+    return currentScale ? currentScale.ratio.toString() : '1.2';
   };
+
+  // Apply initial scale on mount
+  useEffect(() => {
+    const initialScale = typeScales.find(scale => scale.value === selectedScale);
+    if (initialScale) {
+      applyTypeScale(initialScale.ratio);
+    }
+  }, []);
 
   return (
     <GradientContainer className="p-6">
