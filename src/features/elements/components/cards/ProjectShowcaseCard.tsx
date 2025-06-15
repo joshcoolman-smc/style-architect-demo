@@ -2,6 +2,7 @@
 import React from 'react';
 import { useColorStore } from '../../../../stores/colorStore';
 import { Project } from '../../types/element.types';
+import { AspectRatio } from '../../../../components/ui/aspect-ratio';
 
 interface ProjectShowcaseCardProps {
   project: Project;
@@ -51,21 +52,23 @@ const ProjectShowcaseCard = ({ project }: ProjectShowcaseCardProps) => {
 
   return (
     <div 
-      className="shadow-lg rounded-lg overflow-hidden transition-colors duration-300 h-80" 
+      className="shadow-lg rounded-lg overflow-hidden transition-colors duration-300" 
       style={{ 
         backgroundColor: colors.backgroundColor,
         border: `1px solid ${colors.backgroundColor}10`
       }}
     >
-      <div className="flex h-full">
-        <div className="w-64 flex-shrink-0 bg-zinc-800 overflow-hidden">
-          <img 
-            src={project.imageUrl} 
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
+      <div className="flex">
+        <div className="w-48 flex-shrink-0 bg-zinc-800">
+          <AspectRatio ratio={2/3}>
+            <img 
+              src={project.imageUrl} 
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+          </AspectRatio>
         </div>
-        <div className="flex-1 p-8 space-y-3 flex flex-col justify-center min-h-0">
+        <div className="flex-1 p-8 space-y-3 flex flex-col justify-center">
           <h4 
             className="text-xl font-semibold transition-colors duration-300"
             style={{ color: colors.titleColor }}
