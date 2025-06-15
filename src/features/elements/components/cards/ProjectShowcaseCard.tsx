@@ -70,19 +70,19 @@ const ProjectShowcaseCard = ({ project }: ProjectShowcaseCardProps) => {
         </div>
         <div className="flex-1 p-8 space-y-3 flex flex-col justify-center">
           <h4 
-            className="text-xl font-semibold transition-colors duration-300 font-structural"
+            className="text-heading-2 font-structural transition-colors duration-300"
             style={{ color: colors.titleColor }}
           >
             {project.title}
           </h4>
           <div 
-            className="font-subheader transition-colors duration-300 text-base" 
+            className="text-body font-subheader transition-colors duration-300" 
             style={{ color: colors.locationColor }}
           >
             {project.location}
           </div>
           <p 
-            className="text-base transition-colors duration-300 leading-relaxed font-content"
+            className="text-body font-content transition-colors duration-300 leading-relaxed"
             style={{ color: colors.descriptionColor }}
           >
             {project.description}

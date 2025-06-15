@@ -15,7 +15,7 @@ const ElementsShowcase = () => {
       <div className="ds-card p-8">
         <div className="space-y-8">
           <div>
-            <h3 className="text-xl font-semibold text-foreground mb-4">Cards</h3>
+            <h3 className="text-heading-3 font-structural text-foreground mb-4">Cards</h3>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {teamMembers.map((member) => (
                 <TeamMemberCard key={member.id} member={member} />
@@ -37,12 +37,12 @@ const ElementsShowcase = () => {
       <div className="ds-card p-8">
         <div className="space-y-8">
           <div>
-            <h3 className="text-xl font-semibold text-foreground mb-4">Buttons</h3>
+            <h3 className="text-heading-3 font-structural text-foreground mb-4">Buttons</h3>
             <div className="grid gap-6 sm:grid-cols-3 max-w-2xl">
               <div className="space-y-3">
-                <h4 className="text-sm font-medium text-muted-foreground">Primary</h4>
+                <h4 className="text-caption font-structural text-muted-foreground uppercase tracking-wide">Primary</h4>
                 <button 
-                  className="w-full px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-white"
+                  className="w-full px-6 py-3 rounded-lg text-body font-structural transition-colors duration-300 text-white"
                   style={{ backgroundColor: palette["mid-1"] }}
                 >
                   Primary Button
@@ -50,9 +50,9 @@ const ElementsShowcase = () => {
               </div>
               
               <div className="space-y-3">
-                <h4 className="text-sm font-medium text-muted-foreground">Secondary</h4>
+                <h4 className="text-caption font-structural text-muted-foreground uppercase tracking-wide">Secondary</h4>
                 <button 
-                  className="w-full px-6 py-3 rounded-lg font-medium transition-colors duration-300"
+                  className="w-full px-6 py-3 rounded-lg text-body font-structural transition-colors duration-300"
                   style={{ backgroundColor: palette["light-2"], color: palette["dark-1"] }}
                 >
                   Secondary Button
@@ -60,9 +60,9 @@ const ElementsShowcase = () => {
               </div>
               
               <div className="space-y-3">
-                <h4 className="text-sm font-medium text-muted-foreground">Outline</h4>
+                <h4 className="text-caption font-structural text-muted-foreground uppercase tracking-wide">Outline</h4>
                 <button 
-                  className="px-6 py-3 rounded-lg font-medium transition-colors duration-300 w-full"
+                  className="px-6 py-3 rounded-lg text-body font-structural transition-colors duration-300 w-full"
                   style={{ border: `1px solid ${palette["mid-2"]}`, color: palette["dark-1"] }}
                 >
                   Outline Button

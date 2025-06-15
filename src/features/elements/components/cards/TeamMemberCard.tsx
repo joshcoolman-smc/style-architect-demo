@@ -73,19 +73,19 @@ const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
       </div>
       <div className="p-6 space-y-2">
         <h4 
-          className="text-lg font-semibold transition-colors duration-300 font-structural"
+          className="text-heading-3 font-structural transition-colors duration-300"
           style={{ color: colors.titleColor }}
         >
           {member.name}
         </h4>
         <div 
-          className="font-subheader transition-colors duration-300" 
+          className="text-body font-subheader transition-colors duration-300" 
           style={{ color: colors.roleColor }}
         >
           {member.role}
         </div>
         <p 
-          className="text-sm transition-colors duration-300 font-content"
+          className="text-body font-content transition-colors duration-300"
           style={{ color: colors.descriptionColor }}
         >
           {member.description}
