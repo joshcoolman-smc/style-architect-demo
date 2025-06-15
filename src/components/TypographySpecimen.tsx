@@ -93,7 +93,7 @@ const TypographySpecimen = () => {
       {/* Type Scale and Editorial Example Side by Side */}
       <div className="grid md:grid-cols-2 gap-8">
         {/* Type Scale - Simplified */}
-        <GradientContainer className="p-12">
+        <GradientContainer className="p-12 pt-[3.25rem]">
           <div className="space-y-12 mt-6">
             <div className="relative">
               <h1 className="text-heading-1 text-white">Quick brown fox</h1>
