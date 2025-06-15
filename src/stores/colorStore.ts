@@ -6,13 +6,46 @@ import { ColorPaletteData, ColorCategory } from '../features/colors/types/color.
 interface ColorStore {
   palette: ColorPaletteData;
   categories: ColorCategory[];
+  uploadedImage: string | null;
+  originalImageFile: string | null; // base64 encoded file data
+  originalImageFileName: string | null;
+  originalImageFileType: string | null;
+  isSampleImage: boolean;
+  currentSampleIndex: number;
+  isAnalyzing: boolean;
   updatePalette: (newPalette: ColorPaletteData) => void;
   updateCategories: (newCategories: ColorCategory[]) => void;
+  setUploadedImage: (imageUrl: string | null) => void;
+  setOriginalImageFile: (file: File | null) => void;
+  setSampleImageState: (imageUrl: string, index: number) => void;
+  setIsAnalyzing: (analyzing: boolean) => void;
+  clearImageState: () => void;
 }
+
+// Helper function to convert File to base64
+const fileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = error => reject(error);
+  });
+};
+
+// Helper function to convert base64 to File
+const base64ToFile = (base64: string, fileName: string, fileType: string): File => {
+  const byteCharacters = atob(base64.split(',')[1]);
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+  return new File([byteArray], fileName, { type: fileType });
+};
 
 export const useColorStore = create<ColorStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       palette: {
         "light-1": "#9DACA7",
         "light-2": "#BABAAC", 
@@ -25,6 +58,13 @@ export const useColorStore = create<ColorStore>()(
         "dark-3": "#233E49"
       },
       categories: [],
+      uploadedImage: null,
+      originalImageFile: null,
+      originalImageFileName: null,
+      originalImageFileType: null,
+      isSampleImage: false,
+      currentSampleIndex: 0,
+      isAnalyzing: false,
       updatePalette: (newPalette) => set((state) => ({ 
         palette: newPalette,
         categories: state.categories.map(category => {
@@ -62,9 +102,55 @@ export const useColorStore = create<ColorStore>()(
         })
       })),
       updateCategories: (newCategories) => set({ categories: newCategories }),
+      setUploadedImage: (imageUrl) => set({ uploadedImage: imageUrl }),
+      setOriginalImageFile: async (file) => {
+        if (file) {
+          try {
+            const base64 = await fileToBase64(file);
+            set({
+              originalImageFile: base64,
+              originalImageFileName: file.name,
+              originalImageFileType: file.type
+            });
+          } catch (error) {
+            console.error('Failed to convert file to base64:', error);
+            set({
+              originalImageFile: null,
+              originalImageFileName: null,
+              originalImageFileType: null
+            });
+          }
+        } else {
+          set({
+            originalImageFile: null,
+            originalImageFileName: null,
+            originalImageFileType: null
+          });
+        }
+      },
+      setSampleImageState: (imageUrl, index) => set({
+        uploadedImage: imageUrl,
+        isSampleImage: true,
+        currentSampleIndex: index,
+        originalImageFile: null,
+        originalImageFileName: null,
+        originalImageFileType: null
+      }),
+      setIsAnalyzing: (analyzing) => set({ isAnalyzing: analyzing }),
+      clearImageState: () => set({
+        uploadedImage: null,
+        originalImageFile: null,
+        originalImageFileName: null,
+        originalImageFileType: null,
+        isSampleImage: false,
+        currentSampleIndex: 0
+      }),
     }),
     {
       name: 'color-palette-storage',
     }
   )
 );
+
+// Export helper functions for use in hooks
+export { base64ToFile };

@@ -2,16 +2,29 @@
 import React from 'react';
 import { ColorService } from '../service/colorService';
 import { ColorPaletteData } from '../types/color.types';
-import { useColorStore } from '../../../stores/colorStore';
+import { useColorStore, base64ToFile } from '../../../stores/colorStore';
 
 export const useColorPalette = () => {
-  const { categories, updateCategories, updatePalette } = useColorStore();
+  const { 
+    categories, 
+    palette,
+    uploadedImage,
+    originalImageFile,
+    originalImageFileName,
+    originalImageFileType,
+    isSampleImage,
+    currentSampleIndex,
+    isAnalyzing,
+    updateCategories, 
+    updatePalette,
+    setUploadedImage,
+    setOriginalImageFile,
+    setSampleImageState,
+    setIsAnalyzing,
+    clearImageState
+  } = useColorStore();
+  
   const [copiedColor, setCopiedColor] = React.useState<string | null>(null);
-  const [isAnalyzing, setIsAnalyzing] = React.useState(false);
-  const [uploadedImage, setUploadedImage] = React.useState<string | null>(null);
-  const [originalImageFile, setOriginalImageFile] = React.useState<File | null>(null);
-  const [isSampleImage, setIsSampleImage] = React.useState(false);
-  const [currentSampleIndex, setCurrentSampleIndex] = React.useState(0);
 
   const colorService = React.useMemo(() => new ColorService(), []);
 
@@ -54,10 +67,11 @@ export const useColorPalette = () => {
 
   const generateNewPalette = async () => {
     // If we have an uploaded image, regenerate from that image
-    if (originalImageFile) {
+    if (originalImageFile && originalImageFileName && originalImageFileType) {
       setIsAnalyzing(true);
       try {
-        const newPalette = await colorService.generatePaletteFromImage(originalImageFile);
+        const file = base64ToFile(originalImageFile, originalImageFileName, originalImageFileType);
+        const newPalette = await colorService.generatePaletteFromImage(file);
         updateColorPalette(newPalette);
       } catch (error) {
         console.error('Failed to regenerate palette from image:', error);
@@ -77,16 +91,14 @@ export const useColorPalette = () => {
       // Store both the image data URL and the original file
       const imageDataUrl = URL.createObjectURL(imageFile);
       setUploadedImage(imageDataUrl);
-      setOriginalImageFile(imageFile);
-      setIsSampleImage(false); // Mark as user-uploaded image
+      await setOriginalImageFile(imageFile);
+      setSampleImageState(imageDataUrl, 0); // Reset sample image state
       
       const newPalette = await colorService.generatePaletteFromImage(imageFile);
       updateColorPalette(newPalette);
     } catch (error) {
       console.error('Failed to generate palette from image:', error);
-      setUploadedImage(null);
-      setOriginalImageFile(null);
-      setIsSampleImage(false);
+      clearImageState();
       throw error;
     } finally {
       setIsAnalyzing(false);
@@ -106,11 +118,9 @@ export const useColorPalette = () => {
       const filename = selectedImage.split('/').pop() || 'sample-image.png';
       const file = new File([blob], filename, { type: blob.type });
       
-      // Set the uploaded image URL and mark as sample image
-      setUploadedImage(selectedImage);
-      setOriginalImageFile(file);
-      setIsSampleImage(true);
-      setCurrentSampleIndex(selectedIndex);
+      // Set the sample image state
+      setSampleImageState(selectedImage, selectedIndex);
+      await setOriginalImageFile(file);
       
       const newPalette = await colorService.generatePaletteFromImage(file);
       updateColorPalette(newPalette);
@@ -130,13 +140,10 @@ export const useColorPalette = () => {
   };
 
   const clearUploadedImage = () => {
-    if (uploadedImage && isSampleImage === false) {
+    if (uploadedImage && !isSampleImage) {
       URL.revokeObjectURL(uploadedImage);
     }
-    setUploadedImage(null);
-    setOriginalImageFile(null);
-    setIsSampleImage(false);
-    setCurrentSampleIndex(0);
+    clearImageState();
     
     // Generate a new random palette when clearing the image
     const newPalette = colorService.generateNewPalette();
