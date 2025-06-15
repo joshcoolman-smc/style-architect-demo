@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { motion } from 'framer-motion';
 import { RefreshCcw, ImagePlus, X } from 'lucide-react';
 import ColorSwatch from './ColorSwatch';
 import ImagePaletteComparison from './ImagePaletteComparison';
@@ -45,6 +46,37 @@ const ColorPalette = () => {
   const lightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
   const midColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
   const darkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
+
+  // Animation variants for staggered entrance
+  const containerVariants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.6,
+      y: 10
+    },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 25,
+        duration: 0.4
+      }
+    }
+  };
 
   const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -148,46 +180,64 @@ const ColorPalette = () => {
         ) : (
           <div className="space-y-6">
             {/* Light Colors Row */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {lightColors.map((color) => (
-                <ColorSwatch
-                  key={color.name}
-                  name={color.name}
-                  value={color.value}
-                  description={color.description}
-                  onCopy={copyToClipboard}
-                  isCopied={copiedColor === color.value}
-                />
+            <motion.div 
+              className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {lightColors.map((color, index) => (
+                <motion.div key={color.name} variants={itemVariants}>
+                  <ColorSwatch
+                    name={color.name}
+                    value={color.value}
+                    description={color.description}
+                    onCopy={copyToClipboard}
+                    isCopied={copiedColor === color.value}
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Mid Colors Row */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {midColors.map((color) => (
-                <ColorSwatch
-                  key={color.name}
-                  name={color.name}
-                  value={color.value}
-                  description={color.description}
-                  onCopy={copyToClipboard}
-                  isCopied={copiedColor === color.value}
-                />
+            <motion.div 
+              className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {midColors.map((color, index) => (
+                <motion.div key={color.name} variants={itemVariants}>
+                  <ColorSwatch
+                    name={color.name}
+                    value={color.value}
+                    description={color.description}
+                    onCopy={copyToClipboard}
+                    isCopied={copiedColor === color.value}
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Dark Colors Row */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {darkColors.map((color) => (
-                <ColorSwatch
-                  key={color.name}
-                  name={color.name}
-                  value={color.value}
-                  description={color.description}
-                  onCopy={copyToClipboard}
-                  isCopied={copiedColor === color.value}
-                />
+            <motion.div 
+              className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {darkColors.map((color, index) => (
+                <motion.div key={color.name} variants={itemVariants}>
+                  <ColorSwatch
+                    name={color.name}
+                    value={color.value}
+                    description={color.description}
+                    onCopy={copyToClipboard}
+                    isCopied={copiedColor === color.value}
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         )}
       </GradientContainer>
