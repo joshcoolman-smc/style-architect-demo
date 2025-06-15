@@ -51,35 +51,35 @@ const ProjectShowcaseCard = ({ project }: ProjectShowcaseCardProps) => {
 
   return (
     <div 
-      className="shadow-lg rounded-lg overflow-hidden transition-colors duration-300 min-h-[10rem]" 
+      className="shadow-lg rounded-lg overflow-hidden transition-colors duration-300 h-80" 
       style={{ 
         backgroundColor: colors.backgroundColor,
         border: `1px solid ${colors.backgroundColor}10`
       }}
     >
       <div className="flex h-full">
-        <div className="w-48 flex-shrink-0 bg-zinc-800 flex">
+        <div className="w-64 flex-shrink-0 bg-zinc-800 overflow-hidden">
           <img 
             src={project.imageUrl} 
             alt={project.title}
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="flex-1 p-6 space-y-2 flex flex-col justify-center">
+        <div className="flex-1 p-8 space-y-3 flex flex-col justify-center min-h-0">
           <h4 
-            className="text-lg font-semibold transition-colors duration-300"
+            className="text-xl font-semibold transition-colors duration-300"
             style={{ color: colors.titleColor }}
           >
             {project.title}
           </h4>
           <div 
-            className="technical-detail transition-colors duration-300" 
+            className="technical-detail transition-colors duration-300 text-base" 
             style={{ color: colors.locationColor }}
           >
             {project.location}
           </div>
           <p 
-            className="text-sm transition-colors duration-300"
+            className="text-base transition-colors duration-300 leading-relaxed"
             style={{ color: colors.descriptionColor }}
           >
             {project.description}
