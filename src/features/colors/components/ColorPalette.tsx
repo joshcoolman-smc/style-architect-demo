@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { RefreshCcw, ImagePlus, X } from 'lucide-react';
 import ColorSwatch from './ColorSwatch';
 import ImagePaletteComparison from './ImagePaletteComparison';
+import ImageUploadDialog from './ImageUploadDialog';
 import GradientContainer from '../../shared/components/GradientContainer';
 import { ColorApplicationShowcase } from './ColorApplicationShowcase';
 import { useColorPalette } from '../hooks/useColorPalette';
@@ -18,6 +19,8 @@ const ColorPalette = () => {
     generatePaletteFromImage,
     clearUploadedImage
   } = useColorPalette();
+  
+  const [dialogOpen, setDialogOpen] = React.useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Get all colors from all categories
@@ -51,8 +54,23 @@ const ColorPalette = () => {
     }
   };
 
+  const handleSampleImageSelect = async (imagePath: string) => {
+    try {
+      // Fetch the image and convert to File object
+      const response = await fetch(imagePath);
+      const blob = await response.blob();
+      const filename = imagePath.split('/').pop() || 'sample-image.png';
+      const file = new File([blob], filename, { type: blob.type });
+      
+      await generatePaletteFromImage(file);
+    } catch (error) {
+      console.error('Error loading sample image:', error);
+      alert('Failed to load sample image. Please try another one.');
+    }
+  };
+
   const handleUploadClick = () => {
-    fileInputRef.current?.click();
+    setDialogOpen(true);
   };
 
   const handleClearImage = () => {
@@ -74,14 +92,6 @@ const ColorPalette = () => {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="hidden"
-            />
-            
             {uploadedImage ? (
               <button
                 onClick={handleClearImage}
@@ -179,6 +189,15 @@ const ColorPalette = () => {
           isTransitioning={false}
         />
       </GradientContainer>
+
+      {/* Image Upload Dialog */}
+      <ImageUploadDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        onFileUpload={handleImageUpload}
+        onSampleImageSelect={handleSampleImageSelect}
+        isAnalyzing={isAnalyzing}
+      />
     </div>
   );
 };
