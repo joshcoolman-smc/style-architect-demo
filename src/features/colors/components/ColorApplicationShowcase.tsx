@@ -1,4 +1,3 @@
-
 import { Palette, Zap, Target } from "lucide-react"
 import { ColorCategory } from '../types/color.types';
 
@@ -37,16 +36,16 @@ function ColorCard({
       style={{ backgroundColor: bgColor }}
     >
       <div className="flex flex-row items-center justify-between mb-4">
-        <h3 className="text-xl font-semibold" style={{ color: titleColor }}>
+        <h3 className="text-heading-2 font-structural" style={{ color: titleColor }}>
           {title}
         </h3>
         <Icon className="h-6 w-6" style={{ color: accentColor }} />
       </div>
       <div className="flex-grow space-y-2">
-        <p className="text-sm font-semibold" style={{ color: subtitleColor }}>
+        <p className="text-body font-subheader" style={{ color: subtitleColor }}>
           {subtitle}
         </p>
-        <p className="text-xs leading-relaxed font-semibold" style={{ color: bodyColor }}>
+        <p className="text-caption font-content leading-relaxed" style={{ color: bodyColor }}>
           {bodyText}
         </p>
       </div>
