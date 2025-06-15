@@ -32,7 +32,10 @@ const InteractiveComponents = () => {
               {/* Card 1 - Using light-1 background like Dashboard showcase */}
               <div 
                 className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
-                style={{ backgroundColor: lightColors[0]?.value || palette["light-1"] }}
+                style={{ 
+                  backgroundColor: lightColors[0]?.value || palette["light-1"],
+                  border: `1px solid ${lightColors[0]?.value || palette["light-1"]}10`
+                }}
               >
                 <div className="aspect-square w-full bg-zinc-800">
                   <img 
@@ -66,7 +69,10 @@ const InteractiveComponents = () => {
               {/* Card 2 - Using mid-1 background like Portfolio showcase */}
               <div 
                 className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
-                style={{ backgroundColor: midColors[0]?.value || palette["mid-1"] }}
+                style={{ 
+                  backgroundColor: midColors[0]?.value || palette["mid-1"],
+                  border: `1px solid ${midColors[0]?.value || palette["mid-1"]}10`
+                }}
               >
                 <div className="aspect-square w-full bg-zinc-800">
                   <img 
@@ -100,7 +106,10 @@ const InteractiveComponents = () => {
               {/* Card 3 - Using dark-1 background like Landing showcase */}
               <div 
                 className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
-                style={{ backgroundColor: darkColors[0]?.value || palette["dark-1"] }}
+                style={{ 
+                  backgroundColor: darkColors[0]?.value || palette["dark-1"],
+                  border: `1px solid ${darkColors[0]?.value || palette["dark-1"]}10`
+                }}
               >
                 <div className="aspect-square w-full bg-zinc-800">
                   <img 
@@ -143,7 +152,7 @@ const InteractiveComponents = () => {
                 style={{ backgroundColor: lightColors[1]?.value || palette["light-2"] }}
               >
                 <div className="flex">
-                  <div className="w-32 h-32 bg-zinc-800 flex-shrink-0">
+                  <div className="w-48 h-36 bg-zinc-800 flex-shrink-0">
                     <img 
                       src="/lovable-uploads/209e88c5-2e6e-43dd-ac8b-37e45fd7e358.png" 
                       alt="Modern Architecture"
@@ -179,7 +188,7 @@ const InteractiveComponents = () => {
                 style={{ backgroundColor: midColors[1]?.value || palette["mid-2"] }}
               >
                 <div className="flex">
-                  <div className="w-32 h-32 bg-zinc-800 flex-shrink-0">
+                  <div className="w-48 h-36 bg-zinc-800 flex-shrink-0">
                     <img 
                       src="/lovable-uploads/c7882e27-4b93-4093-b2f0-b30adaf793ce.png" 
                       alt="Modern Interior"
