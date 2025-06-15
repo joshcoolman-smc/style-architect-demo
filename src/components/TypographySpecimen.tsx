@@ -1,8 +1,13 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Pencil } from 'lucide-react';
+import { Button } from './ui/button';
 import GradientContainer from './GradientContainer';
+import FontSidebar from '../features/fonts/components/FontSidebar';
 
 const TypographySpecimen = () => {
+  const [showFontSidebar, setShowFontSidebar] = useState(false);
+
   const fontFamilies = [
     {
       name: 'Heading',
@@ -29,7 +34,17 @@ const TypographySpecimen = () => {
       
       {/* Font Families Section */}
       <GradientContainer className="p-12">
-        <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Font Families</h2>
+        <div className="flex items-center justify-between border-b border-neutral-300 pb-2 mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-white">Font Families</h2>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setShowFontSidebar(true)}
+            className="bg-transparent border-white/20 text-white hover:bg-white/10"
+          >
+            <Pencil size={16} />
+          </Button>
+        </div>
         <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
           {fontFamilies.map((font) => (
             <div key={font.name}>
@@ -92,6 +107,11 @@ const TypographySpecimen = () => {
           </p>
         </div>
       </GradientContainer>
+
+      <FontSidebar 
+        isOpen={showFontSidebar} 
+        onClose={() => setShowFontSidebar(false)} 
+      />
     </div>
   );
 };

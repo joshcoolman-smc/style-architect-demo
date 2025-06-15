@@ -1,14 +1,13 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import FontButton from '../features/fonts/components/FontButton';
 
 const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: '/typography', label: 'Type' },
-    { path: '/colors', label: 'Color' },
+    { path: '/typography', label: 'Typography' },
+    { path: '/colors', label: 'Colors' },
     { path: '/elements', label: 'Elements' },
   ];
 
@@ -42,8 +41,6 @@ const Navigation = () => {
                 );
               })}
             </div>
-            
-            <FontButton />
           </div>
         </div>
       </div>
