@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Pencil } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
 import GradientContainer from '../../../components/GradientContainer';
@@ -55,10 +56,55 @@ const FontFamiliesComponent = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 20 
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 300,
+        damping: 24,
+      },
+    },
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 300,
+        damping: 24,
+      },
+    },
+  };
+
   return (
     <>
       <GradientContainer className="p-12">
-        <div className="flex items-center justify-between border-b border-neutral-300 pb-2 mb-6">
+        <motion.div 
+          className="flex items-center justify-between border-b border-neutral-300 pb-2 mb-6"
+          variants={headerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <h2 className="text-2xl md:text-3xl font-bold text-white">Font Families</h2>
           <Button
             variant="outline"
@@ -68,10 +114,15 @@ const FontFamiliesComponent = () => {
           >
             <Pencil size={16} />
           </Button>
-        </div>
-        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
-          {fontFamilies.map((font) => (
-            <div key={font.name}>
+        </motion.div>
+        <motion.div 
+          className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mt-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {fontFamilies.map((font, index) => (
+            <motion.div key={font.name} variants={itemVariants}>
               <p className="text-xl font-bold text-white">{font.name}</p>
               <p className="ds-text-technical-muted">{font.family}</p>
               <p className={`text-5xl mt-4 leading-none ${font.class} text-white`}>Aa</p>
@@ -80,9 +131,9 @@ const FontFamiliesComponent = () => {
                 <p>abcdefghijklmnopqrstuvwxyz</p>
                 <p>0123456789</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </GradientContainer>
 
       <FontSidebar 
