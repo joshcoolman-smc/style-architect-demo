@@ -11,9 +11,7 @@ const InteractiveComponents = () => {
 
   return (
     <div className="space-y-12">
-      <div>
-        <h1 className="text-display-xl font-bold text-foreground mb-2">Components</h1>
-      </div>
+    
 
       {/* Cards Section */}
       <div className="ds-card p-8">
