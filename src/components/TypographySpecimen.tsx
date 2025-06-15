@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Pencil } from 'lucide-react';
 import { Button } from './ui/button';
+import { Separator } from './ui/separator';
 import GradientContainer from './GradientContainer';
 import FontSidebar from '../features/fonts/components/FontSidebar';
 
@@ -99,22 +100,27 @@ const TypographySpecimen = () => {
               <span className="ds-text-technical-light">h1</span>
               <h1 className="text-5xl font-extrabold tracking-tighter text-white">Quick brown fox</h1>
             </div>
+            <Separator className="bg-white/20" />
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
               <span className="ds-text-technical-light">h2</span>
               <h2 className="text-4xl font-bold tracking-tight text-white">Quick brown fox</h2>
             </div>
+            <Separator className="bg-white/20" />
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
               <span className="ds-text-technical-light">h3</span>
               <h3 className="text-3xl font-semibold text-white">Quick brown fox</h3>
             </div>
+            <Separator className="bg-white/20" />
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
               <span className="ds-text-technical-light">h4</span>
               <h4 className="text-2xl font-semibold text-white">Quick brown fox</h4>
             </div>
+            <Separator className="bg-white/20" />
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
               <span className="ds-text-technical-light">h5</span>
               <h5 className="text-xl font-medium text-white">Quick brown fox</h5>
             </div>
+            <Separator className="bg-white/20" />
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
               <span className="ds-text-technical-light">h6</span>
               <h6 className="text-lg font-medium text-white">Quick brown fox</h6>
