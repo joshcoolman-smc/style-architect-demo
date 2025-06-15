@@ -35,7 +35,7 @@ const TypeScaleSelector = () => {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-xl font-bold text-white font-inter">Type Scale</h3>
-          <span className="ds-text-technical-light">{getCurrentRatio()}</span>
+          <span className="ds-text-technical-light text-muted-foreground">{getCurrentRatio()}</span>
         </div>
         <Select value={selectedScale} onValueChange={handleScaleChange}>
           <SelectTrigger className="w-64 bg-transparent border-white/20 text-white font-inter text-base">
