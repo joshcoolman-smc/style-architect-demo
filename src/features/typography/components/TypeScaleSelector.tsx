@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import GradientContainer from '../../../components/GradientContainer';
-import { Slider } from '../../../components/ui/slider';
 import {
   Select,
   SelectContent,
@@ -12,7 +11,7 @@ import {
 
 const TypeScaleSelector = () => {
   const [selectedScale, setSelectedScale] = useState('minor-third');
-  const [baseSize, setBaseSize] = useState([16]); // Default to 16px (web standard)
+  const [baseSize, setBaseSize] = useState(16); // Default to 16px (web standard)
 
   const typeScales = [
     { value: 'minor-third', label: 'Minor Third', ratio: 1.2 },
@@ -21,6 +20,13 @@ const TypeScaleSelector = () => {
     { value: 'augmented-fourth', label: 'Augmented Fourth', ratio: 1.414 },
     { value: 'perfect-fifth', label: 'Perfect Fifth', ratio: 1.5 },
     { value: 'golden-ratio', label: 'Golden Ratio', ratio: 1.618 },
+  ];
+
+  const baseSizeOptions = [
+    { value: '14', label: '14px' },
+    { value: '15', label: '15px' },
+    { value: '16', label: '16px' },
+    { value: '17', label: '17px' },
   ];
 
   const applyTypeScale = (ratio: number, baseFontSize: number) => {
@@ -49,18 +55,19 @@ const TypeScaleSelector = () => {
     setSelectedScale(value);
     const selectedTypeScale = typeScales.find(scale => scale.value === value);
     if (selectedTypeScale) {
-      applyTypeScale(selectedTypeScale.ratio, baseSize[0]);
+      applyTypeScale(selectedTypeScale.ratio, baseSize);
     }
     console.log('Selected scale:', value);
   };
 
-  const handleBaseSizeChange = (value: number[]) => {
-    setBaseSize(value);
+  const handleBaseSizeChange = (value: string) => {
+    const newBaseSize = parseInt(value);
+    setBaseSize(newBaseSize);
     const selectedTypeScale = typeScales.find(scale => scale.value === selectedScale);
     if (selectedTypeScale) {
-      applyTypeScale(selectedTypeScale.ratio, value[0]);
+      applyTypeScale(selectedTypeScale.ratio, newBaseSize);
     }
-    console.log('Base size changed:', value[0]);
+    console.log('Base size changed:', newBaseSize);
   };
 
   const getCurrentRatio = () => {
@@ -72,7 +79,7 @@ const TypeScaleSelector = () => {
   useEffect(() => {
     const initialScale = typeScales.find(scale => scale.value === selectedScale);
     if (initialScale) {
-      applyTypeScale(initialScale.ratio, baseSize[0]);
+      applyTypeScale(initialScale.ratio, baseSize);
     }
   }, []);
 
@@ -84,40 +91,44 @@ const TypeScaleSelector = () => {
             <h3 className="text-xl font-bold text-white font-inter">Type Scale</h3>
             <div className="flex gap-4 mt-1">
               <span className="ds-text-technical-light text-muted-foreground">Ratio: {getCurrentRatio()}</span>
-              <span className="ds-text-technical-light text-muted-foreground">Base: {baseSize[0]}px</span>
+              <span className="ds-text-technical-light text-muted-foreground">Base: {baseSize}px</span>
             </div>
           </div>
-          <Select value={selectedScale} onValueChange={handleScaleChange}>
-            <SelectTrigger className="w-64 bg-transparent border-white/20 text-white font-inter text-base">
-              <SelectValue placeholder="Select a type scale" />
-            </SelectTrigger>
-            <SelectContent className="bg-zinc-800 border-zinc-700 font-inter text-base">
-              {typeScales.map((scale) => (
-                <SelectItem 
-                  key={scale.value} 
-                  value={scale.value}
-                  className="text-white hover:bg-zinc-700 focus:bg-zinc-700 font-inter text-base"
-                >
-                  {scale.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <label className="text-white font-inter text-sm">Base Font Size</label>
-            <span className="ds-text-technical-light text-muted-foreground">{baseSize[0]}px</span>
+          <div className="flex gap-3">
+            <Select value={selectedScale} onValueChange={handleScaleChange}>
+              <SelectTrigger className="w-64 bg-transparent border-white/20 text-white font-inter text-base">
+                <SelectValue placeholder="Select a type scale" />
+              </SelectTrigger>
+              <SelectContent className="bg-zinc-800 border-zinc-700 font-inter text-base">
+                {typeScales.map((scale) => (
+                  <SelectItem 
+                    key={scale.value} 
+                    value={scale.value}
+                    className="text-white hover:bg-zinc-700 focus:bg-zinc-700 font-inter text-base"
+                  >
+                    {scale.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            
+            <Select value={baseSize.toString()} onValueChange={handleBaseSizeChange}>
+              <SelectTrigger className="w-20 bg-transparent border-white/20 text-white font-inter text-base">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-zinc-800 border-zinc-700 font-inter text-base">
+                {baseSizeOptions.map((option) => (
+                  <SelectItem 
+                    key={option.value} 
+                    value={option.value}
+                    className="text-white hover:bg-zinc-700 focus:bg-zinc-700 font-inter text-base"
+                  >
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
-          <Slider
-            value={baseSize}
-            onValueChange={handleBaseSizeChange}
-            max={24}
-            min={12}
-            step={1}
-            className="w-full"
-          />
         </div>
       </div>
     </GradientContainer>
