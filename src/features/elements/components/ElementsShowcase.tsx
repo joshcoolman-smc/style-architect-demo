@@ -1,23 +1,20 @@
 
 import React from 'react';
-import { useColorStore } from '../stores/colorStore';
+import { useColorStore } from '../../../stores/colorStore';
 import TeamMemberCard from './cards/TeamMemberCard';
 import ProjectShowcaseCard from './cards/ProjectShowcaseCard';
 import { teamMembers } from '../data/teamMembers';
 import { projects } from '../data/projects';
 
-const InteractiveComponents = () => {
+const ElementsShowcase = () => {
   const { palette } = useColorStore();
 
   return (
     <div className="space-y-12">
-    
-
       {/* Cards Section */}
       <div className="ds-card p-8">
         <div className="space-y-8">
           <div>
-
             <h3 className="text-xl font-semibold text-foreground mb-4">Cards</h3>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl">
               {teamMembers.map((member) => (
@@ -27,7 +24,6 @@ const InteractiveComponents = () => {
           </div>
 
           <div>
-
             <div className="space-y-4 max-w-4xl">
               {projects.map((project) => (
                 <ProjectShowcaseCard key={project.id} project={project} />
@@ -80,4 +76,4 @@ const InteractiveComponents = () => {
   );
 };
 
-export default InteractiveComponents;
+export default ElementsShowcase;

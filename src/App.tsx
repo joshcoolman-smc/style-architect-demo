@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Typography from "./pages/Typography";
 import Colors from "./pages/Colors";
-import Components from "./pages/Components";
+import Elements from "./pages/Elements";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,7 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/typography" element={<Typography />} />
           <Route path="/colors" element={<Colors />} />
-          <Route path="/components" element={<Components />} />
+          <Route path="/elements" element={<Elements />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

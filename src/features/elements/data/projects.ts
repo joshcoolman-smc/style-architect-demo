@@ -1,12 +1,5 @@
 
-export interface Project {
-  id: string;
-  title: string;
-  location: string;
-  description: string;
-  imageUrl: string;
-  colorTone: 'light' | 'mid';
-}
+import { Project } from '../types/element.types';
 
 export const projects: Project[] = [
   {

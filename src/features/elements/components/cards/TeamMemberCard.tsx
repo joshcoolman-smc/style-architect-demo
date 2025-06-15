@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { useColorStore } from '../../stores/colorStore';
-import { TeamMember } from '../../data/teamMembers';
+import { useColorStore } from '../../../../stores/colorStore';
+import { TeamMember } from '../../types/element.types';
 
 interface TeamMemberCardProps {
   member: TeamMember;

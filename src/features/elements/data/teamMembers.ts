@@ -1,12 +1,5 @@
 
-export interface TeamMember {
-  id: string;
-  name: string;
-  role: string;
-  description: string;
-  imageUrl: string;
-  colorTone: 'light' | 'mid' | 'dark';
-}
+import { TeamMember } from '../types/element.types';
 
 export const teamMembers: TeamMember[] = [
   {

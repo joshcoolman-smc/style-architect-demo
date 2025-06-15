@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { useColorStore } from '../../stores/colorStore';
-import { Project } from '../../data/projects';
+import { useColorStore } from '../../../../stores/colorStore';
+import { Project } from '../../types/element.types';
 
 interface ProjectShowcaseCardProps {
   project: Project;
