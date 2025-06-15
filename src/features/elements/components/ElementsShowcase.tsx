@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { useColorStore } from '../../../stores/colorStore';
 import TeamMemberCard from './cards/TeamMemberCard';
 import ProjectShowcaseCard from './cards/ProjectShowcaseCard';
@@ -9,6 +10,37 @@ import { projects } from '../data/projects';
 const ElementsShowcase = () => {
   const { palette } = useColorStore();
 
+  // Animation variants for staggered card entrance
+  const containerVariants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 20,
+      scale: 0.95
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 25,
+        duration: 0.4
+      }
+    }
+  };
+
   return (
     <div className="space-y-12">
       {/* Cards Section */}
@@ -16,19 +48,33 @@ const ElementsShowcase = () => {
         <div className="space-y-8">
           <div>
             <h3 className="text-heading-3 font-structural text-foreground mb-4">Cards</h3>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {teamMembers.map((member) => (
-                <TeamMemberCard key={member.id} member={member} />
+            <motion.div 
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {teamMembers.map((member, index) => (
+                <motion.div key={member.id} variants={cardVariants}>
+                  <TeamMemberCard member={member} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           <div>
-            <div className="space-y-4">
-              {projects.map((project) => (
-                <ProjectShowcaseCard key={project.id} project={project} />
+            <motion.div 
+              className="space-y-4"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {projects.map((project, index) => (
+                <motion.div key={project.id} variants={cardVariants}>
+                  <ProjectShowcaseCard project={project} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
