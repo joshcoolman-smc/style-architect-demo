@@ -11,14 +11,14 @@ const TypographySpecimen = () => {
       
       {/* Font Families Section */}
       <GradientContainer className="p-12">
-        <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Font Families</h2>
+        <h2 className="text-heading-2 border-b border-neutral-300 pb-2 mb-6 text-white">Font Families</h2>
         <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
           {fontFamilies.map((font) => (
             <div key={font.name}>
-              <p className="text-xl font-bold text-white">{font.name}</p>
+              <p className="text-heading-2 text-white">{font.name}</p>
               <p className="ds-text-technical-light text-white">{font.family}</p>
               <p className={`text-5xl mt-4 leading-none ${font.class} text-white`}>Aa</p>
-              <div className={`mt-4 space-y-1 text-sm tracking-wider break-all text-white/70 ${font.class} `}>
+              <div className={`mt-4 space-y-1 text-caption tracking-wider break-all text-white/70 ${font.class} `}>
                 <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
                 <p>abcdefghijklmnopqrstuvwxyz</p>
                 <p>0123456789</p>
@@ -32,41 +32,45 @@ const TypographySpecimen = () => {
       <div className="grid md:grid-cols-2 gap-8">
         {/* Type Scale */}
         <GradientContainer className="p-12">
-          <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Type Scale</h2>
+          <h2 className="text-heading-2 border-b border-neutral-300 pb-2 mb-6 text-white">Type Scale</h2>
           <div className="space-y-6 mt-6">
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-              <span className="ds-text-technical-light text-white">h1</span>
-              <h1 className="text-5xl font-extrabold tracking-tighter text-white">Quick brown fox</h1>
+              <span className="ds-text-technical-light text-white">heading-1</span>
+              <h1 className="text-heading-1 text-white">Quick brown fox</h1>
             </div>
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-              <span className="ds-text-technical-light text-white">h2</span>
-              <h2 className="text-4xl font-bold tracking-tight text-white">Quick brown fox</h2>
+              <span className="ds-text-technical-light text-white">heading-2</span>
+              <h2 className="text-heading-2 text-white">Quick brown fox</h2>
             </div>
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-              <span className="ds-text-technical-light text-white">p-lg</span>
-              <p className="text-lg leading-relaxed text-white">Quick brown fox jumps over the lazy dog</p>
+              <span className="ds-text-technical-light text-white">heading-3</span>
+              <h3 className="text-heading-3 text-white">Quick brown fox</h3>
             </div>
             <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-              <span className="ds-text-technical-light text-white">p</span>
-              <p className="text-base leading-relaxed text-white">Quick brown fox jumps over the lazy dog</p>
+              <span className="ds-text-technical-light text-white">body</span>
+              <p className="text-body text-white">Quick brown fox jumps over the lazy dog</p>
+            </div>
+            <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+              <span className="ds-text-technical-light text-white">caption</span>
+              <p className="text-caption text-white">Quick brown fox jumps over the lazy dog</p>
             </div>
           </div>
         </GradientContainer>
 
         {/* Editorial Example */}
         <GradientContainer className="p-12">
-          <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">In Practice</h2>
+          <h2 className="text-heading-2 border-b border-neutral-300 pb-2 mb-6 text-white">In Practice</h2>
           <div className="space-y-6 max-w-prose mt-6">
-            <h1 className="text-5xl font-extrabold tracking-tighter text-white font-structural">
+            <h1 className="text-heading-1 text-white font-structural">
               Typography creates hierarchy
             </h1>
-            <h2 className="text-4xl font-bold tracking-tight text-white/80 font-subheader">
+            <h2 className="text-heading-2 text-white/80 font-subheader">
               Visual contrast guides the reader's eye
             </h2>
-            <p className="text-lg leading-relaxed text-white font-content">
+            <p className="text-body text-white font-content">
               Effective typography establishes clear information hierarchy through strategic use of size, weight, and spacing.
             </p>
-            <p className="text-base leading-relaxed text-white/90 font-content">
+            <p className="text-caption text-white/90 font-content">
               The largest text draws initial attention, medium weights provide context and categorization, while body text delivers detailed information.
             </p>
           </div>

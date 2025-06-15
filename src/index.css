@@ -1,5 +1,3 @@
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -55,16 +53,46 @@
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground font-content text-left;
+  html {
+    @apply text-body bg-background text-foreground font-content text-left;
     font-family: var(--font-content), ui-sans-serif, system-ui;
   }
   
-  /* Typography System */
-  h1, h2, h3, h4, h5, h6 {
+  /* Typography System - Apply semantic scales to HTML elements */
+  h1 {
+    @apply text-heading-1;
     font-family: var(--font-structural), ui-sans-serif, system-ui;
     line-height: 1.2;
     letter-spacing: -0.02em;
+  }
+
+  h2 {
+    @apply text-heading-2;
+    font-family: var(--font-structural), ui-sans-serif, system-ui;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    @apply text-heading-3;
+    font-family: var(--font-structural), ui-sans-serif, system-ui;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h4, h5, h6 {
+    @apply text-heading-3;
+    font-family: var(--font-structural), ui-sans-serif, system-ui;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    @apply text-body;
+  }
+
+  pre, code {
+    @apply text-monospace-body;
   }
   
   .subheader {

@@ -122,6 +122,80 @@ export default {
 				}
 			},
 			fontSize: {
+				// Semantic Type Scale System
+				// text-caption
+				caption: [
+					"12px",
+					{
+						lineHeight: "16px",
+						fontWeight: "400",
+					},
+				],
+
+				// text-caption-bold
+				"caption-bold": [
+					"12px",
+					{
+						lineHeight: "16px",
+						fontWeight: "500",
+					},
+				],
+
+				// text-body
+				body: [
+					"14px",
+					{
+						lineHeight: "20px",
+						fontWeight: "400",
+					},
+				],
+
+				// text-body-bold
+				"body-bold": [
+					"14px",
+					{
+						lineHeight: "20px",
+						fontWeight: "500",
+					},
+				],
+
+				// text-heading-3
+				"heading-3": [
+					"16px",
+					{
+						lineHeight: "20px",
+						fontWeight: "600",
+					},
+				],
+
+				// text-heading-2
+				"heading-2": [
+					"20px",
+					{
+						lineHeight: "24px",
+						fontWeight: "600",
+					},
+				],
+
+				// text-heading-1
+				"heading-1": [
+					"30px",
+					{
+						lineHeight: "36px",
+						fontWeight: "500",
+					},
+				],
+
+				// text-monospace-body
+				"monospace-body": [
+					"14px",
+					{
+						lineHeight: "20px",
+						fontWeight: "400",
+					},
+				],
+
+				// Keep existing display sizes for special cases
 				'display-2xl': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
 				'display-xl': ['3.75rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
 				'display-lg': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
