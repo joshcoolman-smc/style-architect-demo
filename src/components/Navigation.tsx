@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen } from 'lucide-react';
 import FontButton from '../features/fonts/components/FontButton';
 
 const Navigation = () => {
@@ -11,7 +10,7 @@ const Navigation = () => {
     { path: '/typography', label: 'Typography' },
     { path: '/colors', label: 'Colors' },
     { path: '/elements', label: 'Elements' },
-    { path: '/readme', label: 'README', icon: BookOpen },
+    { path: '/readme', label: 'About' },
   ];
 
   return (
@@ -28,7 +27,6 @@ const Navigation = () => {
             <div className="hidden md:flex items-center space-x-1">
               {navItems.map((item) => {
                 const isActive = location.pathname === item.path;
-                const IconComponent = item.icon;
                 
                 return (
                   <Link
@@ -40,7 +38,6 @@ const Navigation = () => {
                         : 'text-muted-foreground border-transparent hover:text-foreground'
                     }`}
                   >
-                    {IconComponent && <IconComponent size={16} />}
                     {item.label}
                   </Link>
                 );
