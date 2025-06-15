@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Pencil } from 'lucide-react';
 import { Button } from './ui/button';
 import GradientContainer from './GradientContainer';
@@ -7,25 +7,53 @@ import FontSidebar from '../features/fonts/components/FontSidebar';
 
 const TypographySpecimen = () => {
   const [showFontSidebar, setShowFontSidebar] = useState(false);
+  const [currentFonts, setCurrentFonts] = useState({
+    structural: 'Montserrat',
+    subheader: 'Lora', 
+    content: 'Hind Madurai'
+  });
+
+  useEffect(() => {
+    const updateFontNames = () => {
+      const rootStyles = getComputedStyle(document.documentElement);
+      const structural = rootStyles.getPropertyValue('--font-structural').trim() || 'Montserrat';
+      const subheader = rootStyles.getPropertyValue('--font-subheader').trim() || 'Lora';
+      const content = rootStyles.getPropertyValue('--font-content').trim() || 'Hind Madurai';
+      
+      setCurrentFonts({ structural, subheader, content });
+    };
+
+    // Update on mount
+    updateFontNames();
+
+    // Listen for changes to CSS custom properties
+    const observer = new MutationObserver(updateFontNames);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['style']
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const fontFamilies = [
     {
       name: 'Heading',
-      family: 'Montserrat',
+      family: currentFonts.structural,
       class: 'font-structural',
-      description: 'STRUCTURAL / MONTSERRAT'
+      description: `STRUCTURAL / ${currentFonts.structural.toUpperCase()}`
     },
     {
       name: 'Subheading',
-      family: 'Lora',
+      family: currentFonts.subheader,
       class: 'font-subheader',
-      description: 'SUBHEADER / LORA'
+      description: `SUBHEADER / ${currentFonts.subheader.toUpperCase()}`
     },
     {
       name: 'Body',
-      family: 'Hind Madurai',
+      family: currentFonts.content,
       class: 'font-content',
-      description: 'CONTENT / HIND MADURAI'
+      description: `CONTENT / ${currentFonts.content.toUpperCase()}`
     }
   ];
 
