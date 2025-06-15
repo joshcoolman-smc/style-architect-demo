@@ -14,7 +14,7 @@ const Navigation = () => {
 
   return (
     <nav className="bg-card border-b border-border sticky top-0 z-40 backdrop-blur-sm bg-card/95">
-      <div className="w-full px-6unit sm:px-8unit lg:px-10unit">
+      <div className="w-full px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
             <span className="font-structural font-semibold text-lg text-foreground">
