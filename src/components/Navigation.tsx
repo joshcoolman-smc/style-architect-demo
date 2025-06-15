@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Type } from 'lucide-react';
 import FontSelector from './FontSelector';
 
 const Navigation = () => {
@@ -34,10 +33,10 @@ const Navigation = () => {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className={`px-3unit py-2 rounded-lg text-sm font-medium font-structural transition-colors ${
+                      className={`px-3unit py-2 text-sm font-medium font-structural transition-colors border-b-2 ${
                         isActive
-                          ? 'bg-zinc-800 text-zinc-100'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-zinc-800/50'
+                          ? 'text-foreground border-foreground'
+                          : 'text-muted-foreground border-transparent hover:text-foreground'
                       }`}
                     >
                       {item.label}
@@ -48,10 +47,9 @@ const Navigation = () => {
               
               <button
                 onClick={() => setShowFontSelector(true)}
-                className="flex items-center space-x-2 px-3unit py-2 rounded-lg text-sm font-medium font-structural text-muted-foreground hover:text-foreground hover:bg-zinc-800/50 transition-colors"
+                className="px-3unit py-2 text-sm font-medium font-structural text-muted-foreground hover:text-foreground transition-colors border-b-2 border-transparent"
               >
-                <Type size={16} />
-                <span className="hidden sm:block">Fonts</span>
+                Fonts
               </button>
             </div>
           </div>
