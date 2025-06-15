@@ -23,6 +23,19 @@ const ColorPalette = () => {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Sample images array
+  const sampleImages = [
+    '/lovable-uploads/7b22b782-4c1f-4ee7-ba00-ada76ecd8f87.png',
+    '/lovable-uploads/e49ac76e-0b00-474b-aed2-48b1d6495f9f.png',
+    '/lovable-uploads/ded06afa-e63e-4ae5-ae9c-ea01f1b7e609.png',
+    '/lovable-uploads/45e8e9c6-3afc-4d99-a225-3cc766d0b947.png',
+    '/lovable-uploads/e7f46332-598d-4741-9cdf-676a492444ee.png',
+    '/lovable-uploads/ebf33618-35ec-494a-b9a5-718e7db97000.png',
+    '/lovable-uploads/f1a2fb77-285c-4ed3-89f0-3e1f408db11e.png',
+    '/lovable-uploads/ca87949a-4b19-4eaa-9aed-9cf381550219.png',
+    '/lovable-uploads/5122156b-c4e4-416a-a133-85e7ca00bfb3.png'
+  ];
+
   // Get all colors from all categories
   const allColors = categories.flatMap(category => category.colors);
   
@@ -54,12 +67,15 @@ const ColorPalette = () => {
     }
   };
 
-  const handleSampleImageSelect = async (imagePath: string) => {
+  const handleSampleImageSelect = async () => {
     try {
+      // Pick a random sample image
+      const randomImage = sampleImages[Math.floor(Math.random() * sampleImages.length)];
+      
       // Fetch the image and convert to File object
-      const response = await fetch(imagePath);
+      const response = await fetch(randomImage);
       const blob = await response.blob();
-      const filename = imagePath.split('/').pop() || 'sample-image.png';
+      const filename = randomImage.split('/').pop() || 'sample-image.png';
       const file = new File([blob], filename, { type: blob.type });
       
       await generatePaletteFromImage(file);
