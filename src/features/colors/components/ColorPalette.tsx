@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { RefreshCcw, ImagePlus, X } from 'lucide-react';
 import ColorSwatch from './ColorSwatch';
 import ImagePaletteComparison from './ImagePaletteComparison';
@@ -24,6 +24,7 @@ const ColorPalette = () => {
   } = useColorPalette();
   
   const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [isRegenerating, setIsRegenerating] = React.useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Sample images array
@@ -48,7 +49,7 @@ const ColorPalette = () => {
   const darkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
 
   // Animation variants for staggered entrance
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 1 },
     visible: {
       opacity: 1,
@@ -59,7 +60,7 @@ const ColorPalette = () => {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { 
       opacity: 0, 
       scale: 0.6,
@@ -70,10 +71,22 @@ const ColorPalette = () => {
       scale: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 25,
         duration: 0.4
+      }
+    }
+  };
+
+  // Ripple effect variants for regeneration
+  const rippleVariants: Variants = {
+    initial: { scale: 1 },
+    ripple: { 
+      scale: [1, 1.1, 1],
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
       }
     }
   };
@@ -118,6 +131,13 @@ const ColorPalette = () => {
     clearUploadedImage();
   };
 
+  const handleGenerateNewPalette = async () => {
+    setIsRegenerating(true);
+    await generateNewPalette();
+    // Keep regenerating state for animation duration
+    setTimeout(() => setIsRegenerating(false), 1000);
+  };
+
   return (
     <div className="space-y-12">
       {/* Colors Section */}
@@ -159,7 +179,7 @@ const ColorPalette = () => {
             )}
             
             <button
-              onClick={generateNewPalette}
+              onClick={handleGenerateNewPalette}
               disabled={isAnalyzing}
               className="flex items-center justify-center w-10 h-10 rounded-lg bg-card-foreground/10 hover:bg-card-foreground/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               title="Generate new color palette"
@@ -187,7 +207,17 @@ const ColorPalette = () => {
               animate="visible"
             >
               {lightColors.map((color, index) => (
-                <motion.div key={color.name} variants={itemVariants}>
+                <motion.div 
+                  key={color.name} 
+                  variants={isRegenerating ? rippleVariants : itemVariants}
+                  initial={isRegenerating ? "initial" : "hidden"}
+                  animate={isRegenerating ? "ripple" : "visible"}
+                  transition={isRegenerating ? {
+                    delay: index * 0.05,
+                    duration: 0.3,
+                    ease: "easeInOut"
+                  } : undefined}
+                >
                   <ColorSwatch
                     name={color.name}
                     value={color.value}
@@ -207,7 +237,17 @@ const ColorPalette = () => {
               animate="visible"
             >
               {midColors.map((color, index) => (
-                <motion.div key={color.name} variants={itemVariants}>
+                <motion.div 
+                  key={color.name} 
+                  variants={isRegenerating ? rippleVariants : itemVariants}
+                  initial={isRegenerating ? "initial" : "hidden"}
+                  animate={isRegenerating ? "ripple" : "visible"}
+                  transition={isRegenerating ? {
+                    delay: (lightColors.length + index) * 0.05,
+                    duration: 0.3,
+                    ease: "easeInOut"
+                  } : undefined}
+                >
                   <ColorSwatch
                     name={color.name}
                     value={color.value}
@@ -227,7 +267,17 @@ const ColorPalette = () => {
               animate="visible"
             >
               {darkColors.map((color, index) => (
-                <motion.div key={color.name} variants={itemVariants}>
+                <motion.div 
+                  key={color.name} 
+                  variants={isRegenerating ? rippleVariants : itemVariants}
+                  initial={isRegenerating ? "initial" : "hidden"}
+                  animate={isRegenerating ? "ripple" : "visible"}
+                  transition={isRegenerating ? {
+                    delay: (lightColors.length + midColors.length + index) * 0.05,
+                    duration: 0.3,
+                    ease: "easeInOut"
+                  } : undefined}
+                >
                   <ColorSwatch
                     name={color.name}
                     value={color.value}
