@@ -3,152 +3,161 @@ import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import { useColorStore } from '../../../../stores/colorStore';
 import { Testimonial } from '../../types/element.types';
+import { getVariedContrastColors, invertColorScheme } from '../../../../utils/contrastUtils';
 
 interface TestimonialCardProps {
   testimonial: Testimonial;
   colorStrategy?: number;
   cardIndex: number; // To ensure each card gets unique treatment
+  isInverted?: boolean;
 }
 
-const TestimonialCard = ({ testimonial, colorStrategy = 0, cardIndex }: TestimonialCardProps) => {
+const TestimonialCard = ({ testimonial, colorStrategy = 0, cardIndex, isInverted = false }: TestimonialCardProps) => {
   const { palette, categories } = useColorStore();
 
   // Extract colors from categories
-  const lightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
-  const midColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
-  const darkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
+  const baseLightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
+  const baseMidColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
+  const baseDarkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
 
-  // Helper to ensure text color is different from background
-  const ensureDifferent = (textColor: string, bgColor: string, fallback: string) => {
-    return textColor.toLowerCase() === bgColor.toLowerCase() ? fallback : textColor;
-  };
+  // Apply inversion if needed
+  const { lightColors, midColors, darkColors } = isInverted 
+    ? invertColorScheme(baseLightColors, baseMidColors, baseDarkColors, palette)
+    : { lightColors: baseLightColors, midColors: baseMidColors, darkColors: baseDarkColors };
 
-  // Get colors based on card index and strategy - ensures each card is visually distinct
+
+  // Get colors based on card index and strategy - all favor dark backgrounds with light foreground
   const getCardColors = () => {
     const strategies = [
-      // Strategy 0: Light → Mid → Dark progression
+      // Strategy 0: Dark backgrounds with warm light accents
       () => {
         const cardTreatments = [
-          // Card 0: Light background
-          {
-            backgroundColor: lightColors[0]?.value || palette["light-1"],
-            quoteColor: ensureDifferent(darkColors[0]?.value || palette["dark-1"], lightColors[0]?.value || palette["light-1"], "#000000"),
-            authorColor: ensureDifferent(darkColors[1]?.value || palette["dark-2"], lightColors[0]?.value || palette["light-1"], "#333333"),
-            companyColor: ensureDifferent(midColors[1]?.value || palette["mid-2"], lightColors[0]?.value || palette["light-1"], "#666666"),
-            iconColor: ensureDifferent(midColors[0]?.value || palette["mid-1"], lightColors[0]?.value || palette["light-1"], "#888888")
-          },
-          // Card 1: Mid background
-          {
-            backgroundColor: midColors[1]?.value || palette["mid-2"],
-            quoteColor: ensureDifferent(lightColors[0]?.value || "#ffffff", midColors[1]?.value || palette["mid-2"], "#ffffff"),
-            authorColor: ensureDifferent(lightColors[0]?.value || "#ffffff", midColors[1]?.value || palette["mid-2"], "#ffffff"),
-            companyColor: ensureDifferent(lightColors[1]?.value || "#e5e5e5", midColors[1]?.value || palette["mid-2"], "#e5e5e5"),
-            iconColor: ensureDifferent(lightColors[2]?.value || "#cccccc", midColors[1]?.value || palette["mid-2"], "#cccccc")
-          },
-          // Card 2: Dark background
+          // Card 0: Primary dark with white text and warm accents
           {
             backgroundColor: darkColors[0]?.value || palette["dark-1"],
-            quoteColor: ensureDifferent(lightColors[0]?.value || "#ffffff", darkColors[0]?.value || palette["dark-1"], "#ffffff"),
-            authorColor: ensureDifferent(lightColors[0]?.value || "#ffffff", darkColors[0]?.value || palette["dark-1"], "#ffffff"),
-            companyColor: ensureDifferent(lightColors[1]?.value || "#e5e5e5", darkColors[0]?.value || palette["dark-1"], "#e5e5e5"),
-            iconColor: ensureDifferent(midColors[0]?.value || palette["mid-1"], darkColors[0]?.value || palette["dark-1"], "#888888")
-          }
-        ];
-        return cardTreatments[cardIndex % 3];
-      },
-      // Strategy 1: High contrast - varied light backgrounds with distinct dark text
-      () => {
-        const cardTreatments = [
-          // Card 0: Lightest background
-          {
-            backgroundColor: lightColors[0]?.value || palette["light-1"],
-            quoteColor: darkColors[0]?.value || palette["dark-1"],
-            authorColor: darkColors[1]?.value || palette["dark-2"],
-            companyColor: midColors[0]?.value || palette["mid-1"],
-            iconColor: midColors[1]?.value || palette["mid-2"]
+            primaryTextColor: lightColors[0]?.value || "#ffffff",
+            secondaryTextColor: lightColors[1]?.value || "#e5e5e5",
+            tertiaryTextColor: midColors[0]?.value || palette["mid-1"]
           },
-          // Card 1: Medium light background
-          {
-            backgroundColor: lightColors[1]?.value || palette["light-2"],
-            quoteColor: darkColors[0]?.value || palette["dark-1"],
-            authorColor: darkColors[2]?.value || palette["dark-3"],
-            companyColor: midColors[1]?.value || palette["mid-2"],
-            iconColor: darkColors[1]?.value || palette["dark-2"]
-          },
-          // Card 2: Subtle contrast
-          {
-            backgroundColor: lightColors[2]?.value || palette["light-3"],
-            quoteColor: darkColors[1]?.value || palette["dark-2"],
-            authorColor: darkColors[0]?.value || palette["dark-1"],
-            companyColor: midColors[2]?.value || palette["mid-3"],
-            iconColor: darkColors[0]?.value || palette["dark-1"]
-          }
-        ];
-        return cardTreatments[cardIndex % 3];
-      },
-      // Strategy 2: Monochromatic progression through mid-tones
-      () => {
-        const cardTreatments = [
-          // Card 0: Lightest mid-tone
-          {
-            backgroundColor: midColors[2]?.value || palette["mid-3"],
-            quoteColor: lightColors[0]?.value || "#ffffff",
-            authorColor: lightColors[0]?.value || "#ffffff",
-            companyColor: lightColors[1]?.value || "#e5e5e5",
-            iconColor: lightColors[2]?.value || "#cccccc"
-          },
-          // Card 1: Medium mid-tone
-          {
-            backgroundColor: midColors[1]?.value || palette["mid-2"],
-            quoteColor: lightColors[0]?.value || "#ffffff",
-            authorColor: lightColors[1]?.value || "#f5f5f5",
-            companyColor: lightColors[2]?.value || "#e5e5e5",
-            iconColor: lightColors[0]?.value || "#ffffff"
-          },
-          // Card 2: Deepest mid-tone
-          {
-            backgroundColor: midColors[0]?.value || palette["mid-1"],
-            quoteColor: lightColors[0]?.value || "#ffffff",
-            authorColor: lightColors[2]?.value || "#e5e5e5",
-            companyColor: lightColors[1]?.value || "#f5f5f5",
-            iconColor: lightColors[1]?.value || "#f5f5f5"
-          }
-        ];
-        return cardTreatments[cardIndex % 3];
-      },
-      // Strategy 3: Dark mode with accent variations
-      () => {
-        const cardTreatments = [
-          // Card 0: Dark with light accents
-          {
-            backgroundColor: darkColors[0]?.value || palette["dark-1"],
-            quoteColor: lightColors[0]?.value || "#ffffff",
-            authorColor: lightColors[0]?.value || "#ffffff",
-            companyColor: midColors[0]?.value || palette["mid-1"],
-            iconColor: lightColors[1]?.value || palette["light-2"]
-          },
-          // Card 1: Medium dark with mid accents
+          // Card 1: Secondary dark with light accents
           {
             backgroundColor: darkColors[1]?.value || palette["dark-2"],
-            quoteColor: lightColors[0]?.value || "#ffffff",
-            authorColor: midColors[0]?.value || palette["mid-1"],
-            companyColor: midColors[1]?.value || palette["mid-2"],
-            iconColor: lightColors[2]?.value || palette["light-3"]
+            primaryTextColor: lightColors[0]?.value || "#ffffff",
+            secondaryTextColor: midColors[1]?.value || palette["mid-2"],
+            tertiaryTextColor: lightColors[2]?.value || "#cccccc"
           },
-          // Card 2: Deepest dark with bright accents
+          // Card 2: Tertiary dark with varied light tones
           {
             backgroundColor: darkColors[2]?.value || palette["dark-3"],
-            quoteColor: lightColors[1]?.value || "#f5f5f5",
-            authorColor: lightColors[0]?.value || "#ffffff",
-            companyColor: lightColors[2]?.value || "#e5e5e5",
-            iconColor: midColors[2]?.value || palette["mid-3"]
+            primaryTextColor: lightColors[1]?.value || "#e5e5e5",
+            secondaryTextColor: lightColors[0]?.value || "#ffffff",
+            tertiaryTextColor: midColors[2]?.value || palette["mid-3"]
+          }
+        ];
+        return cardTreatments[cardIndex % 3];
+      },
+      // Strategy 1: Deep dark backgrounds with vibrant light accents
+      () => {
+        const cardTreatments = [
+          // Card 0: Deep dark with bright accents
+          {
+            backgroundColor: darkColors[0]?.value || palette["dark-1"],
+            primaryTextColor: lightColors[0]?.value || "#ffffff",
+            secondaryTextColor: midColors[2]?.value || palette["mid-3"],
+            tertiaryTextColor: lightColors[1]?.value || "#e5e5e5"
+          },
+          // Card 1: Rich dark with cool accents
+          {
+            backgroundColor: darkColors[2]?.value || palette["dark-3"],
+            primaryTextColor: lightColors[1]?.value || "#e5e5e5",
+            secondaryTextColor: lightColors[0]?.value || "#ffffff",
+            tertiaryTextColor: midColors[0]?.value || palette["mid-1"]
+          },
+          // Card 2: Warm dark with neutral accents
+          {
+            backgroundColor: darkColors[1]?.value || palette["dark-2"],
+            primaryTextColor: lightColors[2]?.value || "#cccccc",
+            secondaryTextColor: midColors[1]?.value || palette["mid-2"],
+            tertiaryTextColor: lightColors[0]?.value || "#ffffff"
+          }
+        ];
+        return cardTreatments[cardIndex % 3];
+      },
+      // Strategy 2: Dark with mid-tone accents
+      () => {
+        const cardTreatments = [
+          // Card 0: Dark with subtle mid-tone accents
+          {
+            backgroundColor: darkColors[1]?.value || palette["dark-2"],
+            primaryTextColor: lightColors[0]?.value || "#ffffff",
+            secondaryTextColor: lightColors[2]?.value || "#cccccc",
+            tertiaryTextColor: midColors[1]?.value || palette["mid-2"]
+          },
+          // Card 1: Deep dark with contrasting accents
+          {
+            backgroundColor: darkColors[0]?.value || palette["dark-1"],
+            primaryTextColor: lightColors[1]?.value || "#e5e5e5",
+            secondaryTextColor: midColors[0]?.value || palette["mid-1"],
+            tertiaryTextColor: lightColors[0]?.value || "#ffffff"
+          },
+          // Card 2: Rich dark with warm accents
+          {
+            backgroundColor: darkColors[2]?.value || palette["dark-3"],
+            primaryTextColor: lightColors[0]?.value || "#ffffff",
+            secondaryTextColor: lightColors[1]?.value || "#e5e5e5",
+            tertiaryTextColor: midColors[2]?.value || palette["mid-3"]
+          }
+        ];
+        return cardTreatments[cardIndex % 3];
+      },
+      // Strategy 3: Darkest backgrounds with brightest accents
+      () => {
+        const cardTreatments = [
+          // Card 0: Deepest dark with maximum contrast
+          {
+            backgroundColor: darkColors[2]?.value || palette["dark-3"],
+            primaryTextColor: lightColors[0]?.value || "#ffffff",
+            secondaryTextColor: lightColors[1]?.value || "#e5e5e5",
+            tertiaryTextColor: lightColors[2]?.value || "#cccccc"
+          },
+          // Card 1: Dark with bright mid-tone accents
+          {
+            backgroundColor: darkColors[0]?.value || palette["dark-1"],
+            primaryTextColor: lightColors[2]?.value || "#cccccc",
+            secondaryTextColor: lightColors[0]?.value || "#ffffff",
+            tertiaryTextColor: midColors[0]?.value || palette["mid-1"]
+          },
+          // Card 2: Rich dark with varied light tones
+          {
+            backgroundColor: darkColors[1]?.value || palette["dark-2"],
+            primaryTextColor: lightColors[1]?.value || "#e5e5e5",
+            secondaryTextColor: midColors[2]?.value || palette["mid-3"],
+            tertiaryTextColor: lightColors[0]?.value || "#ffffff"
           }
         ];
         return cardTreatments[cardIndex % 3];
       }
     ];
 
-    return strategies[colorStrategy % strategies.length]();
+    const baseColors = strategies[colorStrategy % strategies.length]();
+    const backgroundColor = baseColors.backgroundColor;
+
+    // Use sophisticated contrast adjustment that preserves color variety
+    const adjustedColors = getVariedContrastColors(
+      backgroundColor,
+      baseColors.primaryTextColor,
+      baseColors.secondaryTextColor,
+      baseColors.tertiaryTextColor,
+      3.0 // Minimum contrast ratio for readability
+    );
+
+    return {
+      backgroundColor,
+      quoteColor: adjustedColors.primary,
+      authorColor: adjustedColors.primary,
+      companyColor: adjustedColors.secondary,
+      iconColor: adjustedColors.tertiary
+    };
   };
 
   const colors = getCardColors();
@@ -191,12 +200,6 @@ const TestimonialCard = ({ testimonial, colorStrategy = 0, cardIndex }: Testimon
           {testimonial.company}
         </div>
       </div>
-
-      {/* Subtle decoration */}
-      <div 
-        className="absolute top-0 right-0 w-24 h-24 opacity-5 transform translate-x-8 -translate-y-8"
-        style={{ backgroundColor: colors.iconColor }}
-      />
     </motion.div>
   );
 };

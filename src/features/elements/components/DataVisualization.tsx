@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, Users, Target, Zap } from 'lucide-react';
 import { useColorStore } from '../../../stores/colorStore';
+import { ensureContrast, ensureContrastForSecondaryText, getHighContrastColors, invertColorScheme } from '../../../utils/contrastUtils';
 
 interface StatItem {
   id: string;
@@ -14,15 +15,21 @@ interface StatItem {
 
 interface DataVisualizationProps {
   colorStrategy?: number;
+  isInverted?: boolean;
 }
 
-const DataVisualization = ({ colorStrategy = 0 }: DataVisualizationProps) => {
+const DataVisualization = ({ colorStrategy = 0, isInverted = false }: DataVisualizationProps) => {
   const { palette, categories } = useColorStore();
 
   // Extract colors from categories
-  const lightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
-  const midColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
-  const darkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
+  const baseLightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
+  const baseMidColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
+  const baseDarkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
+
+  // Apply inversion if needed
+  const { lightColors, midColors, darkColors } = isInverted 
+    ? invertColorScheme(baseLightColors, baseMidColors, baseDarkColors, palette)
+    : { lightColors: baseLightColors, midColors: baseMidColors, darkColors: baseDarkColors };
 
   const stats: StatItem[] = [
     {
@@ -59,121 +66,50 @@ const DataVisualization = ({ colorStrategy = 0 }: DataVisualizationProps) => {
     }
   ];
 
-  // Color mapping for different stats based on strategy
+  // Color mapping for different stats based on strategy - all favor dark backgrounds
   const getStatColors = (index: number) => {
     const strategies = [
-      // Strategy 0: Original - varied backgrounds
+      // Strategy 0: Dark backgrounds with varied light progress bars
       [
-        {
-          background: lightColors[0]?.value || palette["light-1"],
-          progress: midColors[0]?.value || palette["mid-1"],
-          text: darkColors[0]?.value || palette["dark-1"],
-          icon: midColors[1]?.value || palette["mid-2"]
-        },
-        {
-          background: lightColors[1]?.value || palette["light-2"],
-          progress: midColors[1]?.value || palette["mid-2"],
-          text: darkColors[0]?.value || palette["dark-1"],
-          icon: darkColors[1]?.value || palette["dark-2"]
-        },
-        {
-          background: lightColors[2]?.value || palette["light-3"],
-          progress: darkColors[0]?.value || palette["dark-1"],
-          text: darkColors[0]?.value || palette["dark-1"],
-          icon: midColors[0]?.value || palette["mid-1"]
-        },
-        {
-          background: midColors[2]?.value || palette["mid-3"],
-          progress: lightColors[0]?.value || palette["light-1"],
-          text: lightColors[0]?.value || "#ffffff",
-          icon: lightColors[1]?.value || palette["light-2"]
-        }
+        { background: darkColors[0]?.value || palette["dark-1"], progress: lightColors[0]?.value || palette["light-1"] },
+        { background: darkColors[1]?.value || palette["dark-2"], progress: lightColors[1]?.value || palette["light-2"] },
+        { background: darkColors[2]?.value || palette["dark-3"], progress: lightColors[2]?.value || palette["light-3"] },
+        { background: darkColors[0]?.value || palette["dark-1"], progress: midColors[0]?.value || palette["mid-1"] }
       ],
-      // Strategy 1: High contrast - light backgrounds, bold progress
+      // Strategy 1: Rich dark backgrounds with warm progress accents
       [
-        {
-          background: lightColors[0]?.value || palette["light-1"],
-          progress: darkColors[0]?.value || palette["dark-1"],
-          text: darkColors[0]?.value || palette["dark-1"],
-          icon: darkColors[1]?.value || palette["dark-2"]
-        },
-        {
-          background: lightColors[1]?.value || palette["light-2"],
-          progress: darkColors[1]?.value || palette["dark-2"],
-          text: darkColors[0]?.value || palette["dark-1"],
-          icon: darkColors[2]?.value || palette["dark-3"]
-        },
-        {
-          background: lightColors[2]?.value || palette["light-3"],
-          progress: midColors[0]?.value || palette["mid-1"],
-          text: darkColors[0]?.value || palette["dark-1"],
-          icon: midColors[1]?.value || palette["mid-2"]
-        },
-        {
-          background: lightColors[0]?.value || palette["light-1"],
-          progress: midColors[2]?.value || palette["mid-3"],
-          text: darkColors[0]?.value || palette["dark-1"],
-          icon: midColors[0]?.value || palette["mid-1"]
-        }
+        { background: darkColors[1]?.value || palette["dark-2"], progress: lightColors[0]?.value || palette["light-1"] },
+        { background: darkColors[0]?.value || palette["dark-1"], progress: midColors[1]?.value || palette["mid-2"] },
+        { background: darkColors[2]?.value || palette["dark-3"], progress: lightColors[1]?.value || palette["light-2"] },
+        { background: darkColors[1]?.value || palette["dark-2"], progress: midColors[2]?.value || palette["mid-3"] }
       ],
-      // Strategy 2: Dark mode - dark backgrounds with light accents
+      // Strategy 2: Deep dark backgrounds with vibrant progress
       [
-        {
-          background: darkColors[0]?.value || palette["dark-1"],
-          progress: lightColors[0]?.value || palette["light-1"],
-          text: lightColors[0]?.value || "#ffffff",
-          icon: lightColors[1]?.value || palette["light-2"]
-        },
-        {
-          background: darkColors[1]?.value || palette["dark-2"],
-          progress: lightColors[1]?.value || palette["light-2"],
-          text: lightColors[0]?.value || "#ffffff",
-          icon: lightColors[2]?.value || palette["light-3"]
-        },
-        {
-          background: darkColors[2]?.value || palette["dark-3"],
-          progress: midColors[0]?.value || palette["mid-1"],
-          text: lightColors[0]?.value || "#ffffff",
-          icon: midColors[1]?.value || palette["mid-2"]
-        },
-        {
-          background: midColors[2]?.value || palette["mid-3"],
-          progress: lightColors[2]?.value || palette["light-3"],
-          text: lightColors[0]?.value || "#ffffff",
-          icon: lightColors[0]?.value || palette["light-1"]
-        }
+        { background: darkColors[2]?.value || palette["dark-3"], progress: lightColors[1]?.value || palette["light-2"] },
+        { background: darkColors[0]?.value || palette["dark-1"], progress: lightColors[0]?.value || palette["light-1"] },
+        { background: darkColors[1]?.value || palette["dark-2"], progress: midColors[0]?.value || palette["mid-1"] },
+        { background: darkColors[2]?.value || palette["dark-3"], progress: lightColors[2]?.value || palette["light-3"] }
       ],
-      // Strategy 3: Monochromatic - single tone family
+      // Strategy 3: Consistent dark backgrounds with varied light accents
       [
-        {
-          background: midColors[0]?.value || palette["mid-1"],
-          progress: lightColors[0]?.value || palette["light-1"],
-          text: lightColors[0]?.value || "#ffffff",
-          icon: lightColors[1]?.value || palette["light-2"]
-        },
-        {
-          background: midColors[1]?.value || palette["mid-2"],
-          progress: lightColors[1]?.value || palette["light-2"],
-          text: lightColors[0]?.value || "#ffffff",
-          icon: lightColors[2]?.value || palette["light-3"]
-        },
-        {
-          background: midColors[2]?.value || palette["mid-3"],
-          progress: lightColors[2]?.value || palette["light-3"],
-          text: lightColors[0]?.value || "#ffffff",
-          icon: lightColors[0]?.value || palette["light-1"]
-        },
-        {
-          background: darkColors[0]?.value || palette["dark-1"],
-          progress: midColors[0]?.value || palette["mid-1"],
-          text: lightColors[0]?.value || "#ffffff",
-          icon: midColors[1]?.value || palette["mid-2"]
-        }
+        { background: darkColors[0]?.value || palette["dark-1"], progress: midColors[2]?.value || palette["mid-3"] },
+        { background: darkColors[1]?.value || palette["dark-2"], progress: lightColors[0]?.value || palette["light-1"] },
+        { background: darkColors[2]?.value || palette["dark-3"], progress: midColors[1]?.value || palette["mid-2"] },
+        { background: darkColors[0]?.value || palette["dark-1"], progress: lightColors[1]?.value || palette["light-2"] }
       ]
     ];
     
     const currentStrategy = strategies[colorStrategy % strategies.length];
-    return currentStrategy[index % currentStrategy.length];
+    const baseColors = currentStrategy[index % currentStrategy.length];
+    const backgroundColor = baseColors.background;
+    const contrastColors = getHighContrastColors(backgroundColor);
+    
+    return {
+      background: backgroundColor,
+      progress: baseColors.progress,
+      text: ensureContrast(contrastColors.primary, backgroundColor),
+      icon: ensureContrast(contrastColors.secondary, backgroundColor)
+    };
   };
 
   return (
@@ -250,20 +186,44 @@ const DataVisualization = ({ colorStrategy = 0 }: DataVisualizationProps) => {
           { label: 'Color Harmony', value: 88, description: 'Palette relationships' },
           { label: 'Typography Flow', value: 95, description: 'Reading experience' }
         ].map((item, index) => {
-          const progressColor = index === 0 
-            ? midColors[0]?.value || palette["mid-1"]
-            : index === 1 
-            ? midColors[1]?.value || palette["mid-2"] 
-            : darkColors[0]?.value || palette["dark-1"];
-          
-          const textColor = darkColors[0]?.value || palette["dark-1"];
-          const bgColor = lightColors[0]?.value || palette["light-1"];
+          // All 3 indicators use the same dark background style based on strategy
+          const getCircularProgressColors = () => {
+            const strategies = [
+              // Strategy 0: Primary dark backgrounds with clean light progress
+              {
+                backgroundColor: darkColors[0]?.value || palette["dark-1"],
+                progressColor: lightColors[0]?.value || palette["light-1"],
+                textColor: lightColors[0]?.value || "#ffffff"
+              },
+              // Strategy 1: Rich dark backgrounds with warm progress accents
+              {
+                backgroundColor: darkColors[1]?.value || palette["dark-2"],
+                progressColor: lightColors[1]?.value || palette["light-2"],
+                textColor: lightColors[1]?.value || "#e5e5e5"
+              },
+              // Strategy 2: Deep dark backgrounds with vibrant progress
+              {
+                backgroundColor: darkColors[2]?.value || palette["dark-3"],
+                progressColor: midColors[0]?.value || palette["mid-1"],
+                textColor: lightColors[0]?.value || "#ffffff"
+              },
+              // Strategy 3: Consistent dark backgrounds with varied accents
+              {
+                backgroundColor: darkColors[0]?.value || palette["dark-1"],
+                progressColor: midColors[2]?.value || palette["mid-3"],
+                textColor: lightColors[2]?.value || "#cccccc"
+              }
+            ];
+            return strategies[colorStrategy % strategies.length];
+          };
+
+          const colors = getCircularProgressColors();
 
           return (
             <motion.div
               key={item.label}
               className="text-center p-6 rounded-lg transition-colors duration-300"
-              style={{ backgroundColor: bgColor }}
+              style={{ backgroundColor: colors.backgroundColor }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
@@ -275,7 +235,7 @@ const DataVisualization = ({ colorStrategy = 0 }: DataVisualizationProps) => {
                     cx="48"
                     cy="48"
                     r="40"
-                    stroke={textColor}
+                    stroke={colors.textColor}
                     strokeWidth="4"
                     fill="none"
                     opacity="0.1"
@@ -284,7 +244,7 @@ const DataVisualization = ({ colorStrategy = 0 }: DataVisualizationProps) => {
                     cx="48"
                     cy="48"
                     r="40"
-                    stroke={progressColor}
+                    stroke={colors.progressColor}
                     strokeWidth="4"
                     fill="none"
                     strokeLinecap="round"
@@ -295,7 +255,7 @@ const DataVisualization = ({ colorStrategy = 0 }: DataVisualizationProps) => {
                 </svg>
                 <div 
                   className="absolute inset-0 flex items-center justify-center text-heading-2 font-structural transition-colors duration-300"
-                  style={{ color: textColor }}
+                  style={{ color: colors.textColor }}
                 >
                   {item.value}%
                 </div>
@@ -303,13 +263,13 @@ const DataVisualization = ({ colorStrategy = 0 }: DataVisualizationProps) => {
 
               <h4 
                 className="text-body-bold font-structural mb-2 transition-colors duration-300"
-                style={{ color: textColor }}
+                style={{ color: colors.textColor }}
               >
                 {item.label}
               </h4>
               <p 
                 className="text-caption font-content transition-colors duration-300"
-                style={{ color: textColor, opacity: 0.7 }}
+                style={{ color: colors.textColor, opacity: 0.7 }}
               >
                 {item.description}
               </p>

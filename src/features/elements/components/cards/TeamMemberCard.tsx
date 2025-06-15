@@ -2,57 +2,125 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useColorStore } from '../../../../stores/colorStore';
 import { TeamMember } from '../../types/element.types';
+import { getVariedContrastColors, invertColorScheme } from '../../../../utils/contrastUtils';
+import { teamMembers } from '../../data/teamMembers';
 
 interface TeamMemberCardProps {
   member: TeamMember;
+  colorStrategy?: number;
+  isInverted?: boolean;
 }
 
-const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
+const TeamMemberCard = ({ member, colorStrategy = 0, isInverted = false }: TeamMemberCardProps) => {
   const { palette, categories } = useColorStore();
   const [imageLoaded, setImageLoaded] = useState(false);
 
   // Extract colors from categories
-  const lightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
-  const midColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
-  const darkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
+  const baseLightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
+  const baseMidColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
+  const baseDarkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
 
-  // Helper to ensure text color is different from background
-  const ensureDifferent = (textColor: string, bgColor: string, fallback: string) => {
-    return textColor.toLowerCase() === bgColor.toLowerCase() ? fallback : textColor;
-  };
+  // Apply inversion if needed
+  const { lightColors, midColors, darkColors } = isInverted 
+    ? invertColorScheme(baseLightColors, baseMidColors, baseDarkColors, palette)
+    : { lightColors: baseLightColors, midColors: baseMidColors, darkColors: baseDarkColors };
 
-  // Get colors based on the member's tone
+  // Get colors based on strategy and member index - each card gets unique colors
   const getCardColors = () => {
-    switch (member.colorTone) {
-      case 'light':
-        return {
-          backgroundColor: lightColors[0]?.value || palette["light-1"],
-          titleColor: ensureDifferent(darkColors[0]?.value || palette["dark-1"], lightColors[0]?.value || palette["light-1"], "#000000"),
-          roleColor: ensureDifferent(darkColors[0]?.value || palette["dark-1"], lightColors[0]?.value || palette["light-1"], "#000000"),
-          descriptionColor: ensureDifferent(darkColors[1]?.value || palette["dark-2"], lightColors[0]?.value || palette["light-1"], "#333333")
-        };
-      case 'mid':
-        return {
-          backgroundColor: midColors[0]?.value || palette["mid-1"],
-          titleColor: ensureDifferent(lightColors[0]?.value || "#ffffff", midColors[0]?.value || palette["mid-1"], "#ffffff"),
-          roleColor: ensureDifferent(lightColors[1]?.value || "#cccccc", midColors[0]?.value || palette["mid-1"], "#cccccc"),
-          descriptionColor: ensureDifferent(lightColors[2]?.value || "#aaaaaa", midColors[0]?.value || palette["mid-1"], "#aaaaaa")
-        };
-      case 'dark':
-        return {
+    const strategies = [
+      // Strategy 0: Dark backgrounds with distinct color treatments per card
+      [
+        // Card 0: Primary dark with clean whites
+        {
           backgroundColor: darkColors[0]?.value || palette["dark-1"],
-          titleColor: ensureDifferent(lightColors[0]?.value || "#ffffff", darkColors[0]?.value || palette["dark-1"], "#ffffff"),
-          roleColor: ensureDifferent(lightColors[0]?.value || "#ffffff", darkColors[0]?.value || palette["dark-1"], "#ffffff"),
-          descriptionColor: ensureDifferent(lightColors[1]?.value || "#cccccc", darkColors[0]?.value || palette["dark-1"], "#cccccc")
-        };
-      default:
-        return {
-          backgroundColor: lightColors[0]?.value || palette["light-1"],
-          titleColor: "#000000",
-          roleColor: "#666666",
-          descriptionColor: "#333333"
-        };
-    }
+          titleColor: lightColors[0]?.value || "#ffffff",
+          roleColor: lightColors[1]?.value || "#e5e5e5",
+          descriptionColor: midColors[0]?.value || palette["mid-1"]
+        },
+        // Card 1: Rich dark with warm accents
+        {
+          backgroundColor: darkColors[1]?.value || palette["dark-2"],
+          titleColor: lightColors[1]?.value || "#e5e5e5",
+          roleColor: midColors[1]?.value || palette["mid-2"],
+          descriptionColor: lightColors[0]?.value || "#ffffff"
+        },
+        // Card 2: Deep dark with vibrant accents
+        {
+          backgroundColor: darkColors[2]?.value || palette["dark-3"],
+          titleColor: lightColors[0]?.value || "#ffffff",
+          roleColor: midColors[2]?.value || palette["mid-3"],
+          descriptionColor: lightColors[2]?.value || "#cccccc"
+        }
+      ],
+      // Strategy 1: Dark backgrounds with high-contrast variety
+      [
+        // Card 0: Primary dark with bright light accents
+        {
+          backgroundColor: darkColors[0]?.value || palette["dark-1"],
+          titleColor: lightColors[0]?.value || "#ffffff",
+          roleColor: midColors[0]?.value || palette["mid-1"],
+          descriptionColor: lightColors[1]?.value || "#e5e5e5"
+        },
+        // Card 1: Secondary dark with mixed light tones
+        {
+          backgroundColor: darkColors[2]?.value || palette["dark-3"],
+          titleColor: lightColors[2]?.value || "#cccccc",
+          roleColor: lightColors[0]?.value || "#ffffff",
+          descriptionColor: midColors[2]?.value || palette["mid-3"]
+        },
+        // Card 2: Rich dark with warm light mix
+        {
+          backgroundColor: darkColors[1]?.value || palette["dark-2"],
+          titleColor: lightColors[1]?.value || "#e5e5e5",
+          roleColor: lightColors[2]?.value || "#cccccc",
+          descriptionColor: midColors[1]?.value || palette["mid-2"]
+        }
+      ],
+      // Strategy 2: Dark backgrounds with unique accent personalities
+      [
+        // Card 0: Cool dark with blue-ish accents
+        {
+          backgroundColor: darkColors[2]?.value || palette["dark-3"],
+          titleColor: lightColors[0]?.value || "#ffffff",
+          roleColor: lightColors[1]?.value || "#e5e5e5",
+          descriptionColor: midColors[0]?.value || palette["mid-1"]
+        },
+        // Card 1: Warm dark with amber accents
+        {
+          backgroundColor: darkColors[0]?.value || palette["dark-1"],
+          titleColor: lightColors[2]?.value || "#cccccc",
+          roleColor: midColors[2]?.value || palette["mid-3"],
+          descriptionColor: lightColors[0]?.value || "#ffffff"
+        },
+        // Card 2: Neutral dark with balanced accents
+        {
+          backgroundColor: darkColors[1]?.value || palette["dark-2"],
+          titleColor: lightColors[1]?.value || "#e5e5e5",
+          roleColor: midColors[1]?.value || palette["mid-2"],
+          descriptionColor: lightColors[2]?.value || "#cccccc"
+        }
+      ]
+    ];
+    
+    const currentStrategy = strategies[colorStrategy % strategies.length];
+    const memberIndex = teamMembers.findIndex(m => m.id === member.id);
+    const cardColors = currentStrategy[memberIndex % currentStrategy.length];
+    
+    // Use sophisticated contrast adjustment that preserves color variety
+    const adjustedColors = getVariedContrastColors(
+      cardColors.backgroundColor,
+      cardColors.titleColor,
+      cardColors.roleColor,
+      cardColors.descriptionColor,
+      3.0 // Minimum contrast ratio
+    );
+    
+    return {
+      backgroundColor: cardColors.backgroundColor,
+      titleColor: adjustedColors.primary,
+      roleColor: adjustedColors.secondary,
+      descriptionColor: adjustedColors.tertiary
+    };
   };
 
   const colors = getCardColors();

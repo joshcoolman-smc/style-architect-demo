@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, User, MessageSquare, Search } from 'lucide-react';
 import { useColorStore } from '../../../stores/colorStore';
+import { getVariedContrastColors, adjustColorForContrast, invertColorScheme } from '../../../utils/contrastUtils';
 
 interface InteractiveFormsProps {
   colorStrategy?: number;
+  isInverted?: boolean;
 }
 
-const InteractiveForms = ({ colorStrategy = 0 }: InteractiveFormsProps) => {
+const InteractiveForms = ({ colorStrategy = 0, isInverted = false }: InteractiveFormsProps) => {
   const { palette, categories } = useColorStore();
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -19,22 +21,77 @@ const InteractiveForms = ({ colorStrategy = 0 }: InteractiveFormsProps) => {
   });
 
   // Extract colors from categories
-  const lightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
-  const midColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
-  const darkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
+  const baseLightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
+  const baseMidColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
+  const baseDarkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
 
-  const formColors = {
-    background: lightColors[0]?.value || palette["light-1"],
-    border: midColors[1]?.value || palette["mid-2"],
-    focusBorder: midColors[0]?.value || palette["mid-1"],
-    text: darkColors[0]?.value || palette["dark-1"],
-    placeholder: darkColors[1]?.value || palette["dark-2"],
-    label: darkColors[0]?.value || palette["dark-1"],
-    button: midColors[0]?.value || palette["mid-1"],
-    buttonText: lightColors[0]?.value || "#ffffff",
-    success: '#10b981',
-    error: '#ef4444'
+  // Apply inversion if needed
+  const { lightColors, midColors, darkColors } = isInverted 
+    ? invertColorScheme(baseLightColors, baseMidColors, baseDarkColors, palette)
+    : { lightColors: baseLightColors, midColors: baseMidColors, darkColors: baseDarkColors };
+
+  // Get colors based on strategy - all favor dark backgrounds with light foreground
+  const getFormColors = () => {
+    const strategies = [
+      // Strategy 0: Primary dark forms with clean light text
+      {
+        background: darkColors[0]?.value || palette["dark-1"],
+        border: midColors[0]?.value || palette["mid-1"],
+        focusBorder: lightColors[0]?.value || palette["light-1"],
+        button: lightColors[0]?.value || palette["light-1"],
+        labelColor: lightColors[0]?.value || "#ffffff",
+        textColor: lightColors[1]?.value || "#e5e5e5",
+        placeholderColor: lightColors[2]?.value || "#cccccc"
+      },
+      // Strategy 1: Rich dark forms with warm accents
+      {
+        background: darkColors[1]?.value || palette["dark-2"],
+        border: midColors[1]?.value || palette["mid-2"],
+        focusBorder: lightColors[1]?.value || palette["light-2"],
+        button: lightColors[1]?.value || palette["light-2"],
+        labelColor: lightColors[1]?.value || "#e5e5e5",
+        textColor: lightColors[0]?.value || "#ffffff",
+        placeholderColor: midColors[0]?.value || palette["mid-1"]
+      },
+      // Strategy 2: Deep dark forms with vibrant accents
+      {
+        background: darkColors[2]?.value || palette["dark-3"],
+        border: midColors[2]?.value || palette["mid-3"],
+        focusBorder: lightColors[2]?.value || palette["light-3"],
+        button: lightColors[2]?.value || palette["light-3"],
+        labelColor: lightColors[0]?.value || "#ffffff",
+        textColor: lightColors[2]?.value || "#cccccc",
+        placeholderColor: midColors[1]?.value || palette["mid-2"]
+      }
+    ];
+    
+    const baseStrategy = strategies[colorStrategy % strategies.length];
+    const backgroundColor = baseStrategy.background;
+    
+    // Use sophisticated contrast adjustment for varied text colors
+    const adjustedColors = getVariedContrastColors(
+      backgroundColor,
+      baseStrategy.labelColor,
+      baseStrategy.textColor,
+      baseStrategy.placeholderColor,
+      3.0
+    );
+    
+    return {
+      background: backgroundColor,
+      border: baseStrategy.border,
+      focusBorder: baseStrategy.focusBorder,
+      text: adjustedColors.secondary,
+      placeholder: adjustedColors.tertiary,
+      label: adjustedColors.primary,
+      button: baseStrategy.button,
+      buttonText: adjustColorForContrast(darkColors[0]?.value || "#000000", baseStrategy.button, 3.0),
+      success: '#10b981',
+      error: '#ef4444'
+    };
   };
+
+  const formColors = getFormColors();
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));

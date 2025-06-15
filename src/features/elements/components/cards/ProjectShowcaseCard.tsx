@@ -3,50 +3,72 @@ import { motion } from 'framer-motion';
 import { useColorStore } from '../../../../stores/colorStore';
 import { Project } from '../../types/element.types';
 import { AspectRatio } from '../../../../components/ui/aspect-ratio';
+import { getVariedContrastColors, invertColorScheme } from '../../../../utils/contrastUtils';
 
 interface ProjectShowcaseCardProps {
   project: Project;
+  colorStrategy?: number;
+  isInverted?: boolean;
 }
 
-const ProjectShowcaseCard = ({ project }: ProjectShowcaseCardProps) => {
+const ProjectShowcaseCard = ({ project, colorStrategy = 0, isInverted = false }: ProjectShowcaseCardProps) => {
   const { palette, categories } = useColorStore();
   const [imageLoaded, setImageLoaded] = useState(false);
 
   // Extract colors from categories
-  const lightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
-  const midColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
-  const darkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
+  const baseLightColors = categories.find(cat => cat.name === 'Light Tones')?.colors || [];
+  const baseMidColors = categories.find(cat => cat.name === 'Mid Tones')?.colors || [];
+  const baseDarkColors = categories.find(cat => cat.name === 'Dark Tones')?.colors || [];
 
-  // Helper to ensure text color is different from background
-  const ensureDifferent = (textColor: string, bgColor: string, fallback: string) => {
-    return textColor.toLowerCase() === bgColor.toLowerCase() ? fallback : textColor;
-  };
+  // Apply inversion if needed
+  const { lightColors, midColors, darkColors } = isInverted 
+    ? invertColorScheme(baseLightColors, baseMidColors, baseDarkColors, palette)
+    : { lightColors: baseLightColors, midColors: baseMidColors, darkColors: baseDarkColors };
 
-  // Get colors based on the project's tone
+  // Get colors based on strategy - all favor dark backgrounds with light foreground
   const getCardColors = () => {
-    switch (project.colorTone) {
-      case 'light':
-        return {
-          backgroundColor: lightColors[1]?.value || palette["light-2"],
-          titleColor: ensureDifferent(darkColors[0]?.value || palette["dark-1"], lightColors[1]?.value || palette["light-2"], "#000000"),
-          locationColor: ensureDifferent(midColors[1]?.value || palette["mid-2"], lightColors[1]?.value || palette["light-2"], "#666666"),
-          descriptionColor: ensureDifferent(darkColors[1]?.value || palette["dark-2"], lightColors[1]?.value || palette["light-2"], "#333333")
-        };
-      case 'mid':
-        return {
-          backgroundColor: midColors[1]?.value || palette["mid-2"],
-          titleColor: ensureDifferent(lightColors[0]?.value || "#ffffff", midColors[1]?.value || palette["mid-2"], "#ffffff"),
-          locationColor: ensureDifferent(lightColors[2]?.value || "#cccccc", midColors[1]?.value || palette["mid-2"], "#cccccc"),
-          descriptionColor: ensureDifferent(lightColors[1]?.value || "#aaaaaa", midColors[1]?.value || palette["mid-2"], "#aaaaaa")
-        };
-      default:
-        return {
-          backgroundColor: lightColors[1]?.value || palette["light-2"],
-          titleColor: "#000000",
-          locationColor: "#666666",
-          descriptionColor: "#333333"
-        };
-    }
+    const strategies = [
+      // Strategy 0: Primary dark backgrounds with clean light text
+      {
+        backgroundColor: darkColors[0]?.value || palette["dark-1"],
+        titleColor: lightColors[0]?.value || "#ffffff",
+        locationColor: lightColors[1]?.value || "#e5e5e5",
+        descriptionColor: midColors[0]?.value || palette["mid-1"]
+      },
+      // Strategy 1: Rich dark backgrounds with varied light accents
+      {
+        backgroundColor: darkColors[1]?.value || palette["dark-2"],
+        titleColor: lightColors[1]?.value || "#e5e5e5",
+        locationColor: midColors[1]?.value || palette["mid-2"],
+        descriptionColor: lightColors[0]?.value || "#ffffff"
+      },
+      // Strategy 2: Deep dark backgrounds with vibrant accents
+      {
+        backgroundColor: darkColors[2]?.value || palette["dark-3"],
+        titleColor: lightColors[0]?.value || "#ffffff",
+        locationColor: midColors[2]?.value || palette["mid-3"],
+        descriptionColor: lightColors[2]?.value || "#cccccc"
+      }
+    ];
+    
+    const baseStrategy = strategies[colorStrategy % strategies.length];
+    const backgroundColor = baseStrategy.backgroundColor;
+    
+    // Use sophisticated contrast adjustment that preserves color variety
+    const adjustedColors = getVariedContrastColors(
+      backgroundColor,
+      baseStrategy.titleColor,
+      baseStrategy.locationColor,
+      baseStrategy.descriptionColor,
+      3.0 // Minimum contrast ratio
+    );
+    
+    return {
+      backgroundColor,
+      titleColor: adjustedColors.primary,
+      locationColor: adjustedColors.secondary,
+      descriptionColor: adjustedColors.tertiary
+    };
   };
 
   const colors = getCardColors();

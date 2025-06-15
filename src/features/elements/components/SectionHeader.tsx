@@ -1,21 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { RefreshCw, Lock, Unlock } from 'lucide-react';
+import { RefreshCw, Lock, Unlock, Sun, Moon } from 'lucide-react';
 
 interface SectionHeaderProps {
   title: string;
   description: string;
   isLocked: boolean;
+  isInverted: boolean;
   onRefresh: () => void;
   onToggleLock: () => void;
+  onToggleInvert: () => void;
 }
 
 const SectionHeader = ({ 
   title, 
   description, 
-  isLocked, 
+  isLocked,
+  isInverted,
   onRefresh, 
-  onToggleLock
+  onToggleLock,
+  onToggleInvert
 }: SectionHeaderProps) => {
   return (
     <div className="flex items-start justify-between mb-6">
@@ -29,6 +33,29 @@ const SectionHeader = ({
       </div>
       
       <div className="flex items-center gap-2 ml-4">
+        <motion.button
+          onClick={onToggleInvert}
+          className={`p-2 rounded-lg transition-colors ${
+            isInverted 
+              ? 'bg-amber-100 hover:bg-amber-200 text-amber-700' 
+              : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+          }`}
+          title={isInverted ? "Switch to dark mode" : "Switch to light mode"}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <motion.div
+            animate={{ rotate: isInverted ? 360 : 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            {isInverted ? (
+              <Sun className="w-4 h-4" />
+            ) : (
+              <Moon className="w-4 h-4" />
+            )}
+          </motion.div>
+        </motion.button>
+
         <motion.button
           onClick={onRefresh}
           disabled={isLocked}

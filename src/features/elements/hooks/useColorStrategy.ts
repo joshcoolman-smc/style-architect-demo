@@ -9,6 +9,7 @@ export interface ColorStrategy {
 export interface ComponentColorState {
   currentStrategy: number;
   isLocked: boolean;
+  isInverted: boolean;
 }
 
 interface ColorStrategyState {
@@ -20,11 +21,11 @@ interface ColorStrategyState {
 }
 
 const initialState: ColorStrategyState = {
-  testimonials: { currentStrategy: 0, isLocked: false },
-  dataVisualization: { currentStrategy: 0, isLocked: false },
-  forms: { currentStrategy: 0, isLocked: false },
-  alerts: { currentStrategy: 0, isLocked: false },
-  cards: { currentStrategy: 0, isLocked: false }
+  testimonials: { currentStrategy: 0, isLocked: false, isInverted: false },
+  dataVisualization: { currentStrategy: 0, isLocked: false, isInverted: false },
+  forms: { currentStrategy: 0, isLocked: false, isInverted: false },
+  alerts: { currentStrategy: 0, isLocked: false, isInverted: false },
+  cards: { currentStrategy: 0, isLocked: false, isInverted: false }
 };
 
 export const useColorStrategy = () => {
@@ -54,6 +55,16 @@ export const useColorStrategy = () => {
     }));
   }, []);
 
+  const toggleInvert = React.useCallback((component: keyof ColorStrategyState) => {
+    setStrategyState(prev => ({
+      ...prev,
+      [component]: {
+        ...prev[component],
+        isInverted: !prev[component].isInverted
+      }
+    }));
+  }, []);
+
   const resetAll = React.useCallback(() => {
     setStrategyState(initialState);
   }, []);
@@ -62,6 +73,7 @@ export const useColorStrategy = () => {
     strategyState,
     refreshStrategy,
     toggleLock,
+    toggleInvert,
     resetAll
   };
 };
