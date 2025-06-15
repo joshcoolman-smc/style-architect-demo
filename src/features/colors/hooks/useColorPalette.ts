@@ -8,6 +8,7 @@ export const useColorPalette = () => {
   const { categories, updateCategories, updatePalette } = useColorStore();
   const [copiedColor, setCopiedColor] = React.useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = React.useState(false);
+  const [uploadedImage, setUploadedImage] = React.useState<string | null>(null);
 
   const colorService = React.useMemo(() => new ColorService(), []);
 
@@ -38,28 +39,43 @@ export const useColorPalette = () => {
   const generateNewPalette = () => {
     const newPalette = colorService.generateNewPalette();
     updateColorPalette(newPalette);
+    clearUploadedImage();
   };
 
   const generatePaletteFromImage = async (imageFile: File) => {
     setIsAnalyzing(true);
     try {
+      // Store the image data URL
+      const imageDataUrl = URL.createObjectURL(imageFile);
+      setUploadedImage(imageDataUrl);
+      
       const newPalette = await colorService.generatePaletteFromImage(imageFile);
       updateColorPalette(newPalette);
     } catch (error) {
       console.error('Failed to generate palette from image:', error);
+      setUploadedImage(null);
       throw error;
     } finally {
       setIsAnalyzing(false);
     }
   };
 
+  const clearUploadedImage = () => {
+    if (uploadedImage) {
+      URL.revokeObjectURL(uploadedImage);
+    }
+    setUploadedImage(null);
+  };
+
   return {
     categories,
     copiedColor,
     isAnalyzing,
+    uploadedImage,
     copyToClipboard,
     updateColorPalette,
     generateNewPalette,
     generatePaletteFromImage,
+    clearUploadedImage,
   };
 };

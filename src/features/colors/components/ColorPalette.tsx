@@ -1,13 +1,23 @@
 
 import React, { useRef } from 'react';
-import { RefreshCcw, Upload } from 'lucide-react';
+import { RefreshCcw, Upload, X } from 'lucide-react';
 import ColorSwatch from './ColorSwatch';
+import ImagePaletteComparison from './ImagePaletteComparison';
 import GradientContainer from '../../shared/components/GradientContainer';
 import { ColorApplicationShowcase } from './ColorApplicationShowcase';
 import { useColorPalette } from '../hooks/useColorPalette';
 
 const ColorPalette = () => {
-  const { categories, copiedColor, isAnalyzing, copyToClipboard, generateNewPalette, generatePaletteFromImage } = useColorPalette();
+  const { 
+    categories, 
+    copiedColor, 
+    isAnalyzing, 
+    uploadedImage,
+    copyToClipboard, 
+    generateNewPalette, 
+    generatePaletteFromImage,
+    clearUploadedImage
+  } = useColorPalette();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Get all colors from all categories
@@ -45,15 +55,22 @@ const ColorPalette = () => {
     fileInputRef.current?.click();
   };
 
+  const handleClearImage = () => {
+    clearUploadedImage();
+  };
+
   return (
     <div className="space-y-12">
-      {/* Single Color Card with Three Rows */}
+      {/* Colors Section */}
       <GradientContainer className="p-8">
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-card-foreground">Colors</h2>
             <p className="text-sm text-muted-foreground mt-1">
-              Upload an image to generate a palette or click refresh to generate a random palette
+              {uploadedImage 
+                ? "Image-based color palette comparison"
+                : "Upload an image to generate a palette or click refresh to generate a random palette"
+              }
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -64,18 +81,30 @@ const ColorPalette = () => {
               onChange={handleImageUpload}
               className="hidden"
             />
-            <button
-              onClick={handleUploadClick}
-              disabled={isAnalyzing}
-              className="flex items-center justify-center w-10 h-10 rounded-lg bg-card-foreground/10 hover:bg-card-foreground/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              title="Upload image to generate palette"
-            >
-              {isAnalyzing ? (
-                <div className="w-5 h-5 border-2 border-card-foreground/20 border-t-card-foreground rounded-full animate-spin" />
-              ) : (
-                <Upload className="w-5 h-5 text-card-foreground" />
-              )}
-            </button>
+            
+            {uploadedImage ? (
+              <button
+                onClick={handleClearImage}
+                className="flex items-center justify-center w-10 h-10 rounded-lg bg-card-foreground/10 hover:bg-card-foreground/20 transition-colors"
+                title="Clear uploaded image"
+              >
+                <X className="w-5 h-5 text-card-foreground" />
+              </button>
+            ) : (
+              <button
+                onClick={handleUploadClick}
+                disabled={isAnalyzing}
+                className="flex items-center justify-center w-10 h-10 rounded-lg bg-card-foreground/10 hover:bg-card-foreground/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                title="Upload image to generate palette"
+              >
+                {isAnalyzing ? (
+                  <div className="w-5 h-5 border-2 border-card-foreground/20 border-t-card-foreground rounded-full animate-spin" />
+                ) : (
+                  <Upload className="w-5 h-5 text-card-foreground" />
+                )}
+              </button>
+            )}
+            
             <button
               onClick={generateNewPalette}
               disabled={isAnalyzing}
@@ -87,49 +116,58 @@ const ColorPalette = () => {
           </div>
         </div>
 
-        <div className="space-y-6">
-          {/* Light Colors Row */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {lightColors.map((color) => (
-              <ColorSwatch
-                key={color.name}
-                name={color.name}
-                value={color.value}
-                description={color.description}
-                onCopy={copyToClipboard}
-                isCopied={copiedColor === color.value}
-              />
-            ))}
-          </div>
+        {uploadedImage ? (
+          <ImagePaletteComparison
+            imageUrl={uploadedImage}
+            categories={categories}
+            onCopyColor={copyToClipboard}
+            copiedColor={copiedColor}
+          />
+        ) : (
+          <div className="space-y-6">
+            {/* Light Colors Row */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {lightColors.map((color) => (
+                <ColorSwatch
+                  key={color.name}
+                  name={color.name}
+                  value={color.value}
+                  description={color.description}
+                  onCopy={copyToClipboard}
+                  isCopied={copiedColor === color.value}
+                />
+              ))}
+            </div>
 
-          {/* Mid Colors Row */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {midColors.map((color) => (
-              <ColorSwatch
-                key={color.name}
-                name={color.name}
-                value={color.value}
-                description={color.description}
-                onCopy={copyToClipboard}
-                isCopied={copiedColor === color.value}
-              />
-            ))}
-          </div>
+            {/* Mid Colors Row */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {midColors.map((color) => (
+                <ColorSwatch
+                  key={color.name}
+                  name={color.name}
+                  value={color.value}
+                  description={color.description}
+                  onCopy={copyToClipboard}
+                  isCopied={copiedColor === color.value}
+                />
+              ))}
+            </div>
 
-          {/* Dark Colors Row */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {darkColors.map((color) => (
-              <ColorSwatch
-                key={color.name}
-                name={color.name}
-                value={color.value}
-                description={color.description}
-                onCopy={copyToClipboard}
-                isCopied={copiedColor === color.value}
-              />
-            ))}
+            {/* Dark Colors Row */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {darkColors.map((color) => (
+                <ColorSwatch
+                  key={color.name}
+                  name={color.name}
+                  value={color.value}
+                  description={color.description}
+                  onCopy={copyToClipboard}
+                  isCopied={copiedColor === color.value}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </GradientContainer>
 
       {/* Usage Examples */}
