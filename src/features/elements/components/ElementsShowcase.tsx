@@ -73,6 +73,7 @@ const ElementsShowcase = () => {
                 <TestimonialCard 
                   testimonial={testimonial} 
                   colorStrategy={strategyState.testimonials.currentStrategy}
+                  cardIndex={index}
                 />
               </motion.div>
             ))}
