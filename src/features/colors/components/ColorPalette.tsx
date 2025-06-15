@@ -1,5 +1,6 @@
+
 import React, { useRef } from 'react';
-import { RefreshCcw, Upload, X } from 'lucide-react';
+import { RefreshCcw, ImagePlus, X } from 'lucide-react';
 import ColorSwatch from './ColorSwatch';
 import ImagePaletteComparison from './ImagePaletteComparison';
 import GradientContainer from '../../shared/components/GradientContainer';
@@ -99,7 +100,7 @@ const ColorPalette = () => {
                 {isAnalyzing ? (
                   <div className="w-5 h-5 border-2 border-card-foreground/20 border-t-card-foreground rounded-full animate-spin" />
                 ) : (
-                  <Upload className="w-5 h-5 text-card-foreground" />
+                  <ImagePlus className="w-5 h-5 text-card-foreground" />
                 )}
               </button>
             )}
