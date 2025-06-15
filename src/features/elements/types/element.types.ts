@@ -16,3 +16,11 @@ export interface Project {
   imageUrl: string;
   colorTone: 'light' | 'mid';
 }
+
+export interface Testimonial {
+  id: string;
+  quote: string;
+  author: string;
+  company: string;
+  colorTone: 'light' | 'mid' | 'dark';
+}
