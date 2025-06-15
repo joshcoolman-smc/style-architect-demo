@@ -13,10 +13,10 @@ const TypeScaleSelector = () => {
   const [selectedScale, setSelectedScale] = useState('minor-third');
 
   const typeScales = [
-    { value: 'minor-third', label: 'Minor Third (1.2)' },
-    { value: 'major-third', label: 'Major Third (1.25)' },
-    { value: 'perfect-fourth', label: 'Perfect Fourth (1.333)' },
-    { value: 'augmented-fourth', label: 'Augmented Fourth (1.414)' },
+    { value: 'minor-third', label: 'Minor Third' },
+    { value: 'major-third', label: 'Major Third' },
+    { value: 'perfect-fourth', label: 'Perfect Fourth' },
+    { value: 'augmented-fourth', label: 'Augmented Fourth' },
   ];
 
   const handleScaleChange = (value: string) => {
