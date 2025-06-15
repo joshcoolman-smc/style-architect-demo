@@ -6,7 +6,7 @@ import GradientContainer from '../../../components/GradientContainer';
 const TypeScaleComponent = () => {
   return (
     <GradientContainer className="p-12">
-      <div className="space-y-12 mt-6">
+      <div className="space-y-12">
         <div className="relative">
           <h1 className="text-heading-1 text-white">Quick brown fox</h1>
           <span className="ds-text-technical-light absolute -bottom-5 left-0">heading-1</span>
