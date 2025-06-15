@@ -90,7 +90,7 @@ const TypographySpecimen = () => {
         </div>
       </GradientContainer>
 
-      {/* Type Scale and Paragraph Styles Side by Side */}
+      {/* Type Scale and Editorial Example Side by Side */}
       <div className="grid md:grid-cols-2 gap-8">
         {/* Type Scale */}
         <GradientContainer className="p-12">
@@ -128,18 +128,20 @@ const TypographySpecimen = () => {
           </div>
         </GradientContainer>
 
-        {/* Paragraph Styles */}
+        {/* Editorial Example */}
         <GradientContainer className="p-12">
-          <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Paragraph Styles</h2>
-          <div className="space-y-4 max-w-prose mt-6">
-            <p className="text-lg font-content ">
-              This is large body text. Quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It's perfect for introductions and lead paragraphs.
+          <div className="space-y-6 max-w-prose">
+            <h1 className="text-4xl font-bold tracking-tight text-white font-structural">
+              Typography creates hierarchy
+            </h1>
+            <h2 className="text-xl font-medium text-white/80 font-subheader">
+              Visual contrast guides the reader's eye through information
+            </h2>
+            <p className="text-lg leading-relaxed text-white font-content">
+              Effective typography establishes clear information hierarchy through strategic use of size, weight, and spacing. By varying these elements systematically, designers create a visual roadmap that leads readers through content naturally.
             </p>
-            <p className="font-content ">
-              This is standard body text. Quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It is the workhorse of our design system, used for most long-form content.
-            </p>
-            <p className="text-sm  font-content">
-              This is small, muted body text. Quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. Ideal for captions, footnotes, and other supplementary information.
+            <p className="text-base leading-relaxed text-white/90 font-content">
+              The largest text draws initial attention, medium weights provide context and categorization, while body text delivers detailed information. This purposeful contrast between type sizes and weights transforms dense information into scannable, digestible content that serves both aesthetic and functional purposes.
             </p>
           </div>
         </GradientContainer>
