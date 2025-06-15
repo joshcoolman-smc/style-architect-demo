@@ -35,7 +35,7 @@ const ColorSwatch = ({ name, value, description, onCopy, isCopied, isSemanticCol
       {/* Color Information - Below the color, with padding */}
       <div className="p-6 space-y-4">
         <div className="space-y-2">
-          <h3 className="font-technical text-card-foreground font-medium">{name}</h3>
+          <h3 className="font-technical text-xs text-card-foreground font-extralight">{name}</h3>
           
           {/* Horizontal rule under the color name */}
           <Separator className="my-2" />
