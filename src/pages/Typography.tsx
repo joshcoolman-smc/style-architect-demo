@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Layout from '../components/Layout';
-import TypographySpecimen from '../components/TypographySpecimen';
+import TypographySpecimen from '../features/typography/components/TypographySpecimen';
 
 const Typography = () => {
   return (
