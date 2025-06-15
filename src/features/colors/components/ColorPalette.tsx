@@ -79,13 +79,13 @@ const ColorPalette = () => {
     }
   };
 
-  // Ripple effect variants for regeneration
+  // Sequential ripple effect variants for regeneration
   const rippleVariants: Variants = {
     initial: { scale: 1 },
     ripple: { 
       scale: [1, 1.1, 1],
       transition: {
-        duration: 0.3,
+        duration: 0.4,
         ease: "easeInOut"
       }
     }
@@ -135,7 +135,7 @@ const ColorPalette = () => {
     setIsRegenerating(true);
     await generateNewPalette();
     // Keep regenerating state for animation duration
-    setTimeout(() => setIsRegenerating(false), 1000);
+    setTimeout(() => setIsRegenerating(false), 2000); // Extended to allow full stagger
   };
 
   return (
@@ -213,9 +213,8 @@ const ColorPalette = () => {
                   initial={isRegenerating ? "initial" : "hidden"}
                   animate={isRegenerating ? "ripple" : "visible"}
                   transition={isRegenerating ? {
-                    delay: index * 0.05,
-                    duration: 0.3,
-                    ease: "easeInOut"
+                    delay: index * 0.1, // Increased delay for clearer sequence
+                    duration: 0.4
                   } : undefined}
                 >
                   <ColorSwatch
@@ -243,9 +242,8 @@ const ColorPalette = () => {
                   initial={isRegenerating ? "initial" : "hidden"}
                   animate={isRegenerating ? "ripple" : "visible"}
                   transition={isRegenerating ? {
-                    delay: (lightColors.length + index) * 0.05,
-                    duration: 0.3,
-                    ease: "easeInOut"
+                    delay: (lightColors.length + index) * 0.1, // Sequential after light colors
+                    duration: 0.4
                   } : undefined}
                 >
                   <ColorSwatch
@@ -273,9 +271,8 @@ const ColorPalette = () => {
                   initial={isRegenerating ? "initial" : "hidden"}
                   animate={isRegenerating ? "ripple" : "visible"}
                   transition={isRegenerating ? {
-                    delay: (lightColors.length + midColors.length + index) * 0.05,
-                    duration: 0.3,
-                    ease: "easeInOut"
+                    delay: (lightColors.length + midColors.length + index) * 0.1, // Sequential after mid colors
+                    duration: 0.4
                   } : undefined}
                 >
                   <ColorSwatch
