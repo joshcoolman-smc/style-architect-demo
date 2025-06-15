@@ -16,7 +16,7 @@ const ElementsShowcase = () => {
         <div className="space-y-8">
           <div>
             <h3 className="text-xl font-semibold text-foreground mb-4">Cards</h3>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {teamMembers.map((member) => (
                 <TeamMemberCard key={member.id} member={member} />
               ))}
@@ -24,7 +24,7 @@ const ElementsShowcase = () => {
           </div>
 
           <div>
-            <div className="space-y-4 max-w-4xl">
+            <div className="space-y-4">
               {projects.map((project) => (
                 <ProjectShowcaseCard key={project.id} project={project} />
               ))}
