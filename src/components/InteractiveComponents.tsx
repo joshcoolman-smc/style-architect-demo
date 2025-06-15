@@ -34,7 +34,7 @@ const InteractiveComponents = () => {
                 className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
                 style={{ 
                   backgroundColor: lightColors[0]?.value || palette["light-1"],
-                  border: `1px solid ${lightColors[0]?.value || palette["light-1"]}10`
+                  border: `1px solid ${lightColors[0]?.value || palette["light-1"]}05`
                 }}
               >
                 <div className="aspect-square w-full bg-zinc-800">
@@ -53,7 +53,7 @@ const InteractiveComponents = () => {
                   </h4>
                   <div 
                     className="technical-detail transition-colors duration-300" 
-                    style={{ color: ensureDifferent(midColors[0]?.value || palette["mid-1"], lightColors[0]?.value || palette["light-1"], "#666666") }}
+                    style={{ color: ensureDifferent(darkColors[1]?.value || palette["dark-2"], lightColors[0]?.value || palette["light-1"], "#333333") }}
                   >
                     CREATIVE DIRECTOR
                   </div>
@@ -71,7 +71,7 @@ const InteractiveComponents = () => {
                 className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
                 style={{ 
                   backgroundColor: midColors[0]?.value || palette["mid-1"],
-                  border: `1px solid ${midColors[0]?.value || palette["mid-1"]}10`
+                  border: `1px solid ${midColors[0]?.value || palette["mid-1"]}05`
                 }}
               >
                 <div className="aspect-square w-full bg-zinc-800">
@@ -108,7 +108,7 @@ const InteractiveComponents = () => {
                 className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
                 style={{ 
                   backgroundColor: darkColors[0]?.value || palette["dark-1"],
-                  border: `1px solid ${darkColors[0]?.value || palette["dark-1"]}10`
+                  border: `1px solid ${darkColors[0]?.value || palette["dark-1"]}05`
                 }}
               >
                 <div className="aspect-square w-full bg-zinc-800">
@@ -127,7 +127,7 @@ const InteractiveComponents = () => {
                   </h4>
                   <div 
                     className="technical-detail transition-colors duration-300" 
-                    style={{ color: ensureDifferent(midColors[1]?.value || "#999999", darkColors[0]?.value || palette["dark-1"], "#999999") }}
+                    style={{ color: ensureDifferent(lightColors[1]?.value || "#cccccc", darkColors[0]?.value || palette["dark-1"], "#cccccc") }}
                   >
                     DESIGN LEAD
                   </div>
@@ -228,143 +228,36 @@ const InteractiveComponents = () => {
           <div>
             <div className="technical-detail">BUTTON VARIANTS</div>
             <h3 className="text-xl font-semibold text-foreground mb-4">Button Styles</h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-3 max-w-2xl">
               <div className="space-y-3">
                 <h4 className="text-sm font-medium text-muted-foreground">Primary</h4>
-                <div className="space-y-2">
-                  <button 
-                    className="w-full px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-white"
-                    style={{ backgroundColor: palette["mid-1"] }}
-                  >
-                    Large Primary
-                  </button>
-                  <button 
-                    className="text-sm px-3 py-1.5 w-full rounded-lg font-medium transition-colors duration-300 text-white"
-                    style={{ backgroundColor: palette["mid-1"] }}
-                  >
-                    Medium Primary
-                  </button>
-                  <button 
-                    className="text-xs px-2 py-1 w-full rounded-lg font-medium transition-colors duration-300 text-white"
-                    style={{ backgroundColor: palette["mid-1"] }}
-                  >
-                    Small Primary
-                  </button>
-                </div>
+                <button 
+                  className="w-full px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-white"
+                  style={{ backgroundColor: palette["mid-1"] }}
+                >
+                  Primary Button
+                </button>
               </div>
               
               <div className="space-y-3">
                 <h4 className="text-sm font-medium text-muted-foreground">Secondary</h4>
-                <div className="space-y-2">
-                  <button 
-                    className="w-full px-6 py-3 rounded-lg font-medium transition-colors duration-300"
-                    style={{ backgroundColor: palette["light-2"], color: palette["dark-1"] }}
-                  >
-                    Large Secondary
-                  </button>
-                  <button 
-                    className="text-sm px-3 py-1.5 w-full rounded-lg font-medium transition-colors duration-300"
-                    style={{ backgroundColor: palette["light-2"], color: palette["dark-1"] }}
-                  >
-                    Medium Secondary
-                  </button>
-                  <button 
-                    className="text-xs px-2 py-1 w-full rounded-lg font-medium transition-colors duration-300"
-                    style={{ backgroundColor: palette["light-2"], color: palette["dark-1"] }}
-                  >
-                    Small Secondary
-                  </button>
-                </div>
+                <button 
+                  className="w-full px-6 py-3 rounded-lg font-medium transition-colors duration-300"
+                  style={{ backgroundColor: palette["light-2"], color: palette["dark-1"] }}
+                >
+                  Secondary Button
+                </button>
               </div>
               
               <div className="space-y-3">
                 <h4 className="text-sm font-medium text-muted-foreground">Outline</h4>
-                <div className="space-y-2">
-                  <button 
-                    className="px-4 py-2 rounded-lg font-medium transition-colors duration-300 w-full"
-                    style={{ border: `1px solid ${palette["mid-2"]}`, color: palette["dark-1"] }}
-                  >
-                    Large Outline
-                  </button>
-                  <button 
-                    className="text-sm px-3 py-1.5 rounded-lg font-medium transition-colors duration-300 w-full"
-                    style={{ border: `1px solid ${palette["mid-2"]}`, color: palette["dark-1"] }}
-                  >
-                    Medium Outline
-                  </button>
-                  <button 
-                    className="text-xs px-2 py-1 rounded-lg font-medium transition-colors duration-300 w-full"
-                    style={{ border: `1px solid ${palette["mid-2"]}`, color: palette["dark-1"] }}
-                  >
-                    Small Outline
-                  </button>
-                </div>
+                <button 
+                  className="px-6 py-3 rounded-lg font-medium transition-colors duration-300 w-full"
+                  style={{ border: `1px solid ${palette["mid-2"]}`, color: palette["dark-1"] }}
+                >
+                  Outline Button
+                </button>
               </div>
-            </div>
-          </div>
-
-          <div>
-            <div className="technical-detail">ICON BUTTONS</div>
-            <h3 className="text-xl font-semibold text-foreground mb-4">Buttons with Icons</h3>
-            <div className="flex flex-wrap gap-3">
-              <button 
-                className="flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-white"
-                style={{ backgroundColor: palette["mid-1"] }}
-              >
-                <Download size={16} />
-                <span>Download</span>
-              </button>
-              <button 
-                className="flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-colors duration-300"
-                style={{ backgroundColor: palette["light-2"], color: palette["dark-1"] }}
-              >
-                <Settings size={16} />
-                <span>Settings</span>
-              </button>
-              <button 
-                className="p-2 rounded-lg transition-colors duration-300"
-                style={{ border: `1px solid ${palette["mid-2"]}`, color: palette["dark-1"] }}
-              >
-                <Heart size={16} />
-              </button>
-              <button 
-                className="p-2 rounded-lg transition-colors duration-300"
-                style={{ border: `1px solid ${palette["mid-2"]}`, color: palette["dark-1"] }}
-              >
-                <Star size={16} />
-              </button>
-            </div>
-          </div>
-
-          <div>
-            <div className="technical-detail">BUTTON STATES</div>
-            <h3 className="text-xl font-semibold text-foreground mb-4">Interactive States</h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <button 
-                className="px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-white"
-                style={{ backgroundColor: palette["mid-1"] }}
-              >
-                Normal
-              </button>
-              <button 
-                className="px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-white opacity-75"
-                style={{ backgroundColor: palette["mid-1"] }}
-              >
-                Hover
-              </button>
-              <button 
-                className="px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-white opacity-50 cursor-not-allowed" 
-                style={{ backgroundColor: palette["mid-1"] }}
-                disabled
-              >
-                Disabled
-              </button>
-              <button 
-                className="px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-white animate-pulse"
-                style={{ backgroundColor: palette["mid-1"] }}
-              >
-                Loading
-              </button>
             </div>
           </div>
         </div>
