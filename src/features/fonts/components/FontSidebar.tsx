@@ -1,8 +1,14 @@
 
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
 import { FontOption } from '../types/font.types';
 import { fontCombinations } from '../data/fontCombinations';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from '@/components/ui/sheet';
 
 interface FontSidebarProps {
   isOpen: boolean;
@@ -20,23 +26,16 @@ const FontSidebar: React.FC<FontSidebarProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className={`fixed top-0 right-0 h-full w-96 bg-card border-l border-border shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
-      isOpen ? 'translate-x-0' : 'translate-x-full'
-    }`}>
-      <div className="flex flex-col h-full">
-        <div className="flex items-center justify-between p-6unit border-b border-border">
-          <h2 className="text-xl font-structural font-semibold text-foreground">
-            Font Selector
-          </h2>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-muted rounded-lg transition-colors"
-          >
-            <X size={20} className="text-muted-foreground" />
-          </button>
-        </div>
+    <Sheet open={isOpen} onOpenChange={onClose}>
+      <SheetContent side="right" className="w-96 overflow-y-auto">
+        <SheetHeader>
+          <SheetTitle className="font-structural">Font Selector</SheetTitle>
+          <SheetDescription>
+            Choose a font combination that fits your design
+          </SheetDescription>
+        </SheetHeader>
 
-        <div className="flex-1 overflow-y-auto p-6unit space-y-4unit">
+        <div className="space-y-4unit mt-6unit">
           {fontCombinations.map((font, index) => (
             <div
               key={index}
@@ -102,13 +101,13 @@ const FontSidebar: React.FC<FontSidebarProps> = ({ isOpen, onClose }) => {
           ))}
         </div>
 
-        <div className="p-6unit border-t border-border">
+        <div className="mt-8unit pt-6unit border-t border-border">
           <p className="text-sm text-muted-foreground text-center">
             Font changes apply instantly and persist across the application
           </p>
         </div>
-      </div>
-    </div>
+      </SheetContent>
+    </Sheet>
   );
 };
 
