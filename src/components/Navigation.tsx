@@ -25,7 +25,7 @@ const Navigation = () => {
           </Link>
           
           <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center space-x-1">
+            <div className="hidden md:flex items-center space-x-1 relative">
               {navItems.map((item) => {
                 const isActive = location.pathname === item.path;
                 
@@ -40,22 +40,30 @@ const Navigation = () => {
                     }`}
                   >
                     {item.label}
-                    {isActive && (
-                      <motion.div
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground"
-                        layoutId="activeTab"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 500,
-                          damping: 30,
-                          mass: 0.8
-                        }}
-                      />
-                    )}
                   </Link>
                 );
+              })}
+              
+              {/* Active indicator that slides between nav items */}
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return isActive ? (
+                  <motion.div
+                    key="activeIndicator"
+                    className="absolute bottom-0 h-0.5 bg-foreground"
+                    layoutId="activeNavIndicator"
+                    transition={{
+                      type: "spring",
+                      stiffness: 380,
+                      damping: 30,
+                      mass: 0.8
+                    }}
+                    style={{
+                      left: `${navItems.findIndex(navItem => navItem.path === item.path) * 25}%`,
+                      width: `${100 / navItems.length}%`
+                    }}
+                  />
+                ) : null;
               })}
             </div>
             
