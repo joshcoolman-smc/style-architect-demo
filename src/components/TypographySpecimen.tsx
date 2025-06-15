@@ -89,52 +89,55 @@ const TypographySpecimen = () => {
         </div>
       </GradientContainer>
 
-      {/* Type Scale */}
-      <GradientContainer className="p-12">
-        <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Type Scale</h2>
-        <div className="space-y-10 mt-6 flow-root">
-          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="ds-text-technical-light">h1</span>
-            <h1 className="text-5xl font-extrabold tracking-tighter text-white">The quick brown fox</h1>
+      {/* Type Scale and Paragraph Styles Side by Side */}
+      <div className="grid md:grid-cols-2 gap-8">
+        {/* Type Scale */}
+        <GradientContainer className="p-12">
+          <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Type Scale</h2>
+          <div className="space-y-10 mt-6 flow-root">
+            <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+              <span className="ds-text-technical-light">h1</span>
+              <h1 className="text-5xl font-extrabold tracking-tighter text-white">Quick brown fox</h1>
+            </div>
+            <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+              <span className="ds-text-technical-light">h2</span>
+              <h2 className="text-4xl font-bold tracking-tight text-white">Quick brown fox</h2>
+            </div>
+            <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+              <span className="ds-text-technical-light">h3</span>
+              <h3 className="text-3xl font-semibold text-white">Quick brown fox</h3>
+            </div>
+            <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+              <span className="ds-text-technical-light">h4</span>
+              <h4 className="text-2xl font-semibold text-white">Quick brown fox</h4>
+            </div>
+            <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+              <span className="ds-text-technical-light">h5</span>
+              <h5 className="text-xl font-medium text-white">Quick brown fox</h5>
+            </div>
+            <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
+              <span className="ds-text-technical-light">h6</span>
+              <h6 className="text-lg font-medium text-white">Quick brown fox</h6>
+            </div>
           </div>
-          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="ds-text-technical-light">h2</span>
-            <h2 className="text-4xl font-bold tracking-tight text-white">The quick brown fox</h2>
-          </div>
-          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="ds-text-technical-light">h3</span>
-            <h3 className="text-3xl font-semibold text-white">The quick brown fox</h3>
-          </div>
-          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="ds-text-technical-light">h4</span>
-            <h4 className="text-2xl font-semibold text-white">The quick brown fox</h4>
-          </div>
-          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="ds-text-technical-light">h5</span>
-            <h5 className="text-xl font-medium text-white">The quick brown fox</h5>
-          </div>
-          <div className="grid grid-cols-[auto,1fr] items-baseline gap-x-6">
-            <span className="ds-text-technical-light">h6</span>
-            <h6 className="text-lg font-medium text-white">The quick brown fox</h6>
-          </div>
-        </div>
-      </GradientContainer>
+        </GradientContainer>
 
-      {/* Paragraph Styles */}
-      <GradientContainer className="p-12">
-        <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Paragraph Styles</h2>
-        <div className="space-y-4 max-w-prose mt-6">
-          <p className="text-lg font-content ">
-            This is large body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It's perfect for introductions and lead paragraphs.
-          </p>
-          <p className="font-content ">
-            This is standard body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It is the workhorse of our design system, used for most long-form content.
-          </p>
-          <p className="text-sm  font-content">
-            This is small, muted body text. The quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. Ideal for captions, footnotes, and other supplementary information.
-          </p>
-        </div>
-      </GradientContainer>
+        {/* Paragraph Styles */}
+        <GradientContainer className="p-12">
+          <h2 className="text-2xl md:text-3xl font-bold border-b border-neutral-300 pb-2 mb-6 text-white">Paragraph Styles</h2>
+          <div className="space-y-4 max-w-prose mt-6">
+            <p className="text-lg font-content ">
+              This is large body text. Quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It's perfect for introductions and lead paragraphs.
+            </p>
+            <p className="font-content ">
+              This is standard body text. Quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. It is the workhorse of our design system, used for most long-form content.
+            </p>
+            <p className="text-sm  font-content">
+              This is small, muted body text. Quick brown fox jumps over the lazy dog. A true master of the arts, this sentence contains every letter of the alphabet. Ideal for captions, footnotes, and other supplementary information.
+            </p>
+          </div>
+        </GradientContainer>
+      </div>
 
       <FontSidebar 
         isOpen={showFontSidebar} 
