@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { FontOption } from '../types/font.types';
 import { fontCombinations } from '../data/fontCombinations';
@@ -28,7 +27,6 @@ const FontSidebar: React.FC<FontSidebarProps> = ({ isOpen, onClose }) => {
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetOverlay className="bg-black/20 backdrop-blur-[1px]" />
       <SheetContent 
         side="right" 
         className="w-96 overflow-y-auto bg-zinc-900 border-l border-zinc-700"
