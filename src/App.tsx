@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Typography from "./pages/Typography";
 import Colors from "./pages/Colors";
 import Elements from "./pages/Elements";
+import Readme from "./pages/Readme";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/typography" element={<Typography />} />
           <Route path="/colors" element={<Colors />} />
           <Route path="/elements" element={<Elements />} />
+          <Route path="/readme" element={<Readme />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
