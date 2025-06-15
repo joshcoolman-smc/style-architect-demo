@@ -122,12 +122,12 @@ export default {
 				}
 			},
 			fontSize: {
-				// Dynamic type scale using CSS custom properties
+				// Dynamic type scale using CSS custom properties with proportional line heights
 				// text-caption
 				caption: [
 					"var(--font-size-caption, 12px)",
 					{
-						lineHeight: "16px",
+						lineHeight: "var(--line-height-caption, 18px)",
 						fontWeight: "400",
 					},
 				],
@@ -136,7 +136,7 @@ export default {
 				"caption-bold": [
 					"var(--font-size-caption, 12px)",
 					{
-						lineHeight: "16px",
+						lineHeight: "var(--line-height-caption, 18px)",
 						fontWeight: "500",
 					},
 				],
@@ -145,7 +145,7 @@ export default {
 				body: [
 					"var(--font-size-body, 14px)",
 					{
-						lineHeight: "20px",
+						lineHeight: "var(--line-height-body, 21px)",
 						fontWeight: "400",
 					},
 				],
@@ -154,7 +154,7 @@ export default {
 				"body-bold": [
 					"var(--font-size-body, 14px)",
 					{
-						lineHeight: "20px",
+						lineHeight: "var(--line-height-body, 21px)",
 						fontWeight: "500",
 					},
 				],
@@ -163,7 +163,7 @@ export default {
 				"heading-3": [
 					"var(--font-size-heading-3, 16px)",
 					{
-						lineHeight: "20px",
+						lineHeight: "var(--line-height-heading-3, 19px)",
 						fontWeight: "600",
 					},
 				],
@@ -172,7 +172,7 @@ export default {
 				"heading-2": [
 					"var(--font-size-heading-2, 20px)",
 					{
-						lineHeight: "24px",
+						lineHeight: "var(--line-height-heading-2, 23px)",
 						fontWeight: "600",
 					},
 				],
@@ -181,7 +181,7 @@ export default {
 				"heading-1": [
 					"var(--font-size-heading-1, 30px)",
 					{
-						lineHeight: "36px",
+						lineHeight: "var(--line-height-heading-1, 33px)",
 						fontWeight: "500",
 					},
 				],
@@ -190,7 +190,7 @@ export default {
 				"monospace-body": [
 					"var(--font-size-body, 14px)",
 					{
-						lineHeight: "20px",
+						lineHeight: "var(--line-height-body, 21px)",
 						fontWeight: "400",
 					},
 				],

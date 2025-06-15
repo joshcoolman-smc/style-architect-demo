@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import GradientContainer from '../../../components/GradientContainer';
 import {
@@ -14,6 +13,8 @@ const TypeScaleSelector = () => {
   const [baseSize, setBaseSize] = useState(16); // Default to 16px (web standard)
 
   const typeScales = [
+    { value: 'minor-second', label: 'Minor Second', ratio: 1.067 },
+    { value: 'major-second', label: 'Major Second', ratio: 1.125 },
     { value: 'minor-third', label: 'Minor Third', ratio: 1.2 },
     { value: 'major-third', label: 'Major Third', ratio: 1.25 },
     { value: 'perfect-fourth', label: 'Perfect Fourth', ratio: 1.333 },
@@ -29,25 +30,78 @@ const TypeScaleSelector = () => {
     { value: '17', label: '17px' },
   ];
 
+  // Calculate proportional line height based on font size and text type
+  const calculateLineHeight = (fontSize: number, textType: 'caption' | 'body' | 'heading') => {
+    let baseLineHeightRatio;
+    
+    // Different base line height ratios for different text types
+    switch (textType) {
+      case 'caption':
+        baseLineHeightRatio = 1.5; // Tighter for small text
+        break;
+      case 'body':
+        baseLineHeightRatio = 1.5; // Comfortable for reading
+        break;
+      case 'heading':
+        baseLineHeightRatio = 1.2; // Tighter for headings, gets looser as size increases
+        break;
+      default:
+        baseLineHeightRatio = 1.4;
+    }
+    
+    // Adjust line height based on font size - larger fonts need relatively tighter line heights
+    // but still need adequate spacing
+    let adjustedRatio = baseLineHeightRatio;
+    
+    if (textType === 'heading') {
+      // For headings, use a formula that provides appropriate spacing
+      // Larger headings get slightly looser line heights
+      if (fontSize > 32) {
+        adjustedRatio = 1.1;
+      } else if (fontSize > 24) {
+        adjustedRatio = 1.15;
+      } else {
+        adjustedRatio = 1.2;
+      }
+    }
+    
+    return Math.round(fontSize * adjustedRatio);
+  };
+
   const applyTypeScale = (ratio: number, baseFontSize: number) => {
     // Proper geometric progression: each level is base × ratio^n
-    const caption = Math.round(baseFontSize * 0.75); // Smaller than base
+    const caption = Math.round(baseFontSize * 0.875); // Slightly smaller than base
     const body = baseFontSize; // Base size
     const heading3 = Math.round(baseFontSize * Math.pow(ratio, 1)); // base × ratio¹
     const heading2 = Math.round(baseFontSize * Math.pow(ratio, 2)); // base × ratio²
     const heading1 = Math.round(baseFontSize * Math.pow(ratio, 3)); // base × ratio³
     
-    // Apply to CSS custom properties
+    // Calculate proportional line heights
+    const captionLineHeight = calculateLineHeight(caption, 'caption');
+    const bodyLineHeight = calculateLineHeight(body, 'body');
+    const heading3LineHeight = calculateLineHeight(heading3, 'heading');
+    const heading2LineHeight = calculateLineHeight(heading2, 'heading');
+    const heading1LineHeight = calculateLineHeight(heading1, 'heading');
+    
+    // Apply font sizes to CSS custom properties
     document.documentElement.style.setProperty('--font-size-caption', `${caption}px`);
     document.documentElement.style.setProperty('--font-size-body', `${body}px`);
     document.documentElement.style.setProperty('--font-size-heading-3', `${heading3}px`);
     document.documentElement.style.setProperty('--font-size-heading-2', `${heading2}px`);
     document.documentElement.style.setProperty('--font-size-heading-1', `${heading1}px`);
     
-    console.log('Applied type scale:', { 
+    // Apply line heights to CSS custom properties
+    document.documentElement.style.setProperty('--line-height-caption', `${captionLineHeight}px`);
+    document.documentElement.style.setProperty('--line-height-body', `${bodyLineHeight}px`);
+    document.documentElement.style.setProperty('--line-height-heading-3', `${heading3LineHeight}px`);
+    document.documentElement.style.setProperty('--line-height-heading-2', `${heading2LineHeight}px`);
+    document.documentElement.style.setProperty('--line-height-heading-1', `${heading1LineHeight}px`);
+    
+    console.log('Applied type scale with proportional line heights:', { 
       ratio, 
       baseSize: baseFontSize,
-      sizes: { caption, body, heading3, heading2, heading1 }
+      sizes: { caption, body, heading3, heading2, heading1 },
+      lineHeights: { captionLineHeight, bodyLineHeight, heading3LineHeight, heading2LineHeight, heading1LineHeight }
     });
   };
 
