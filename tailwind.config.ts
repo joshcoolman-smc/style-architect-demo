@@ -30,7 +30,7 @@ export default {
 				// Monospace
 				'mono': ['Fira Code', 'ui-monospace', 'SFMono-Regular'],
 				
-				// Available font options
+				// Available font options - properly configured
 				'montserrat': ['Montserrat', 'ui-sans-serif', 'system-ui'],
 				'lora': ['Lora', 'ui-serif', 'serif'],
 				'hind': ['Hind Madurai', 'ui-sans-serif', 'system-ui'],
@@ -40,6 +40,11 @@ export default {
 				'open-sans': ['Open Sans', 'ui-sans-serif', 'system-ui'],
 				'playfair': ['Playfair Display', 'ui-serif', 'serif'],
 				'ibm-plex-mono': ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace'],
+				'martel': ['Martel', 'ui-serif', 'serif'],
+				'cardo': ['Cardo', 'ui-serif', 'serif'],
+				'muli': ['Muli', 'ui-sans-serif', 'system-ui'],
+				'source-sans-pro': ['Source Sans Pro', 'ui-sans-serif', 'system-ui'],
+				'roboto-slab': ['Roboto Slab', 'ui-serif', 'serif'],
 			},
 			colors: {
 				// Dark mode color palette
