@@ -17,8 +17,8 @@ const InteractiveComponents = () => {
       <div className="ds-card p-8">
         <div className="space-y-8">
           <div>
-            <div className="technical-detail">VERTICAL CARDS</div>
-            <h3 className="text-xl font-semibold text-foreground mb-4">Team Member Cards</h3>
+
+            <h3 className="text-xl font-semibold text-foreground mb-4">Cards</h3>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl">
               {teamMembers.map((member) => (
                 <TeamMemberCard key={member.id} member={member} />
@@ -27,8 +27,7 @@ const InteractiveComponents = () => {
           </div>
 
           <div>
-            <div className="technical-detail">HORIZONTAL CARDS</div>
-            <h3 className="text-xl font-semibold text-foreground mb-4">Project Showcases</h3>
+
             <div className="space-y-4 max-w-4xl">
               {projects.map((project) => (
                 <ProjectShowcaseCard key={project.id} project={project} />
@@ -42,8 +41,7 @@ const InteractiveComponents = () => {
       <div className="ds-card p-8">
         <div className="space-y-8">
           <div>
-            <div className="technical-detail">BUTTON VARIANTS</div>
-            <h3 className="text-xl font-semibold text-foreground mb-4">Button Styles</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-4">Buttons</h3>
             <div className="grid gap-6 sm:grid-cols-3 max-w-2xl">
               <div className="space-y-3">
                 <h4 className="text-sm font-medium text-muted-foreground">Primary</h4>
