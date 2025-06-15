@@ -34,7 +34,7 @@ const InteractiveComponents = () => {
                 className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
                 style={{ 
                   backgroundColor: lightColors[0]?.value || palette["light-1"],
-                  border: `1px solid ${lightColors[0]?.value || palette["light-1"]}05`
+                  border: `1px solid ${lightColors[0]?.value || palette["light-1"]}1A`
                 }}
               >
                 <div className="aspect-square w-full bg-zinc-800">
@@ -53,7 +53,7 @@ const InteractiveComponents = () => {
                   </h4>
                   <div 
                     className="technical-detail transition-colors duration-300" 
-                    style={{ color: ensureDifferent(darkColors[1]?.value || palette["dark-2"], lightColors[0]?.value || palette["light-1"], "#333333") }}
+                    style={{ color: ensureDifferent(midColors[0]?.value || palette["mid-1"], lightColors[0]?.value || palette["light-1"], "#666666") }}
                   >
                     CREATIVE DIRECTOR
                   </div>
@@ -71,7 +71,7 @@ const InteractiveComponents = () => {
                 className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
                 style={{ 
                   backgroundColor: midColors[0]?.value || palette["mid-1"],
-                  border: `1px solid ${midColors[0]?.value || palette["mid-1"]}05`
+                  border: `1px solid ${midColors[0]?.value || palette["mid-1"]}1A`
                 }}
               >
                 <div className="aspect-square w-full bg-zinc-800">
@@ -108,7 +108,7 @@ const InteractiveComponents = () => {
                 className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
                 style={{ 
                   backgroundColor: darkColors[0]?.value || palette["dark-1"],
-                  border: `1px solid ${darkColors[0]?.value || palette["dark-1"]}05`
+                  border: `1px solid ${darkColors[0]?.value || palette["dark-1"]}1A`
                 }}
               >
                 <div className="aspect-square w-full bg-zinc-800">
@@ -127,7 +127,7 @@ const InteractiveComponents = () => {
                   </h4>
                   <div 
                     className="technical-detail transition-colors duration-300" 
-                    style={{ color: ensureDifferent(lightColors[1]?.value || "#cccccc", darkColors[0]?.value || palette["dark-1"], "#cccccc") }}
+                    style={{ color: ensureDifferent(lightColors[2]?.value || "#aaaaaa", darkColors[0]?.value || palette["dark-1"], "#aaaaaa") }}
                   >
                     DESIGN LEAD
                   </div>
@@ -148,18 +148,18 @@ const InteractiveComponents = () => {
             <div className="space-y-4 max-w-4xl">
               {/* Horizontal Card 1 - Light tone styling */}
               <div 
-                className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
+                className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300 min-h-[10rem]" 
                 style={{ backgroundColor: lightColors[1]?.value || palette["light-2"] }}
               >
-                <div className="flex">
-                  <div className="w-48 h-36 bg-zinc-800 flex-shrink-0">
+                <div className="flex h-full">
+                  <div className="w-48 flex-shrink-0 bg-zinc-800">
                     <img 
                       src="/lovable-uploads/209e88c5-2e6e-43dd-ac8b-37e45fd7e358.png" 
                       alt="Modern Architecture"
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="flex-1 p-6 space-y-2">
+                  <div className="flex-1 p-6 space-y-2 flex flex-col justify-center">
                     <h4 
                       className="text-lg font-semibold transition-colors duration-300"
                       style={{ color: ensureDifferent(darkColors[0]?.value || palette["dark-1"], lightColors[1]?.value || palette["light-2"], "#000000") }}
@@ -184,18 +184,18 @@ const InteractiveComponents = () => {
 
               {/* Horizontal Card 2 - Mid tone styling */}
               <div 
-                className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300" 
+                className="shadow-2xl rounded-lg overflow-hidden transition-colors duration-300 min-h-[10rem]" 
                 style={{ backgroundColor: midColors[1]?.value || palette["mid-2"] }}
               >
-                <div className="flex">
-                  <div className="w-48 h-36 bg-zinc-800 flex-shrink-0">
+                <div className="flex h-full">
+                  <div className="w-48 flex-shrink-0 bg-zinc-800">
                     <img 
                       src="/lovable-uploads/c7882e27-4b93-4093-b2f0-b30adaf793ce.png" 
                       alt="Modern Interior"
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="flex-1 p-6 space-y-2">
+                  <div className="flex-1 p-6 space-y-2 flex flex-col justify-center">
                     <h4 
                       className="text-lg font-semibold transition-colors duration-300"
                       style={{ color: ensureDifferent(lightColors[0]?.value || "#ffffff", midColors[1]?.value || palette["mid-2"], "#ffffff") }}
