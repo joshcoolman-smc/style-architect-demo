@@ -3,7 +3,11 @@ import { motion } from 'framer-motion';
 import { Mail, User, MessageSquare, Search } from 'lucide-react';
 import { useColorStore } from '../../../stores/colorStore';
 
-const InteractiveForms = () => {
+interface InteractiveFormsProps {
+  colorStrategy?: number;
+}
+
+const InteractiveForms = ({ colorStrategy = 0 }: InteractiveFormsProps) => {
   const { palette, categories } = useColorStore();
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [formData, setFormData] = useState({

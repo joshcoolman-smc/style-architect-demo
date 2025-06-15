@@ -12,7 +12,11 @@ interface StatItem {
   trend: 'up' | 'down' | 'neutral';
 }
 
-const DataVisualization = () => {
+interface DataVisualizationProps {
+  colorStrategy?: number;
+}
+
+const DataVisualization = ({ colorStrategy = 0 }: DataVisualizationProps) => {
   const { palette, categories } = useColorStore();
 
   // Extract colors from categories
@@ -55,35 +59,121 @@ const DataVisualization = () => {
     }
   ];
 
-  // Color mapping for different stats
+  // Color mapping for different stats based on strategy
   const getStatColors = (index: number) => {
-    const colorSets = [
-      {
-        background: lightColors[0]?.value || palette["light-1"],
-        progress: midColors[0]?.value || palette["mid-1"],
-        text: darkColors[0]?.value || palette["dark-1"],
-        icon: midColors[1]?.value || palette["mid-2"]
-      },
-      {
-        background: lightColors[1]?.value || palette["light-2"],
-        progress: midColors[1]?.value || palette["mid-2"],
-        text: darkColors[0]?.value || palette["dark-1"],
-        icon: darkColors[1]?.value || palette["dark-2"]
-      },
-      {
-        background: lightColors[2]?.value || palette["light-3"],
-        progress: darkColors[0]?.value || palette["dark-1"],
-        text: darkColors[0]?.value || palette["dark-1"],
-        icon: midColors[0]?.value || palette["mid-1"]
-      },
-      {
-        background: midColors[2]?.value || palette["mid-3"],
-        progress: lightColors[0]?.value || palette["light-1"],
-        text: lightColors[0]?.value || "#ffffff",
-        icon: lightColors[1]?.value || palette["light-2"]
-      }
+    const strategies = [
+      // Strategy 0: Original - varied backgrounds
+      [
+        {
+          background: lightColors[0]?.value || palette["light-1"],
+          progress: midColors[0]?.value || palette["mid-1"],
+          text: darkColors[0]?.value || palette["dark-1"],
+          icon: midColors[1]?.value || palette["mid-2"]
+        },
+        {
+          background: lightColors[1]?.value || palette["light-2"],
+          progress: midColors[1]?.value || palette["mid-2"],
+          text: darkColors[0]?.value || palette["dark-1"],
+          icon: darkColors[1]?.value || palette["dark-2"]
+        },
+        {
+          background: lightColors[2]?.value || palette["light-3"],
+          progress: darkColors[0]?.value || palette["dark-1"],
+          text: darkColors[0]?.value || palette["dark-1"],
+          icon: midColors[0]?.value || palette["mid-1"]
+        },
+        {
+          background: midColors[2]?.value || palette["mid-3"],
+          progress: lightColors[0]?.value || palette["light-1"],
+          text: lightColors[0]?.value || "#ffffff",
+          icon: lightColors[1]?.value || palette["light-2"]
+        }
+      ],
+      // Strategy 1: High contrast - light backgrounds, bold progress
+      [
+        {
+          background: lightColors[0]?.value || palette["light-1"],
+          progress: darkColors[0]?.value || palette["dark-1"],
+          text: darkColors[0]?.value || palette["dark-1"],
+          icon: darkColors[1]?.value || palette["dark-2"]
+        },
+        {
+          background: lightColors[1]?.value || palette["light-2"],
+          progress: darkColors[1]?.value || palette["dark-2"],
+          text: darkColors[0]?.value || palette["dark-1"],
+          icon: darkColors[2]?.value || palette["dark-3"]
+        },
+        {
+          background: lightColors[2]?.value || palette["light-3"],
+          progress: midColors[0]?.value || palette["mid-1"],
+          text: darkColors[0]?.value || palette["dark-1"],
+          icon: midColors[1]?.value || palette["mid-2"]
+        },
+        {
+          background: lightColors[0]?.value || palette["light-1"],
+          progress: midColors[2]?.value || palette["mid-3"],
+          text: darkColors[0]?.value || palette["dark-1"],
+          icon: midColors[0]?.value || palette["mid-1"]
+        }
+      ],
+      // Strategy 2: Dark mode - dark backgrounds with light accents
+      [
+        {
+          background: darkColors[0]?.value || palette["dark-1"],
+          progress: lightColors[0]?.value || palette["light-1"],
+          text: lightColors[0]?.value || "#ffffff",
+          icon: lightColors[1]?.value || palette["light-2"]
+        },
+        {
+          background: darkColors[1]?.value || palette["dark-2"],
+          progress: lightColors[1]?.value || palette["light-2"],
+          text: lightColors[0]?.value || "#ffffff",
+          icon: lightColors[2]?.value || palette["light-3"]
+        },
+        {
+          background: darkColors[2]?.value || palette["dark-3"],
+          progress: midColors[0]?.value || palette["mid-1"],
+          text: lightColors[0]?.value || "#ffffff",
+          icon: midColors[1]?.value || palette["mid-2"]
+        },
+        {
+          background: midColors[2]?.value || palette["mid-3"],
+          progress: lightColors[2]?.value || palette["light-3"],
+          text: lightColors[0]?.value || "#ffffff",
+          icon: lightColors[0]?.value || palette["light-1"]
+        }
+      ],
+      // Strategy 3: Monochromatic - single tone family
+      [
+        {
+          background: midColors[0]?.value || palette["mid-1"],
+          progress: lightColors[0]?.value || palette["light-1"],
+          text: lightColors[0]?.value || "#ffffff",
+          icon: lightColors[1]?.value || palette["light-2"]
+        },
+        {
+          background: midColors[1]?.value || palette["mid-2"],
+          progress: lightColors[1]?.value || palette["light-2"],
+          text: lightColors[0]?.value || "#ffffff",
+          icon: lightColors[2]?.value || palette["light-3"]
+        },
+        {
+          background: midColors[2]?.value || palette["mid-3"],
+          progress: lightColors[2]?.value || palette["light-3"],
+          text: lightColors[0]?.value || "#ffffff",
+          icon: lightColors[0]?.value || palette["light-1"]
+        },
+        {
+          background: darkColors[0]?.value || palette["dark-1"],
+          progress: midColors[0]?.value || palette["mid-1"],
+          text: lightColors[0]?.value || "#ffffff",
+          icon: midColors[1]?.value || palette["mid-2"]
+        }
+      ]
     ];
-    return colorSets[index % colorSets.length];
+    
+    const currentStrategy = strategies[colorStrategy % strategies.length];
+    return currentStrategy[index % currentStrategy.length];
   };
 
   return (

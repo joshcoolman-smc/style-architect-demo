@@ -11,7 +11,11 @@ interface Alert {
   dismissible?: boolean;
 }
 
-const AlertNotifications = () => {
+interface AlertNotificationsProps {
+  colorStrategy?: number;
+}
+
+const AlertNotifications = ({ colorStrategy = 0 }: AlertNotificationsProps) => {
   const { palette, categories } = useColorStore();
 
   // Extract colors from categories for alert theming

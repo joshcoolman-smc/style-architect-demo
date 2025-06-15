@@ -2,7 +2,8 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { useColorStore } from '../../../stores/colorStore';
-import HeroBanner from './HeroBanner';
+import { useColorStrategy } from '../hooks/useColorStrategy';
+import SectionHeader from './SectionHeader';
 import TestimonialCard from './cards/TestimonialCard';
 import TeamMemberCard from './cards/TeamMemberCard';
 import ProjectShowcaseCard from './cards/ProjectShowcaseCard';
@@ -15,6 +16,7 @@ import { projects } from '../data/projects';
 
 const ElementsShowcase = () => {
   const { palette } = useColorStore();
+  const { strategyState, refreshStrategy, toggleLock } = useColorStrategy();
 
   // Animation variants for staggered card entrance
   const containerVariants: Variants = {
@@ -49,91 +51,105 @@ const ElementsShowcase = () => {
 
   return (
     <div className="space-y-12">
-      {/* Hero Banner - Large typography showcase */}
-      <HeroBanner />
-
       {/* Testimonials Section - Quote typography & color backgrounds */}
       <div className="ds-card p-8">
         <div className="space-y-8">
-          <div>
-            <h3 className="text-heading-3 font-structural text-foreground mb-2">Testimonials</h3>
-            <p className="text-body font-content text-muted-foreground mb-6">
-              See how typography and color create different moods for the same content.
-            </p>
-            <motion.div 
-              className="grid gap-6 lg:grid-cols-3"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {testimonials.map((testimonial, index) => (
-                <motion.div key={testimonial.id} variants={cardVariants}>
-                  <TestimonialCard testimonial={testimonial} />
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+          <SectionHeader
+            title="Testimonials"
+            description="See how typography and color create different moods for the same content."
+            isLocked={strategyState.testimonials.isLocked}
+            onRefresh={() => refreshStrategy('testimonials', 4)}
+            onToggleLock={() => toggleLock('testimonials')}
+            strategyInfo={`Strategy ${strategyState.testimonials.currentStrategy + 1}/4`}
+          />
+          <motion.div 
+            className="grid gap-6 lg:grid-cols-3"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {testimonials.map((testimonial, index) => (
+              <motion.div key={testimonial.id} variants={cardVariants}>
+                <TestimonialCard 
+                  testimonial={testimonial} 
+                  colorStrategy={strategyState.testimonials.currentStrategy}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
 
       {/* Data Visualization - Numbers & progress with color mapping */}
       <div className="ds-card p-8">
         <div className="space-y-8">
-          <div>
-            <h3 className="text-heading-3 font-structural text-foreground mb-2">Data Visualization</h3>
-            <p className="text-body font-content text-muted-foreground mb-6">
-              Watch numbers come alive with your color choices and typography selections.
-            </p>
-            <DataVisualization />
-          </div>
+          <SectionHeader
+            title="Data Visualization"
+            description="Watch numbers come alive with your color choices and typography selections."
+            isLocked={strategyState.dataVisualization.isLocked}
+            onRefresh={() => refreshStrategy('dataVisualization', 4)}
+            onToggleLock={() => toggleLock('dataVisualization')}
+            strategyInfo={`Strategy ${strategyState.dataVisualization.currentStrategy + 1}/4`}
+          />
+          <DataVisualization colorStrategy={strategyState.dataVisualization.currentStrategy} />
         </div>
       </div>
 
       {/* Interactive Forms - Focus states & dynamic feedback */}
       <div className="ds-card p-8">
         <div className="space-y-8">
-          <div>
-            <h3 className="text-heading-3 font-structural text-foreground mb-2">Interactive Forms</h3>
-            <p className="text-body font-content text-muted-foreground mb-6">
-              Experience how your color palette creates interactive feedback systems.
-            </p>
-            <InteractiveForms />
-          </div>
+          <SectionHeader
+            title="Interactive Forms"
+            description="Experience how your color palette creates interactive feedback systems."
+            isLocked={strategyState.forms.isLocked}
+            onRefresh={() => refreshStrategy('forms', 3)}
+            onToggleLock={() => toggleLock('forms')}
+            strategyInfo={`Strategy ${strategyState.forms.currentStrategy + 1}/3`}
+          />
+          <InteractiveForms colorStrategy={strategyState.forms.currentStrategy} />
         </div>
       </div>
 
       {/* Alerts & Notifications - Semantic color usage */}
       <div className="ds-card p-8">
         <div className="space-y-8">
-          <div>
-            <AlertNotifications />
-          </div>
+          <SectionHeader
+            title="Alerts & Notifications"
+            description="Status messages, badges, and progress indicators showcase semantic color usage."
+            isLocked={strategyState.alerts.isLocked}
+            onRefresh={() => refreshStrategy('alerts', 3)}
+            onToggleLock={() => toggleLock('alerts')}
+            strategyInfo={`Strategy ${strategyState.alerts.currentStrategy + 1}/3`}
+          />
+          <AlertNotifications colorStrategy={strategyState.alerts.currentStrategy} />
         </div>
       </div>
 
       {/* Cards Section */}
       <div className="ds-card p-8">
         <div className="space-y-8">
-          <div>
-            <h3 className="text-heading-3 font-structural text-foreground mb-2">Cards</h3>
-            <p className="text-body font-content text-muted-foreground mb-6">
-              Cards showcase how content adapts to different color tones and typography hierarchies.
-            </p>
-            <motion.div 
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {teamMembers.map((member, index) => (
-                <motion.div key={member.id} variants={cardVariants}>
-                  <TeamMemberCard member={member} />
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+          <SectionHeader
+            title="Cards"
+            description="Cards showcase how content adapts to different color tones and typography hierarchies."
+            isLocked={strategyState.cards.isLocked}
+            onRefresh={() => refreshStrategy('cards', 3)}
+            onToggleLock={() => toggleLock('cards')}
+            strategyInfo={`Strategy ${strategyState.cards.currentStrategy + 1}/3`}
+          />
+          <motion.div 
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {teamMembers.map((member, index) => (
+              <motion.div key={member.id} variants={cardVariants}>
+                <TeamMemberCard member={member} />
+              </motion.div>
+            ))}
+          </motion.div>
 
-          <div>
+          <div className="mt-8">
             <motion.div 
               className="space-y-4"
               variants={containerVariants}
