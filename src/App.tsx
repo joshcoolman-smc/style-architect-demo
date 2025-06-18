@@ -10,6 +10,7 @@ import Typography from "./pages/Typography";
 import Colors from "./pages/Colors";
 import Elements from "./pages/Elements";
 import Readme from "./pages/Readme";
+import DBTest from "./pages/DBTest";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/colors" element={<ErrorBoundary><Colors /></ErrorBoundary>} />
             <Route path="/elements" element={<ErrorBoundary><Elements /></ErrorBoundary>} />
             <Route path="/readme" element={<ErrorBoundary><Readme /></ErrorBoundary>} />
+            <Route path="/dbtest" element={<ErrorBoundary><DBTest /></ErrorBoundary>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

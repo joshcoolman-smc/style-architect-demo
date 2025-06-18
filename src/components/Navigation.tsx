@@ -11,6 +11,7 @@ const Navigation = () => {
     { path: '/typography', label: 'Typography' },
     { path: '/colors', label: 'Colors' },
     { path: '/elements', label: 'Elements' },
+    { path: '/dbtest', label: 'DB Test' },
     { path: '/readme', label: 'About' },
   ];
 
